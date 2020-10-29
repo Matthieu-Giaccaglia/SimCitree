@@ -1,9 +1,11 @@
-Yo les potos, pour pouvoir coder il faut dl javaFx 15 -> https://gluonhq.com/products/javafx/
+Yo les potos, 
 
-Puis quand le projet sera ouvert, il faudra ajouter dans File>Project Structure>Librairies le fichier lib de javaFx en mettant le chemin d'accès.
+Pour pouvoir coder il faut télécharger **javaFx 15 **-> https://gluonhq.com/products/javafx/
 
-Pour Run le projet, faudra ajouter dans la configuration, dans VM options : --module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml,javafx.media
+Puis quand le projet sera ouvert, il faudra ajouter dans **File>Project Structure>Librairies** le fichier lib de javaFx en mettant le chemin d'accès.
 
-PATH_TO_FX est à configurer dans File>Settings>Appearance & Behavior>Path Variables. Il faudra mettre le nom "PATH_TO_FX" et les chemin d'accès du fichier lib de JavaFx.
+Pour Run le projet, faudra ajouter dans la configuration, dans VM options : **--module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml,javafx.media**
+
+PATH_TO_FX est à configurer dans **File>Settings>Appearance & Behavior>Path Variables**. Il faudra mettre le nom "PATH_TO_FX" et les chemin d'accès du fichier lib de JavaFx.
 
 Voili Voilou
