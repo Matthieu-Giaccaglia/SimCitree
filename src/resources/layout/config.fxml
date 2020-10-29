@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerConfig">
+    <children>
+        <ImageView fitHeight="79.0" fitWidth="71.0" layoutX="15.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../raw/logo_simcitree.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="189.0" layoutY="130.0" prefHeight="29.0" prefWidth="130.0" text="Durée Simulation :" />
+      <TextField fx:id="textFieldTour" layoutX="404.0" layoutY="131.0">
+         <effect>
+            <Reflection />
+         </effect>
+      </TextField>
+      <Button fx:id="buttonStart" layoutX="482.0" layoutY="551.0" mnemonicParsing="false" onAction="#start" text="Ok" />
+      <Label layoutX="232.0" layoutY="256.0" text="Taille :" />
+      <TextField fx:id="textFieldTime" layoutX="404.0" layoutY="251.0" />
+    </children>
+</AnchorPane>
