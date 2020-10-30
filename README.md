@@ -1,6 +1,6 @@
 Yo les potos, 
 
-Pour pouvoir coder il faut télécharger **javaFx 15 ** -> https://gluonhq.com/products/javafx/
+Pour pouvoir coder il faut télécharger **javaFx 15** -> https://gluonhq.com/products/javafx/
 
 Puis quand le projet sera ouvert, il faudra ajouter dans **File>Project Structure>Librairies** le fichier lib de javaFx en mettant le chemin d'accès.
 
