@@ -6,18 +6,30 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
+
+    public static Foret foret;
+    public static Stage stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../resources/layout/forest_config.fxml"));
-        primaryStage.setTitle("SimCitree");
-        primaryStage.setScene(new Scene(root, 1000, 500));
-        primaryStage.show();
+        stage = primaryStage;
+        changeScene("layout/forest_config.fxml", false);
     }
 
 
     public static void main(String[] args) {
         launch(args);
     }
+
+    public static void changeScene(String FXLM, boolean resizible) throws IOException {
+        stage.setResizable(resizible);
+        Parent root = FXMLLoader.load(Main.class.getResource(FXLM));
+        stage.setTitle("SimCitree");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 }

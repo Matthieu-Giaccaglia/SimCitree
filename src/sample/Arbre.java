@@ -9,7 +9,7 @@ public class Arbre {
     private double intensiteCompetition;
     private double chanceReproduction;
 
-    public Arbre(int x, int y, int rayonCompetition, double esperanceVie, int rayonDispersion, double intensiteCompetition, double chanceReproduction) {
+    public Arbre(int x, int y, int rayonCompetition,int rayonDispersion, double esperanceVie, double intensiteCompetition, double chanceReproduction) {
         this.x = x;
         this.y = y;
         this.rayonCompetition = rayonCompetition;
@@ -73,5 +73,18 @@ public class Arbre {
 
     public void setChanceReproduction(double chanceReproduction) {
         this.chanceReproduction = chanceReproduction;
+    }
+
+    @Override
+    public String toString() {
+        return "Arbre{" +
+                "x=" + x +
+                ", y=" + y +
+                ", rayonCompetition=" + rayonCompetition +
+                ", esperanceVie=" + esperanceVie +
+                ", rayonDispersion=" + rayonDispersion +
+                ", intensiteCompetition=" + intensiteCompetition +
+                ", chanceReproduction=" + chanceReproduction +
+                '}';
     }
 }
