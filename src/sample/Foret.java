@@ -51,8 +51,10 @@ public class Foret {
     public void addFils(Arbre arbrePere) {
 
 
-        int coordonneX = new Random().nextInt((arbrePere.getRayonDispersion()) + arbrePere.getRayonDispersion() ) - arbrePere.getRayonDispersion();
-        int coordonneY = new Random().nextInt((arbrePere.getRayonDispersion()) + arbrePere.getRayonDispersion() ) - arbrePere.getRayonDispersion();
+        int coordonneX = new Random().nextInt((arbrePere.getRayonDispersion()+1) + arbrePere.getRayonDispersion()) - arbrePere.getRayonDispersion();
+        int coordonneY = new Random().nextInt( (arbrePere.getRayonDispersion()+1) + arbrePere.getRayonDispersion()) - arbrePere.getRayonDispersion();
+
+        System.out.println(coordonneX + " , " +coordonneY);
 
         coordonneX += arbrePere.getX();
         coordonneY += arbrePere.getY();
@@ -68,6 +70,7 @@ public class Foret {
         } else if (coordonneY + coordonneY < 0) {
             coordonneY = coordonneY + tableauArbre.length;
         }
+
         if (tableauArbre[coordonneX][coordonneY] == null) {
 
             Arbre arbreFils = new Arbre(coordonneX,
