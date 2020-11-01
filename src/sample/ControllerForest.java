@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ControllerForest implements Initializable {
@@ -67,18 +68,20 @@ public class ControllerForest implements Initializable {
 
     public void startSimulation() {
 
-        Main.foret.setNbTour(saveNbTour);
+        //Main.foret.setNbTour(saveNbTour);
         simulation();
     }
 
     public void pauseSimulation() {
-        saveNbTour = Main.foret.getNbTour();
-        Main.foret.setNbTour(0);
+        //saveNbTour = Main.foret.getNbTour();
+        //Main.foret.setNbTour(0);
     }
 
     public void simulation(){
         while (Main.foret.getNbTour() != 0) {
             Main.foret.setNbTour(Main.foret.getNbTour()-1);
+            int i = new Random().nextInt(Main.foret.getList().size());
+            Main.foret.addFils(Main.foret.getList().get(i));
             //evenement
             //wait
         }
