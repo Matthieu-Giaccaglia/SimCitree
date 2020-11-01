@@ -1,5 +1,9 @@
 package sample;
 
+import javafx.animation.AnimationTimer;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
@@ -11,6 +15,7 @@ import javafx.scene.layout.*;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class ControllerForest implements Initializable {
 
@@ -24,14 +29,14 @@ public class ControllerForest implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Main.stage.setMaximized(true);
-        
 
-        for(int i = 1; i <= Main.foret.getTaille(); i++) {
+
+        for (int i = 1; i <= Main.foret.getTaille(); i++) {
             ColumnConstraints column = new ColumnConstraints(40);
             Main.gridPane.getColumnConstraints().add(column);
         }
 
-        for(int i = 1; i <= Main.foret.getTaille(); i++) {
+        for (int i = 1; i <= Main.foret.getTaille(); i++) {
             RowConstraints row = new RowConstraints(40);
             Main.gridPane.getRowConstraints().add(row);
         }
@@ -74,19 +79,26 @@ public class ControllerForest implements Initializable {
         //Main.foret.setNbTour(0);
     }
 
-    public void simulation(){
-        while (Main.foret.getNbTour() != 0) {
-            Main.foret.setNbTour(Main.foret.getNbTour()-1);
-            //if(evenement != -1){
-                //if(evenement = 0){
+    public void simulation() {
+
+        AnimationTimer timer = new AnimationTimer() {
+            private long lastUpdate = 0;
+
+            @Override
+            public void handle(long now) {
+                if (now - lastUpdate >= 1000_000_000 && Main.foret.getNbTour() != 0) { // delay de 1000 ms
                     int i = new Random().nextInt(Main.foret.getList().size());
                     Main.foret.addFils(Main.foret.getList().get(i));
-               //if(evenement = 1){
-                    //int j = new Random().nextInt(Main.foret.getList().size());
-                    //Main.foret.deleteArbre(j);
-            //else {wait}
-        }
+                    Main.gridPane.add(new ImageView(new Image(getClass().getResource("raw/arbre.png").toExternalForm(), 40, 40, false, false)), 0, 0);
+                    Main.foret.setNbTour(Main.foret.getNbTour() - 1);
+                    lastUpdate = now;
+                } else if (Main.foret.getNbTour() == 0) {
+                    stop();
+                }
+            }
+        };
+
+        timer.start();
+
     }
-
-
 }
