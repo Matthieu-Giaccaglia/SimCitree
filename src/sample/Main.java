@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ public class Main extends Application {
 
     public static Foret foret;
     public static Stage stage;
+    public static ScrollableGrid gridPane = new ScrollableGrid();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
