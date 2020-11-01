@@ -77,10 +77,14 @@ public class ControllerForest implements Initializable {
     public void simulation(){
         while (Main.foret.getNbTour() != 0) {
             Main.foret.setNbTour(Main.foret.getNbTour()-1);
-            int i = new Random().nextInt(Main.foret.getList().size());
-            Main.foret.addFils(Main.foret.getList().get(i));
-            //evenement
-            //wait
+            //if(evenement != -1){
+                //if(evenement = 0){
+                    int i = new Random().nextInt(Main.foret.getList().size());
+                    Main.foret.addFils(Main.foret.getList().get(i));
+               //if(evenement = 1){
+                    //int j = new Random().nextInt(Main.foret.getList().size());
+                    //Main.foret.deleteArbre(j);
+            //else {wait}
         }
     }
 
