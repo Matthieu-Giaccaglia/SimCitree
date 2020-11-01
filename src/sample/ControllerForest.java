@@ -67,6 +67,8 @@ public class ControllerForest implements Initializable {
 
     public void startSimulation() {
 
+        Main.foret.setNbTour(saveNbTour);
+        simulation();
     }
 
     public void pauseSimulation() {
