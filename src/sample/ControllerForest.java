@@ -38,9 +38,6 @@ public class ControllerForest implements Initializable {
 
         Main.gridPane.setGridLinesVisible(true);
 
-        for (Arbre a : Main.foret.getList()) {
-            Main.gridPane.add(new ImageView(new Image(getClass().getResource("raw/arbre.png").toExternalForm() ,40,40,false,false)), a.getX(), a.getY());
-        }
 
         vbox.getChildren().add(Main.gridPane);
 
