@@ -20,6 +20,8 @@ public class Foret {
         return nbTour;
     }
 
+    public void setNbTour(int nbTour) { this.nbTour = nbTour;}
+
     public int getTaille(){
         return taille;
     }

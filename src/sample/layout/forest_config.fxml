@@ -11,7 +11,7 @@
     <Label layoutX="113.0" layoutY="93.0" prefHeight="29.0" prefWidth="130.0" text="Durée Simulation :" />
     <TextField fx:id="textFieldTour" depthTest="DISABLE" layoutX="297.0" layoutY="95.0" promptText="Nombre sans virgule" />
     <Label layoutX="156.0" layoutY="151.0" text="Taille :" />
-    <TextField fx:id="textFieldTime" layoutX="297.0" layoutY="146.0" promptText="Nombre sans virgule" />
+    <TextField fx:id="textFieldTaille" layoutX="297.0" layoutY="146.0" promptText="Nombre sans virgule" />
     <Button fx:id="buttonStart" layoutX="365.0" layoutY="217.0" mnemonicParsing="false" onAction="#start" text="Ok" />
 
 </AnchorPane>
