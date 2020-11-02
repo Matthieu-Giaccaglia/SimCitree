@@ -1,12 +1,8 @@
 package sample;
 
-import javafx.geometry.HPos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Foret {
 
@@ -14,90 +10,90 @@ public class Foret {
     private int taille;
     private Arbre[][] tableauArbre;
     private ArrayList<Arbre> list = new ArrayList<>();
-    
+
 
     public Foret(int nbTour, int taille) {
         this.nbTour = nbTour;
         this.taille = taille;
-        this.tableauArbre = new Arbre[taille][taille];
     }
 
-    public int getNbTour(){
+    public int getNbTour() {
         return nbTour;
     }
 
-    public void setNbTour(int nbTour) { this.nbTour = nbTour;}
+    public void setNbTour(int nbTour) {
+        this.nbTour = nbTour;
+    }
 
-    public int getTaille(){
+    public int getTaille() {
         return taille;
     }
 
-    public ArrayList<Arbre> getList (){
+    public ArrayList<Arbre> getList() {
         return list;
     }
 
     public void addArbre(Arbre arbreAjoute) {
         list.add(arbreAjoute);
-        tableauArbre[arbreAjoute.getX()][arbreAjoute.getY()] = arbreAjoute;
-        ImageView imageView = new ImageView(new Image(getClass().getResource("raw/arbre.jpg").toExternalForm()));
+
+        Main.sc.getData().get(0).getData().add(new XYChart.Data(arbreAjoute.getX(),arbreAjoute.getY()));
+
+        /*ImageView imageView = new ImageView(new Image(getClass().getResource("raw/arbre.jpg").toExternalForm()));
         imageView.setFitWidth(39);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         imageView.setCache(true);
-        Main.gridPane.add(imageView,arbreAjoute.getX(), arbreAjoute.getY());
-        GridPane.setHalignment(imageView,HPos.CENTER);
-        //listToString();
+
+        GridPane.setHalignment(imageView,HPos.CENTER);*/
     }
 
-    public void deleteArbre(int index){
+    public void deleteArbre(int index) {
         Arbre arbre = list.get(index);
-        tableauArbre[arbre.getX()][arbre.getY()] = null;
         list.remove(list.get(index));
-        //listToString();
     }
 
     public void addFils(Arbre arbrePere) {
 
 
-        int coordonneX = new Random().nextInt((arbrePere.getRayonDispersion()+1) + arbrePere.getRayonDispersion()) - arbrePere.getRayonDispersion();
-        int coordonneY = new Random().nextInt( (arbrePere.getRayonDispersion()+1) + arbrePere.getRayonDispersion()) - arbrePere.getRayonDispersion();
+        double angle = Math.toRadians(Math.random() * 360);
+        double amount = arbrePere.getRayonDispersion();
+        double coordonneX = (amount * Math.cos(angle));
+        double coordonneY = (amount * Math.sin(angle));
 
-        System.out.println(coordonneX + " , " +coordonneY);
+        coordonneX = coordonneX + arbrePere.getX();
+        coordonneY = coordonneY + arbrePere.getY();
 
-        coordonneX += arbrePere.getX();
-        coordonneY += arbrePere.getY();
-
-        if (coordonneX > tableauArbre.length - 1) {
-            coordonneX = coordonneX - tableauArbre.length;
-        } else if (coordonneX + coordonneX < 0) {
-            coordonneX = coordonneX + tableauArbre.length;
+        if (coordonneX >= 1) {
+            coordonneX = coordonneX - 1;
+        } else if (coordonneX <= 0) {
+            coordonneX = coordonneX + 1;
         }
 
-        if (coordonneY > tableauArbre.length - 1) {
-            coordonneY = coordonneY - tableauArbre.length;
-        } else if (coordonneY + coordonneY < 0) {
-            coordonneY = coordonneY + tableauArbre.length;
+        if (coordonneY >= 1) {
+            coordonneY = coordonneY - 1;
+        } else if (coordonneY <= 0) {
+            coordonneY = coordonneY + 1;
         }
 
-        if (tableauArbre[coordonneX][coordonneY] == null) {
+        System.out.println(coordonneX +","+ coordonneY);
 
-            Arbre arbreFils = new Arbre(coordonneX,
-                     coordonneY,
-                     arbrePere.getRayonCompetition(),
-                     arbrePere.getRayonDispersion(),
-                     arbrePere.getEsperanceVie(),
-                     arbrePere.getIntensiteCompetition(),
-                     arbrePere.getChanceReproduction());
+        Arbre arbreFils = new Arbre(
+                coordonneX,
+                coordonneY,
+                arbrePere.getRayonCompetition(),
+                arbrePere.getRayonDispersion(),
+                arbrePere.getEsperanceVie(),
+                arbrePere.getIntensiteCompetition(),
+                arbrePere.getChanceReproduction());
 
-            addArbre(arbreFils);
-         }
+        addArbre(arbreFils);
+
     }
 
     public void listToString() {
         StringBuilder listString = new StringBuilder();
 
-        for (Arbre a : list)
-        {
+        for (Arbre a : list) {
             listString.append(a.toString()).append("\t");
         }
 

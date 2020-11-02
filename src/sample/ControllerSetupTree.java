@@ -41,25 +41,22 @@ public class ControllerSetupTree implements Initializable {
         if (posX.equals("") || posY.equals("") || chanceRep.equals("") || intensiteComp.equals("") || esperanceVie.equals("") || rayonComp.equals("") || rayonDisp.equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Veillez remplir tous les champs !", ButtonType.OK);
             alert.showAndWait();
-        } else if (!posX.matches("[0-9]*") || !posY.matches("[0-9]*") || !rayonComp.matches("[0-9]*") || !rayonDisp.matches("[0-9]*")) { //Si c'est pas des chiffres
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Veillez entrer uniquement des nombres sans virgule pour :\n" +
+        } else if (!posX.matches("[0]*[.][0-9]*") || !posY.matches("[0]*[.][0-9]*") || !rayonComp.matches("[0-9]*[.][0-9]*") || !rayonDisp.matches("[0-9]*[.][0-9]*") || !intensiteComp.matches("[0-9]*[.][0-9]*") || !chanceRep.matches("[0-9]*[.][0-9]*") || !esperanceVie.matches("[0-9]*[.][0-9]*") ) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Veillez entrer uniquement des nombres à virgule (avec un point) pour :\n" +
+                    " - L'espérance de vie.\n" +
+                    " - L'instensité de compétition.\n" +
+                    " - La chance de reproduction." +
                     " - Position X.\n" +
                     " - Position Y.\n" +
                     " - Rayon Compétition.\n" +
                     " - Rayon Disperstion.", ButtonType.OK);
             alert.showAndWait();
-        } else if (!intensiteComp.matches("[0-9]*[.][0-9]*") || !chanceRep.matches("[0-9]*[.][0-9]*") || !esperanceVie.matches("[0-9]*[.][0-9]*") ) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Veillez entrer uniquement des nombres à virgule (avec un point) pour :\n" +
-                    " - L'espérance de vie.\n" +
-                    " - L'instensité de compétition.\n" +
-                    " - La chance de reproduction.", ButtonType.OK);
-            alert.showAndWait();
-        } else if (Integer.parseInt(posX) > Main.foret.getTaille()-1|| Integer.parseInt(posY) > Main.foret.getTaille()-1){
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Les coordonnées de l'arbre doivent être comprise entre 0 et " + (Main.foret.getTaille() - 1) + " !", ButtonType.OK);
+        } else if (Double.parseDouble(posX) >= 1 || Double.parseDouble(posX) < 0 || Double.parseDouble(posY) >= 1 || Double.parseDouble(posY) < 0){
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Les coordonnées de l'arbre doivent être comprise entre 0 et 1" + (Main.foret.getTaille() - 1) + " !", ButtonType.OK);
             alert.showAndWait();
         } else {
             listView.getItems().add(listView.getItems().size(), "Arbre (" + posX + " ," + posY + ")");
-            Arbre arbre = new Arbre(Integer.parseInt(posX), Integer.parseInt(posY), Integer.parseInt(rayonComp), Integer.parseInt(rayonDisp), Double.parseDouble(esperanceVie), Double.parseDouble(intensiteComp), Double.parseDouble(chanceRep));
+            Arbre arbre = new Arbre(Double.parseDouble(posX), Double.parseDouble(posY), Double.parseDouble(rayonComp), Double.parseDouble(rayonDisp), Double.parseDouble(esperanceVie), Double.parseDouble(intensiteComp), Double.parseDouble(chanceRep));
             Main.foret.addArbre(arbre);
         }
 

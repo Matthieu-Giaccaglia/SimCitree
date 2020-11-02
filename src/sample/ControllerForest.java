@@ -1,29 +1,36 @@
 package sample;
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+import sample.jfxutils.chart.ChartPanManager;
+import sample.jfxutils.chart.FixedFormatTickFormatter;
+import sample.jfxutils.chart.JFXChartUtil;
+import sample.jfxutils.chart.StableTicksAxis;
 
 import java.net.URL;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
+import java.util.TimeZone;
 
 public class ControllerForest implements Initializable {
 
-    private static ScrollableGrid gridPane = new ScrollableGrid();
     public ToolBar toolbar;
     public VBox vbox;
     public Button buttonStart;
@@ -33,23 +40,72 @@ public class ControllerForest implements Initializable {
     private AnimationTimer animationTimer;
     private MediaPlayer mediaPlayer;
 
+    private long startTime;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        vbox.getChildren().add(Main.sc);
+        startTime = System.currentTimeMillis();
 
-        for (int i = 1; i <= Main.foret.getTaille(); i++) {
-            Main.gridPane.getColumnConstraints().add(new ColumnConstraints(40));
-            Main.gridPane.getRowConstraints().add(new RowConstraints(40));
-        }
+        //Set chart to format dates on the X axis
+        SimpleDateFormat format = new SimpleDateFormat( "HH:mm:ss" );
+        format.setTimeZone( TimeZone.getTimeZone( "GMT" ) );
 
-        Main.gridPane.setGridLinesVisible(true);
-        vbox.getChildren().add(Main.gridPane);
 
-        ZoomableScrollPane zoomableScrollPane = new ZoomableScrollPane(Main.gridPane);
+        Main.serie = new XYChart.Series<Number, Number>();
+        Main.serie.setName( "Data" );
+
+        Main.sc.getData().add( Main.serie );
+
+
+        //addDataTimeline.setCycleCount( Animation.INDEFINITE );
+
+        Main.sc.setOnMouseMoved( new EventHandler<MouseEvent>() {
+            @Override
+            public void handle( MouseEvent mouseEvent ) {
+                double xStart = Main.sc.getXAxis().getLocalToParentTransform().getTx();
+                double axisXRelativeMousePosition = mouseEvent.getX() - xStart;
+
+            }
+        } );
+
+        //Panning works via either secondary (right) mouse or primary with ctrl held down
+        ChartPanManager panner = new ChartPanManager( Main.sc );
+        panner.setMouseFilter( new EventHandler<MouseEvent>() {
+            @Override
+            public void handle( MouseEvent mouseEvent ) {
+                if ( mouseEvent.getButton() == MouseButton.SECONDARY ||
+                        ( mouseEvent.getButton() == MouseButton.PRIMARY &&
+                                mouseEvent.isShortcutDown() ) ) {
+                    //let it through
+                } else {
+                    mouseEvent.consume();
+                }
+            }
+        } );
+        panner.start();
+
+        //Zooming works only via primary mouse button without ctrl held down
+        JFXChartUtil.setupZooming( Main.sc, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle( MouseEvent mouseEvent ) {
+                if ( mouseEvent.getButton() != MouseButton.PRIMARY ||
+                        mouseEvent.isShortcutDown() )
+                    mouseEvent.consume();
+            }
+        } );
+
+        JFXChartUtil.addDoublePrimaryClickAutoRangeHandler( Main.sc );
+
+
+
+        /*ZoomableScrollPane zoomableScrollPane = new ZoomableScrollPane(Main.ssc);
         zoomableScrollPane.prefWidthProperty().bind(Main.stage.widthProperty().multiply(1));
-        zoomableScrollPane.prefHeightProperty().bind(Main.stage.heightProperty().multiply(1));
-        vbox.getChildren().add(zoomableScrollPane);
+        zoomableScrollPane.prefHeightProperty().bind(Main.stage.heightProperty().multiply(1));*/
+
+
 
         animationTimer = new AnimationTimer() {
             private long lastUpdate = 0;
@@ -68,7 +124,19 @@ public class ControllerForest implements Initializable {
             }
         };
         mediaPlayer = new MediaPlayer(new Media(Paths.get("src/sample/raw/test.mp3").toUri().toString()));
-        mediaPlayer.setVolume(0);
+        mediaPlayer.setVolume(0.1);
+
+        Main.foret.addArbre(
+                new Arbre(
+                        0.5,
+                        0.5,
+                        0.1,
+                        0.1,
+                        0.1,
+                        0.1,
+                        0.1
+                )
+        );
 
     }
 

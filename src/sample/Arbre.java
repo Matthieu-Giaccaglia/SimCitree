@@ -2,14 +2,14 @@ package sample;
 
 public class Arbre {
 
-    private int x, y;
-    private int rayonCompetition;
+    private double x, y;
+    private double rayonCompetition;
     private double esperanceVie;
-    private int rayonDispersion;
+    private double rayonDispersion;
     private double intensiteCompetition;
     private double chanceReproduction;
 
-    public Arbre(int x, int y, int rayonCompetition,int rayonDispersion, double esperanceVie, double intensiteCompetition, double chanceReproduction) {
+    public Arbre(double x, double y, double rayonCompetition,double rayonDispersion, double esperanceVie, double intensiteCompetition, double chanceReproduction) {
         this.x = x;
         this.y = y;
         this.rayonCompetition = rayonCompetition;
@@ -19,27 +19,30 @@ public class Arbre {
         this.chanceReproduction = chanceReproduction;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
+
         this.y = y;
     }
 
-    public int getRayonCompetition() {
+    public double getRayonCompetition() {
         return rayonCompetition;
     }
 
-    public void setRayonCompetition(int rayonCompetition) {
+    public void setRayonCompetition(double rayonCompetition) {
         this.rayonCompetition = rayonCompetition;
     }
 
@@ -51,11 +54,11 @@ public class Arbre {
         this.esperanceVie = esperanceVie;
     }
 
-    public int getRayonDispersion() {
+    public double getRayonDispersion() {
         return rayonDispersion;
     }
 
-    public void setRayonDispersion(int rayonDispersion) {
+    public void setRayonDispersion(double rayonDispersion) {
         this.rayonDispersion = rayonDispersion;
     }
 
@@ -79,7 +82,7 @@ public class Arbre {
     public String toString() {
         return "Arbre{" +
                 "x=" + x +
-                ", y=" + y +
+                ", y="+ y  +
                 ", rayonCompetition=" + rayonCompetition +
                 ", esperanceVie=" + esperanceVie +
                 ", rayonDispersion=" + rayonDispersion +
@@ -87,4 +90,6 @@ public class Arbre {
                 ", chanceReproduction=" + chanceReproduction +
                 '}';
     }
+
+
 }
