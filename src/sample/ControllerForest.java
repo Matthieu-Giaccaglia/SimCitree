@@ -68,7 +68,7 @@ public class ControllerForest implements Initializable {
             }
         };
         mediaPlayer = new MediaPlayer(new Media(Paths.get("src/sample/raw/test.mp3").toUri().toString()));
-        mediaPlayer.setVolume(1);
+        mediaPlayer.setVolume(0);
 
     }
 
