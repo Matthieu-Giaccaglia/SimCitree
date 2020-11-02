@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sample.ControllerSetupTree">
+    <ToolBar minHeight="-Infinity" prefHeight="40.0" prefWidth="800.0">
+        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../sample/raw/logo_simcitree.png"/>
+        </ImageView>
+    </ToolBar>
+    <Pane prefHeight="517.0" prefWidth="798.0">
+        <Pane layoutX="35.0" layoutY="13.0" prefHeight="491.0" prefWidth="325.0" style="-fx-border-color: black;">
+            <ToolBar prefHeight="40.0" prefWidth="325.0">
+                <Label text="Création d'arbre"/>
+            </ToolBar>
+            <VBox layoutX="9.0" layoutY="40.0" prefHeight="375.0" prefWidth="308.0"
+                  style="-fx-border-color: gray; -fx-background-color: green;">
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Position X :"/>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="textFieldX" prefHeight="20.0" prefWidth="50.0" promptText="12"/>
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Position Y :"/>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="textFieldY" prefHeight="20.0" prefWidth="50.0" promptText="12"/>
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Rayon Compétition :"/>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="textFieldRayonC" prefHeight="20.0" prefWidth="50.0" promptText="12"/>
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Rayon Dispersion :"/>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="textFieldRayonD" prefHeight="20.0" prefWidth="50.0" promptText="12"/>
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Chance Reproduction :"/>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="textFieldChanceR" prefHeight="20.0" prefWidth="50.0"
+                               promptText="12.0"/>
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Espérance Vie :"/>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="textFieldLifeE" prefHeight="20.0" prefWidth="50.0" promptText="12.0"/>
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Intensité Compétition :"/>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="textFieldIntensite" prefHeight="20.0" prefWidth="50.0"
+                               promptText="12.0"/>
+                </HBox>
+            </VBox>
+            <Button fx:id="buttonArbre" layoutX="178.0" layoutY="438.0" mnemonicParsing="false" onAction="#addArbre"
+                    prefHeight="39.0" prefWidth="133.0" text="Ajouter un arbre"/>
+        </Pane>
+        <VBox layoutX="474.0" layoutY="14.0">
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+                <Label text="Liste d'arbre"/>
+            </ToolBar>
+
+            <ListView fx:id="listView" prefHeight="375.0" prefWidth="290.0"/>
+        </VBox>
+        <Button layoutX="565.0" layoutY="464.0" mnemonicParsing="false" onAction="#startSimulation"
+                prefHeight="39.0" prefWidth="199.0" text="Commencer la simulation"/>
+    </Pane>
+</VBox>

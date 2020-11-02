@@ -6,13 +6,17 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -22,74 +26,40 @@ public class ControllerForest implements Initializable {
     private static ScrollableGrid gridPane = new ScrollableGrid();
     public ToolBar toolbar;
     public VBox vbox;
-    private int saveNbTour;
+    public Button buttonStart;
+    public Button buttonPause;
+    public Label labelNbTour;
+    private int nbTourEcoule = 0;
+    private AnimationTimer animationTimer;
+    private MediaPlayer mediaPlayer;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Main.stage.setMaximized(true);
-
 
         for (int i = 1; i <= Main.foret.getTaille(); i++) {
-            ColumnConstraints column = new ColumnConstraints(40);
-            Main.gridPane.getColumnConstraints().add(column);
-        }
-
-        for (int i = 1; i <= Main.foret.getTaille(); i++) {
-            RowConstraints row = new RowConstraints(40);
-            Main.gridPane.getRowConstraints().add(row);
+            Main.gridPane.getColumnConstraints().add(new ColumnConstraints(40));
+            Main.gridPane.getRowConstraints().add(new RowConstraints(40));
         }
 
         Main.gridPane.setGridLinesVisible(true);
-
-
         vbox.getChildren().add(Main.gridPane);
 
-        Button buttonStart = new Button("Start");
-        buttonStart.setOnAction(actionEvent -> startSimulation());
-
-        Button buttonPause = new Button("Pause");
-        buttonPause.setOnAction(actionEvent -> pauseSimulation());
-
-        toolbar.getItems().add(buttonStart);
-        toolbar.getItems().add(new Separator());
-        toolbar.getItems().add(buttonPause);
-
-
         ZoomableScrollPane zoomableScrollPane = new ZoomableScrollPane(Main.gridPane);
-
         zoomableScrollPane.prefWidthProperty().bind(Main.stage.widthProperty().multiply(1));
         zoomableScrollPane.prefHeightProperty().bind(Main.stage.heightProperty().multiply(1));
-
         vbox.getChildren().add(zoomableScrollPane);
-        vbox.getChildren().add(new ToolBar());
 
-
-    }
-
-    public void startSimulation() {
-
-        //Main.foret.setNbTour(saveNbTour);
-        simulation();
-    }
-
-    public void pauseSimulation() {
-        //saveNbTour = Main.foret.getNbTour();
-        //Main.foret.setNbTour(0);
-    }
-
-    public void simulation() {
-
-        AnimationTimer timer = new AnimationTimer() {
+        animationTimer = new AnimationTimer() {
             private long lastUpdate = 0;
 
             @Override
             public void handle(long now) {
-                if (now - lastUpdate >= 1000_000_000 && Main.foret.getNbTour() != 0) { // delay de 1000 ms
-                    int i = new Random().nextInt(Main.foret.getList().size());
-                    Main.foret.addFils(Main.foret.getList().get(i));
-                    Main.gridPane.add(new ImageView(new Image(getClass().getResource("raw/arbre.png").toExternalForm(), 40, 40, false, false)), 0, 0);
+                if ((now - lastUpdate)/ 1_000_000_000.0 >= 1 && Main.foret.getNbTour() != 0) { // delay de 1s
+                    Main.foret.addFils(Main.foret.getList().get(new Random().nextInt(Main.foret.getList().size())));
+                    nbTourEcoule ++;
+                    labelNbTour.setText(String.valueOf(nbTourEcoule));
                     Main.foret.setNbTour(Main.foret.getNbTour() - 1);
                     lastUpdate = now;
                 } else if (Main.foret.getNbTour() == 0) {
@@ -97,8 +67,20 @@ public class ControllerForest implements Initializable {
                 }
             }
         };
-
-        timer.start();
+        mediaPlayer = new MediaPlayer(new Media(Paths.get("src/sample/raw/urss.mp3").toUri().toString()));
+        mediaPlayer.setVolume(1);
 
     }
+
+    public void startSimulation() {
+        animationTimer.start();
+        mediaPlayer.play();
+    }
+
+    public void pauseSimulation() {
+
+        animationTimer.stop();
+        mediaPlayer.pause();
+    }
+
 }

@@ -1,7 +1,9 @@
 package sample;
 
+import javafx.geometry.HPos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -37,7 +39,13 @@ public class Foret {
     public void addArbre(Arbre arbreAjoute) {
         list.add(arbreAjoute);
         tableauArbre[arbreAjoute.getX()][arbreAjoute.getY()] = arbreAjoute;
-        Main.gridPane.add(new ImageView(new Image(getClass().getResource("raw/arbre.png").toExternalForm() ,40,40,false,false)), arbreAjoute.getX(), arbreAjoute.getY());
+        ImageView imageView = new ImageView(new Image(getClass().getResource("raw/urss.jpg").toExternalForm()));
+        imageView.setFitWidth(39);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+        Main.gridPane.add(imageView,arbreAjoute.getX(), arbreAjoute.getY());
+        GridPane.setHalignment(imageView,HPos.CENTER);
         //listToString();
     }
 
