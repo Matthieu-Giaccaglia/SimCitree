@@ -39,7 +39,7 @@ public class Foret {
     public void addArbre(Arbre arbreAjoute) {
         list.add(arbreAjoute);
         tableauArbre[arbreAjoute.getX()][arbreAjoute.getY()] = arbreAjoute;
-        ImageView imageView = new ImageView(new Image(getClass().getResource("raw/urss.jpg").toExternalForm()));
+        ImageView imageView = new ImageView(new Image(getClass().getResource("raw/arbre.jpg").toExternalForm()));
         imageView.setFitWidth(39);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
