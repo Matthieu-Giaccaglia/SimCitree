@@ -1,33 +1,18 @@
 package sample;
 
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
-import sample.jfxutils.chart.ChartPanManager;
-import sample.jfxutils.chart.FixedFormatTickFormatter;
-import sample.jfxutils.chart.JFXChartUtil;
-import sample.jfxutils.chart.StableTicksAxis;
 
 import java.net.URL;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.TimeZone;
 
 public class ControllerForest implements Initializable {
 
@@ -40,64 +25,17 @@ public class ControllerForest implements Initializable {
     private AnimationTimer animationTimer;
     private MediaPlayer mediaPlayer;
 
-    private long startTime;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         vbox.getChildren().add(Main.sc);
-        startTime = System.currentTimeMillis();
-
-        //Set chart to format dates on the X axis
-        SimpleDateFormat format = new SimpleDateFormat( "HH:mm:ss" );
-        format.setTimeZone( TimeZone.getTimeZone( "GMT" ) );
-
-
-        Main.serie = new XYChart.Series<Number, Number>();
-        Main.serie.setName( "Data" );
-
+        Main.serie.setName( "Test" );
         Main.sc.getData().add( Main.serie );
 
 
-        //addDataTimeline.setCycleCount( Animation.INDEFINITE );
 
-        Main.sc.setOnMouseMoved( new EventHandler<MouseEvent>() {
-            @Override
-            public void handle( MouseEvent mouseEvent ) {
-                double xStart = Main.sc.getXAxis().getLocalToParentTransform().getTx();
-                double axisXRelativeMousePosition = mouseEvent.getX() - xStart;
-
-            }
-        } );
-
-        //Panning works via either secondary (right) mouse or primary with ctrl held down
-        ChartPanManager panner = new ChartPanManager( Main.sc );
-        panner.setMouseFilter( new EventHandler<MouseEvent>() {
-            @Override
-            public void handle( MouseEvent mouseEvent ) {
-                if ( mouseEvent.getButton() == MouseButton.SECONDARY ||
-                        ( mouseEvent.getButton() == MouseButton.PRIMARY &&
-                                mouseEvent.isShortcutDown() ) ) {
-                    //let it through
-                } else {
-                    mouseEvent.consume();
-                }
-            }
-        } );
-        panner.start();
-
-        //Zooming works only via primary mouse button without ctrl held down
-        JFXChartUtil.setupZooming( Main.sc, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle( MouseEvent mouseEvent ) {
-                if ( mouseEvent.getButton() != MouseButton.PRIMARY ||
-                        mouseEvent.isShortcutDown() )
-                    mouseEvent.consume();
-            }
-        } );
-
-        JFXChartUtil.addDoublePrimaryClickAutoRangeHandler( Main.sc );
 
 
 
