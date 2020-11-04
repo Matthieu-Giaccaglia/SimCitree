@@ -1,6 +1,9 @@
 package sample;
 
+import java.util.ArrayList;
+
 public class Arbre {
+
 
     private double x, y;
     private double rayonCompetition;
@@ -8,6 +11,7 @@ public class Arbre {
     private double rayonDispersion;
     private double intensiteCompetition;
     private double chanceReproduction;
+    private ArrayList<Arbre> voisins = new ArrayList<>();
 
     public Arbre(double x, double y, double rayonCompetition,double rayonDispersion, double esperanceVie, double intensiteCompetition, double chanceReproduction) {
         this.x = x;
@@ -72,6 +76,10 @@ public class Arbre {
 
     public double getChanceReproduction() {
         return chanceReproduction;
+    }
+
+    public ArrayList<Arbre> getVoisins() {
+        return voisins;
     }
 
     public void setChanceReproduction(double chanceReproduction) {
