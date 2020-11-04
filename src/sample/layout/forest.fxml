@@ -15,10 +15,10 @@
    </ToolBar>
    <ScatterChart fx:id="chart" alternativeColumnFillVisible="false" alternativeRowFillVisible="false" animated="true" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" legendVisible="false" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
       <xAxis>
-         <NumberAxis animated="true" minorTickVisible="false" side="BOTTOM" upperBound="1.0" />
+         <NumberAxis animated="true" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickMarkVisible="false" upperBound="0.9" />
       </xAxis>
       <yAxis>
-         <NumberAxis animated="true" minorTickVisible="false" side="LEFT" upperBound="1.0" />
+         <NumberAxis animated="true" minorTickVisible="false" side="LEFT" tickLabelGap="1.0" tickMarkVisible="false" upperBound="0.9" />
       </yAxis>
    </ScatterChart>
 </VBox>

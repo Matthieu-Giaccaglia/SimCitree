@@ -52,7 +52,7 @@ public class ControllerSetupTree implements Initializable {
                     " - Rayon Disperstion.", ButtonType.OK);
             alert.showAndWait();
         } else if (Double.parseDouble(posX) >= 1 || Double.parseDouble(posX) < 0 || Double.parseDouble(posY) >= 1 || Double.parseDouble(posY) < 0){
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Les coordonnées de l'arbre doivent être comprise entre 0 et 1" + (Main.foret.getTaille() - 1) + " !", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Les coordonnées de l'arbre doivent être comprise entre 0 et 1 !", ButtonType.OK);
             alert.showAndWait();
         } else {
             listView.getItems().add(listView.getItems().size(), "Arbre (" + posX + " ," + posY + ")");

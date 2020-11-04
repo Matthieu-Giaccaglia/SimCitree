@@ -7,14 +7,11 @@ import java.util.ArrayList;
 public class Foret {
 
     private int nbTour;
-    private int taille;
-    private Arbre[][] tableauArbre;
     private ArrayList<Arbre> list = new ArrayList<>();
 
 
-    public Foret(int nbTour, int taille) {
+    public Foret(int nbTour) {
         this.nbTour = nbTour;
-        this.taille = taille;
     }
 
     public int getNbTour() {
@@ -23,10 +20,6 @@ public class Foret {
 
     public void setNbTour(int nbTour) {
         this.nbTour = nbTour;
-    }
-
-    public int getTaille() {
-        return taille;
     }
 
     public ArrayList<Arbre> getList() {
@@ -48,7 +41,6 @@ public class Foret {
     }
 
     public void deleteArbre(int index) {
-        Arbre arbre = list.get(index);
         list.remove(list.get(index));
     }
 

@@ -4,20 +4,15 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="250.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="sample.ControllerSetupForest">
+<VBox prefHeight="250.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerSetupForest">
     <ToolBar minHeight="-Infinity" prefHeight="40.0">
         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../sample/raw/logo_simcitree.png"/>
+            <Image url="@../../sample/raw/logo_simcitree.png" />
         </ImageView>
     </ToolBar>
     <Pane prefHeight="200.0" prefWidth="200.0">
-        <Label layoutX="102.0" layoutY="41.0" text="Taille :"/>
-        <TextField fx:id="textFieldTaille" layoutX="250.0" layoutY="36.0" promptText="Nombre sans virgule"/>
-        <Label layoutX="102.0" layoutY="73.0" prefHeight="29.0" prefWidth="130.0" text="Durée Simulation :"/>
-        <TextField fx:id="textFieldTour" depthTest="DISABLE" layoutX="250.0" layoutY="75.0"
-                   promptText="Nombre sans virgule"/>
-        <Button fx:id="buttonStart" layoutX="214.0" layoutY="141.0" mnemonicParsing="false" onAction="#start"
-                text="Ok"/>
+        <Label layoutX="102.0" layoutY="61.0" prefHeight="29.0" prefWidth="130.0" text="Durée Simulation :" />
+        <TextField fx:id="textFieldTour" depthTest="DISABLE" layoutX="250.0" layoutY="63.0" promptText="Nombre sans virgule" />
+        <Button fx:id="buttonStart" layoutX="195.0" layoutY="149.0" mnemonicParsing="false" onAction="#start" prefHeight="29.0" prefWidth="74.0" text="Ok" />
     </Pane>
 </VBox>

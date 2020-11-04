@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -24,14 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        foret = new Foret(100,1);
-
-        FXMLLoader loader = new FXMLLoader( getClass().getResource( "layout/setup_forest.fxml" ) );
-        Parent root = loader.load();
-
-        stage.setScene(new Scene(root));
-        stage.show();
-
+        changeScene("layout/setup_forest.fxml",false,false);
     }
 
 
