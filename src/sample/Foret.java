@@ -84,23 +84,6 @@ public class Foret {
         addArbre(arbreFils);
 
     }
-    /*
-    public void updateVoisinsEtatInitial(){
-        for (Arbre arbreCourant : list) {
-            double coordArbreX = arbreCourant.getX();
-            double coordArbreY = arbreCourant.getY();
-            double rayonCompet = arbreCourant.getRayonCompetition();
-            for (double x = coordArbreX-rayonCompet; x <= coordArbreX+rayonCompet; x++) {
-                for (double y = coordArbreY-rayonCompet; y <= coordArbreY-rayonCompet; y++) {
-                    if (list.contains() && !arbreCourant.getVoisins().contains(listeArbre[x][y])){
-                        arbreCourant.getVoisins().add();
-                        .getVoisins().add(arbreCourant);
-                    }
-                }
-            }
-        }
-    }
-    */
 
 
     public void listToString() {
