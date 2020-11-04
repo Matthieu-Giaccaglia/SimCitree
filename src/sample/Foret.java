@@ -55,15 +55,17 @@ public class Foret {
         coordonneX = coordonneX + arbrePere.getX();
         coordonneY = coordonneY + arbrePere.getY();
 
-        if (coordonneX >= 1) {
+        while (coordonneX >= 1) {
             coordonneX = coordonneX - 1;
-        } else if (coordonneX <= 0) {
+        }
+        while (coordonneX <= 0) {
             coordonneX = coordonneX + 1;
         }
 
-        if (coordonneY >= 1) {
+        while (coordonneY >= 1) {
             coordonneY = coordonneY - 1;
-        } else if (coordonneY <= 0) {
+        }
+        while (coordonneY <= 0) {
             coordonneY = coordonneY + 1;
         }
 
