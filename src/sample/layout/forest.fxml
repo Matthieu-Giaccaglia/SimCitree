@@ -13,12 +13,12 @@
       <Label text="Nombre tour :" />
       <Label fx:id="labelNbTour" />
    </ToolBar>
-   <ScatterChart fx:id="chart" alternativeColumnFillVisible="false" alternativeRowFillVisible="false" animated="true" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" legendVisible="false" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+   <ScatterChart fx:id="chart" alternativeColumnFillVisible="false" alternativeRowFillVisible="false" animated="true" legendVisible="false" VBox.vgrow="ALWAYS">
       <xAxis>
-         <NumberAxis animated="true" minorTickVisible="false" side="BOTTOM" tickLabelGap="1.0" tickMarkVisible="false" upperBound="0.9" />
+         <NumberAxis animated="false" autoRanging="false" side="BOTTOM" tickMarkVisible="false" upperBound="1.0" />
       </xAxis>
       <yAxis>
-         <NumberAxis animated="true" minorTickVisible="false" side="LEFT" tickLabelGap="1.0" tickMarkVisible="false" upperBound="0.9" />
+         <NumberAxis animated="false" autoRanging="false" minorTickVisible="false" side="LEFT" tickLabelGap="1.0" tickMarkVisible="false" upperBound="1.0" />
       </yAxis>
    </ScatterChart>
 </VBox>

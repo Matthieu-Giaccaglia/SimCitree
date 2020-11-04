@@ -36,14 +36,14 @@ public class Main extends Application {
         stage.setResizable(resizible);
         stage.setTitle("SimCitree");
 
-        if (FXMLForest) {
-            Region region = FXMLLoader.load(Main.class.getResource(FXLM));
-            StackPane root = JFXUtil.createScalePane( region, 500, 500, true );
-            stage.setScene(new Scene(root));
-        } else {
+
+            //Region region = FXMLLoader.load(Main.class.getResource(FXLM));
+            //StackPane root = JFXUtil.createScalePane( region, 500, 500, true );
+            //stage.setScene(new Scene(root));
+
             Parent root = FXMLLoader.load(Main.class.getResource(FXLM));
             stage.setScene(new Scene(root));
-        }
+
 
         stage.show();
     }

@@ -6,39 +6,28 @@ import java.util.ArrayList;
 
 public class Foret {
 
-
-    private int nbTour;
     private ArrayList<Arbre> list = new ArrayList<>();
+    private final double rayonDispersion;
+    private final double rayonCompetition;
+    private double tauxNaissance;
+    private double tauxMort;
 
 
-    public Foret(int nbTour) {
-        this.nbTour = nbTour;
-    }
-
-    public int getNbTour() {
-        return nbTour;
-    }
-
-    public void setNbTour(int nbTour) {
-        this.nbTour = nbTour;
+    public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, int nbArbre) {
+        this.rayonDispersion = rayonDispersion;
+        this.rayonCompetition = rayonCompetition;
+        this.tauxNaissance = tauxNaissance;
+        this.tauxMort = tauxMort;
+        initialiseAllArbre(nbArbre);
     }
 
     public ArrayList<Arbre> getList() {
         return list;
     }
 
-    public void addArbre(Arbre arbreAjoute) {
-        list.add(arbreAjoute);
-
-        Main.serie.getData().add(new XYChart.Data(arbreAjoute.getX(),arbreAjoute.getY()));
-
-        /*ImageView imageView = new ImageView(new Image(getClass().getResource("raw/arbre.jpg").toExternalForm()));
-        imageView.setFitWidth(39);
-        imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
-        imageView.setCache(true);
-
-        GridPane.setHalignment(imageView,HPos.CENTER);*/
+    public void addArbre(double coordonneeX, double coordonneeY) {
+        list.add(new Arbre(coordonneeX,coordonneeY));
+        Main.serie.getData().add(new XYChart.Data(coordonneeX, coordonneeY));
     }
 
     public void deleteArbre(int index) {
@@ -47,9 +36,8 @@ public class Foret {
 
     public void addFils(Arbre arbrePere) {
 
-
         double angle = Math.toRadians(Math.random() * 360);
-        double amount = arbrePere.getRayonDispersion();
+        double amount = rayonDispersion;
         double coordonneX = (amount * Math.cos(angle));
         double coordonneY = (amount * Math.sin(angle));
 
@@ -71,18 +59,12 @@ public class Foret {
         }
 
         System.out.println(coordonneX +","+ coordonneY);
+        addArbre(coordonneX, coordonneY);
+    }
 
-        Arbre arbreFils = new Arbre(
-                coordonneX,
-                coordonneY,
-                arbrePere.getRayonCompetition(),
-                arbrePere.getRayonDispersion(),
-                arbrePere.getEsperanceVie(),
-                arbrePere.getIntensiteCompetition(),
-                arbrePere.getChanceReproduction());
-
-        addArbre(arbreFils);
-
+    public void initialiseAllArbre(int nbArbre) {
+        for (int i = 0; i<nbArbre; i++)
+            addArbre(Math.random(),Math.random());
     }
 
 
@@ -94,5 +76,17 @@ public class Foret {
         }
 
         System.out.println(listString);
+    }
+
+    public double getTauxNaissance(){
+        return 1/(tauxNaissance*list.size());
+    }
+
+    public double getTauxMort(){
+        return (1 / (tauxMort * list.size()));
+    }
+
+    public double getTauxGlobal() {
+        return (1/((tauxNaissance + tauxMort)*list.size()));
     }
 }

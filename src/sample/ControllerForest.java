@@ -15,7 +15,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import jfxutils.chart.JFXChartUtil;
 
-import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Random;
@@ -63,14 +62,11 @@ public class ControllerForest implements Initializable {
 
             @Override
             public void handle(long now) {
-                if ((now - lastUpdate)/ 1_000_000_000.0 >= 1/ (Main.foret.getList().size() * Main.foret.getList().get(0).getChanceReproduction())  && Main.foret.getNbTour() != 0) { // delay de 1s
+                if ((now - lastUpdate)/ 1_000_000_000.0 >= Main.foret.getTauxNaissance()){ // delay de 1s
                     Main.foret.addFils(Main.foret.getList().get(new Random().nextInt(Main.foret.getList().size())));
                     nbTourEcoule ++;
                     labelNbTour.setText(String.valueOf(nbTourEcoule));
-                    Main.foret.setNbTour(Main.foret.getNbTour() - 1);
                     lastUpdate = now;
-                } else if (Main.foret.getNbTour() == 0) {
-                    stop();
                 }
             }
         };

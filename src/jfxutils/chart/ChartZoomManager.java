@@ -417,14 +417,12 @@ public class ChartZoomManager {
 	}
 
 	private void onMouseReleased() {
-		System.out.println("OnMouseReleased");
 		if ( !selecting.get() )
 			return;
 
 		//Prevent a silly zoom... I'm still undecided about && vs ||
 		if ( selectRect.getWidth() == 0.0 ||
 				 selectRect.getHeight() == 0.0 ) {
-			System.out.println("selecting.set( false )");
 
 			selecting.set( false );
 			return;
@@ -439,7 +437,6 @@ public class ChartZoomManager {
 		yAxis.setAutoRanging( false );
 		if ( zoomAnimated.get() ) {
 			zoomAnimation.stop();
-			System.out.println("OnMouseReleased : if");
 
 			zoomAnimation.getKeyFrames().setAll(
 					new KeyFrame( Duration.ZERO,
@@ -457,7 +454,6 @@ public class ChartZoomManager {
 			);
 			zoomAnimation.play();
 		} else {
-			System.out.println("OnMouseReleased : Else");
 			zoomAnimation.stop();
 			setXAxisLowerBound( zoomWindow.getMinX() );
 			setXAxisUpperBound( zoomWindow.getMaxX() );
@@ -531,27 +527,15 @@ public class ChartZoomManager {
 				//Are we zooming in or out, based on the direction of the roll
 				double direction = -Math.signum( event.getDeltaY() );
 
-				//TODO: Do we need to handle "continuous" scroll wheels that don't work based on ticks?
+
 				//If so, the 0.2 needs to be modified
 				double zoomAmount = 0.2 * direction;
 
 				if ( zoomMode == AxisConstraint.Both || zoomMode == AxisConstraint.Horizontal ) {
 					double xZoomDelta = ( getXAxisUpperBound() - getXAxisLowerBound() ) * zoomAmount;
 					xAxis.setAutoRanging( false );
-
-					double XMin = getXAxisLowerBound() - xZoomDelta * xZoomBalance ;
-					double XMax = getXAxisUpperBound() + xZoomDelta * ( 1 - xZoomBalance );
-
-					if (XMin < 0)
-						XMin = 0;
-					if (XMax > 1)
-						XMax = 1;
-
-					setYAxisLowerBound(XMin);
-					setYAxisUpperBound(XMax);
-
-					setXAxisLowerBound( XMin );
-					setXAxisUpperBound( XMax );
+					setXAxisLowerBound( getXAxisLowerBound() - xZoomDelta * xZoomBalance );
+					setXAxisUpperBound( getXAxisUpperBound() + xZoomDelta * ( 1 - xZoomBalance ) );
 				}
 
 				if ( zoomMode == AxisConstraint.Both || zoomMode == AxisConstraint.Vertical ) {
@@ -560,14 +544,8 @@ public class ChartZoomManager {
 
 					double YMin = getYAxisLowerBound() - yZoomDelta * yZoomBalance;
 					double YMax = getYAxisUpperBound() + yZoomDelta * ( 1 - yZoomBalance );
-
-					if (YMin < 0)
-						YMin = 0;
-					if (YMax > 1)
-						YMax = 1;
-
-					setYAxisLowerBound(YMin);
-					setYAxisUpperBound(YMax);
+					setYAxisLowerBound( YMin );
+					setYAxisUpperBound( YMax );
 				}
 			}
 		}
