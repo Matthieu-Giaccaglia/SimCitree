@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -12,4 +13,12 @@
       <Label text="Nombre tour :" />
       <Label fx:id="labelNbTour" />
    </ToolBar>
+   <ScatterChart fx:id="chart" alternativeColumnFillVisible="false" alternativeRowFillVisible="false" animated="true" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" legendVisible="false" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+      <xAxis>
+         <NumberAxis animated="true" minorTickVisible="false" side="BOTTOM" upperBound="1.0" />
+      </xAxis>
+      <yAxis>
+         <NumberAxis animated="true" minorTickVisible="false" side="LEFT" upperBound="1.0" />
+      </yAxis>
+   </ScatterChart>
 </VBox>

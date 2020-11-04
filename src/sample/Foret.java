@@ -36,7 +36,7 @@ public class Foret {
     public void addArbre(Arbre arbreAjoute) {
         list.add(arbreAjoute);
 
-        Main.sc.getData().get(0).getData().add(new XYChart.Data(arbreAjoute.getX(),arbreAjoute.getY()));
+        Main.serie.getData().add(new XYChart.Data(arbreAjoute.getX(),arbreAjoute.getY()));
 
         /*ImageView imageView = new ImageView(new Image(getClass().getResource("raw/arbre.jpg").toExternalForm()));
         imageView.setFitWidth(39);

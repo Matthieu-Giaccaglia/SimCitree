@@ -1,14 +1,21 @@
 package sample;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import jfxutils.chart.JFXChartUtil;
 
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Random;
@@ -21,6 +28,7 @@ public class ControllerForest implements Initializable {
     public Button buttonStart;
     public Button buttonPause;
     public Label labelNbTour;
+    public ScatterChart<Number, Number> chart;
     private int nbTourEcoule = 0;
     private AnimationTimer animationTimer;
     private MediaPlayer mediaPlayer;
@@ -30,20 +38,25 @@ public class ControllerForest implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        vbox.getChildren().add(Main.sc);
-        Main.serie.setName( "Test" );
-        Main.sc.getData().add( Main.serie );
+        chart.getData().add(Main.serie);
 
+        JFXChartUtil.setupZooming( chart, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle( MouseEvent mouseEvent ) {
+                if ( mouseEvent.getButton() != MouseButton.PRIMARY ||
+                        mouseEvent.isShortcutDown() )
+                    mouseEvent.consume();
+            }
+        } );
+        JFXChartUtil.addDoublePrimaryClickAutoRangeHandler(chart);
 
+        NumberAxis numberXAxis = (NumberAxis) chart.getXAxis();
+        numberXAxis.setLowerBound(0);
+        numberXAxis.setUpperBound(1);
 
-
-
-
-        /*ZoomableScrollPane zoomableScrollPane = new ZoomableScrollPane(Main.ssc);
-        zoomableScrollPane.prefWidthProperty().bind(Main.stage.widthProperty().multiply(1));
-        zoomableScrollPane.prefHeightProperty().bind(Main.stage.heightProperty().multiply(1));*/
-
-
+        NumberAxis numberYAxis = (NumberAxis) chart.getYAxis();
+        numberYAxis.setLowerBound(0);
+        numberYAxis.setUpperBound(1);
 
         animationTimer = new AnimationTimer() {
             private long lastUpdate = 0;
@@ -63,19 +76,6 @@ public class ControllerForest implements Initializable {
         };
         mediaPlayer = new MediaPlayer(new Media(Paths.get("src/sample/raw/test.mp3").toUri().toString()));
         mediaPlayer.setVolume(0.1);
-
-        Main.foret.addArbre(
-                new Arbre(
-                        0.5,
-                        0.5,
-                        0.1,
-                        0.1,
-                        0.1,
-                        0.1,
-                        0.1
-                )
-        );
-
     }
 
     public void startSimulation() {

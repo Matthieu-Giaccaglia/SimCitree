@@ -72,7 +72,7 @@ public class ControllerSetupTree implements Initializable {
             alert.showAndWait();
         } else {
             Main.stage.close();
-            Main.changeScene("layout/forest.fxml", true);
+            Main.changeScene("layout/forest.fxml", true, true);
         }
     }
 

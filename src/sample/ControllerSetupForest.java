@@ -33,7 +33,7 @@ public class ControllerSetupForest {
             Main.foret = new Foret(Integer.parseInt(cardno), Integer.parseInt(cardno2));
 
             Main.stage.close();
-            Main.changeScene("layout/setup_tree.fxml", true);
+            Main.changeScene("layout/setup_tree.fxml", true, false);
 
         }
 
