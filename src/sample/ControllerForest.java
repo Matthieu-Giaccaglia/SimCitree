@@ -66,7 +66,7 @@ public class ControllerForest implements Initializable {
 
             @Override
             public void handle(long now) {
-                if ((now - lastEvenement)/ 1_000_000_000.0 >= Main.foret.getTauxGlobal() && Main.foret.getList().size() != 0){
+                if ((now - lastEvenement)/ 1_000_000_000.0 >= Main.foret.getDureeNextEven() && Main.foret.getList().size() != 0){
                     nbTourEcoule++;
                     Main.foret.appliquerEvenement(nbTourEcoule);
                     labelNbTour.setText(String.valueOf(nbTourEcoule));
@@ -78,7 +78,6 @@ public class ControllerForest implements Initializable {
                 }
                 if ((now - lastSecond)/1_000_000_000.0 >= 1) {
                     labelTime.setText(chrono.getActuelDureeTxt());
-                    System.out.println("testmailleur"+chrono.getDureeTxt());
                     lastSecond = now;
                 }
             }

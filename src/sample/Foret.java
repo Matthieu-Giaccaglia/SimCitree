@@ -99,7 +99,13 @@ public class Foret {
         return (1 / (tauxMort * list.size()));
     }
 
-    public double getTauxGlobal() {
-        return (1/((tauxNaissance + tauxMort)*list.size()));
+    private double getTauxGlobal() {
+        return 1/((tauxNaissance + tauxMort)*list.size());
+    }
+
+    public double getDureeNextEven(){
+        double n = (-Math.log(Math.random()))/getTauxGlobal();
+        System.out.println(n);
+        return n;
     }
 }
