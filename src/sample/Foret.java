@@ -62,7 +62,6 @@ public class Foret {
             coordonneY = coordonneY + 1;
         }
 
-        System.out.println(coordonneX +","+ coordonneY);
         addArbre(coordonneX, coordonneY);
     }
 
@@ -74,10 +73,9 @@ public class Foret {
     public void appliquerEvenement(int i){
         int r = randomEven.nextInt(2);
         System.out.println(r);
-        if (r == 0)
+        if (r == 0 || i == 1)
             addFils(new Random().nextInt(list.size()));
-        else if (r == 1 && i!= 1)
-            deleteArbre(new Random().nextInt(list.size()));
+        else deleteArbre(new Random().nextInt(list.size()));
     }
 
 

@@ -72,6 +72,9 @@ public class ControllerForest implements Initializable {
                 } else if (Main.foret.getList().size() == 0) {
                     stop();
                 }
+                if ((now - lastUpdate)/1_000_000_000.0 >= 1) {
+                    //labelTime.setText();
+                }
             }
         };
 
