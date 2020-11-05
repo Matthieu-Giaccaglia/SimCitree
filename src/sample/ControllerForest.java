@@ -28,7 +28,7 @@ public class ControllerForest implements Initializable {
     public Label labelNbTour;
     public Label labelNbArbres;
     public ScatterChart<Number, Number> chart;
-    public Label textTime;
+    public Label labelTime;
     private int nbTourEcoule = 0;
     private AnimationTimer animationTimer;
     private MediaPlayer mediaPlayer;

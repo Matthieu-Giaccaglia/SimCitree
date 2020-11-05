@@ -17,7 +17,7 @@
       <Label fx:id="labelNbArbres" />
       <Separator orientation="VERTICAL" prefHeight="200.0" />
       <Label text="Temps :" />
-      <Label fx:id="textTime" />
+      <Label fx:id="labelTime" />
    </ToolBar>
    <ScatterChart fx:id="chart" alternativeColumnFillVisible="false" alternativeRowFillVisible="false" animated="true" legendVisible="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
       <xAxis>
