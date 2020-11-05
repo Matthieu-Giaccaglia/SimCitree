@@ -13,6 +13,7 @@ public class Foret {
     private final double tauxNaissance;
     private final double tauxMort;
     private Random randomEven = new Random();
+    private Random randomIndex = new Random();
 
 
     public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, int nbArbre) {
@@ -70,12 +71,13 @@ public class Foret {
             addArbre(Math.random(),Math.random());
     }
 
-    public void appliquerEvenement(int i){
+    public void appliquerEvenement(int nbTour){
         int r = randomEven.nextInt(2);
+        int indexRandom = randomIndex.nextInt(list.size());
         System.out.println(r);
-        if (r == 0 || i == 1)
-            addFils(new Random().nextInt(list.size()));
-        else deleteArbre(new Random().nextInt(list.size()));
+        if (r == 0 || nbTour == 1)
+            addFils(indexRandom);
+        else deleteArbre(indexRandom);
     }
 
 
@@ -89,11 +91,11 @@ public class Foret {
         System.out.println(listString);
     }
 
-    public double getTauxNaissance(){
+    private double getTauxNaissance(){
         return 1/(tauxNaissance*list.size());
     }
 
-    public double getTauxMort(){
+    private double getTauxMort(){
         return (1 / (tauxMort * list.size()));
     }
 
