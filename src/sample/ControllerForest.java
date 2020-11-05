@@ -59,21 +59,23 @@ public class ControllerForest implements Initializable {
         numberYAxis.setUpperBound(1);
 
         animationTimer = new AnimationTimer() {
-            private long lastUpdate = 0;
+            private long lastEvenement = 0;
+            private long lastSecond = 0;
 
             @Override
             public void handle(long now) {
-                if ((now - lastUpdate)/ 1_000_000_000.0 >= Main.foret.getTauxGlobal() && Main.foret.getList().size() != 0){
+                if ((now - lastEvenement)/ 1_000_000_000.0 >= Main.foret.getTauxGlobal() && Main.foret.getList().size() != 0){
                     nbTourEcoule++;
                     Main.foret.appliquerEvenement(nbTourEcoule);
                     labelNbTour.setText(String.valueOf(nbTourEcoule));
                     labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
-                    lastUpdate = now;
+                    lastEvenement = now;
                 } else if (Main.foret.getList().size() == 0) {
                     stop();
                 }
-                if ((now - lastUpdate)/1_000_000_000.0 >= 1) {
+                if ((now - lastSecond)/1_000_000_000.0 >= 1) {
                     //labelTime.setText();
+                    lastSecond = now;
                 }
             }
         };
