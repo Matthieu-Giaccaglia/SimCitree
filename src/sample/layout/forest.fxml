@@ -12,7 +12,7 @@
       <Separator orientation="VERTICAL" prefHeight="200.0" />
       <Label text="Nombre tour :" />
       <Label fx:id="labelNbTour" />
-      <Label text="Nombres Arbres : " />
+      <Label prefHeight="17.0" prefWidth="97.0" text="Nombres Arbres : " />
       <Label fx:id="labelNbArbres" />
    </ToolBar>
    <ScatterChart fx:id="chart" alternativeColumnFillVisible="false" alternativeRowFillVisible="false" animated="true" legendVisible="false" VBox.vgrow="ALWAYS">
