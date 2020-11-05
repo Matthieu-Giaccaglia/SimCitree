@@ -81,6 +81,7 @@ public class ControllerForest implements Initializable {
         };
         mediaPlayer = new MediaPlayer(new Media(Paths.get("src/sample/raw/test.mp3").toUri().toString()));
         mediaPlayer.setVolume(0.1);
+        labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
     }
 
     public void startSimulation() {
