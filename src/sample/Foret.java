@@ -10,8 +10,9 @@ public class Foret {
     private ArrayList<Arbre> list = new ArrayList<>();
     private final double rayonDispersion;
     private final double rayonCompetition;
-    private double tauxNaissance;
-    private double tauxMort;
+    private final double tauxNaissance;
+    private final double tauxMort;
+    private Random randomEven = new Random();
 
 
     public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, int nbArbre) {
@@ -26,18 +27,19 @@ public class Foret {
         return list;
     }
 
-    public void addArbre(double coordonneeX, double coordonneeY) {
+    private void addArbre(double coordonneeX, double coordonneeY) {
         list.add(new Arbre(coordonneeX,coordonneeY));
         Main.serie.getData().add(new XYChart.Data(coordonneeX, coordonneeY));
     }
 
-    public void deleteArbre(int index) {
+    private void deleteArbre(int index) {
         list.remove(list.get(index));
         Main.serie.getData().remove(index);
     }
 
-    public void addFils(Arbre arbrePere) {
+    private void addFils(int index) {
 
+        Arbre arbrePere = list.get(index);
         double angle = Math.toRadians(Math.random() * 360);
         double amount = rayonDispersion;
         double coordonneX = (amount * Math.cos(angle));
@@ -64,9 +66,18 @@ public class Foret {
         addArbre(coordonneX, coordonneY);
     }
 
-    public void initialiseAllArbre(int nbArbre) {
+    private void initialiseAllArbre(int nbArbre) {
         for (int i = 0; i<nbArbre; i++)
             addArbre(Math.random(),Math.random());
+    }
+
+    public void appliquerEvenement(int i){
+        int r = randomEven.nextInt(2);
+        System.out.println(r);
+        if (r == 0)
+            addFils(new Random().nextInt(list.size()));
+        else if (r == 1 && i!= 1)
+            deleteArbre(new Random().nextInt(list.size()));
     }
 
 
