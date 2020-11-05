@@ -6,7 +6,7 @@ public class Chrono {
     private long tempsFin=0;
     private long pauseDepart=0;
     private long pauseFin=0;
-    private static long duree=0;
+    private long duree=0;
 
     public void start()
     {

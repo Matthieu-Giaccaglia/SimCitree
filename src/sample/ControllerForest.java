@@ -32,11 +32,13 @@ public class ControllerForest implements Initializable {
     private int nbTourEcoule = 0;
     private AnimationTimer animationTimer;
     private MediaPlayer mediaPlayer;
+    private Chrono chrono;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.chrono = new Chrono();
 
         chart.getData().add(Main.serie);
 
@@ -72,9 +74,13 @@ public class ControllerForest implements Initializable {
                     lastEvenement = now;
                 } else if (Main.foret.getList().size() == 0) {
                     stop();
+                    chrono.stop();
                 }
                 if ((now - lastSecond)/1_000_000_000.0 >= 1) {
-                    //labelTime.setText();
+                    chrono.pause();
+                    labelTime.setText(chrono.getDureeTxt());
+                    System.out.println("testmailleur"+chrono.getDureeTxt());
+                    chrono.resume();
                     lastSecond = now;
                 }
             }
@@ -87,12 +93,17 @@ public class ControllerForest implements Initializable {
     }
 
     public void startSimulation() {
+        if(nbTourEcoule==0) {
+            this.chrono.start();
+        }else {
+            this.chrono.resume();
+        }
         animationTimer.start();
         mediaPlayer.play();
     }
 
     public void pauseSimulation() {
-
+        this.chrono.pause();
         animationTimer.stop();
         mediaPlayer.pause();
     }
