@@ -34,7 +34,7 @@
                 <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
                     <Label text="Taux de Mortalité :" />
                     <Pane HBox.hgrow="ALWAYS" />
-                    <TextField fx:id="textTauxMort" editable="false" prefHeight="20.0" prefWidth="50.0" promptText="12.0" text="0.0" />
+                    <TextField fx:id="textTauxMort" prefHeight="20.0" prefWidth="50.0" promptText="12.0" text="0.0" />
                 </HBox>
                 <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
                     <Label text="Nombre d'arbre :" />

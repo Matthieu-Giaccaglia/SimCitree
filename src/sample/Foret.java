@@ -3,6 +3,7 @@ package sample;
 import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Foret {
 
@@ -32,6 +33,7 @@ public class Foret {
 
     public void deleteArbre(int index) {
         list.remove(list.get(index));
+        Main.serie.getData().remove(index);
     }
 
     public void addFils(Arbre arbrePere) {

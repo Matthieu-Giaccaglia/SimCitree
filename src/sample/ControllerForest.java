@@ -62,9 +62,16 @@ public class ControllerForest implements Initializable {
 
             @Override
             public void handle(long now) {
-                if ((now - lastUpdate)/ 1_000_000_000.0 >= Main.foret.getTauxNaissance()){ // delay de 1s
-                    Main.foret.addFils(Main.foret.getList().get(new Random().nextInt(Main.foret.getList().size())));
-                    nbTourEcoule ++;
+                if ((now - lastUpdate)/ 1_000_000_000.0 >= Main.foret.getTauxNaissance() + Main.foret.getTauxMort()){
+                    int tmp = (int) ( Math.random() * 2 + 1);
+                    if ( tmp == 1 ) {
+                        Main.foret.deleteArbre(new Random().nextInt(Main.foret.getList().size()));
+                        System.out.println("arbre supprimé");
+                        nbTourEcoule ++;
+                    }else {
+                        Main.foret.addFils(Main.foret.getList().get(new Random().nextInt(Main.foret.getList().size())));
+                        nbTourEcoule ++;
+                    }
                     labelNbTour.setText(String.valueOf(nbTourEcoule));
                     lastUpdate = now;
                 }
