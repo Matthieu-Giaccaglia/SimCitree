@@ -27,6 +27,7 @@ public class ControllerForest implements Initializable {
     public Button buttonStart;
     public Button buttonPause;
     public Label labelNbTour;
+    public Label labelNbArbres;
     public ScatterChart<Number, Number> chart;
     private int nbTourEcoule = 0;
     private AnimationTimer animationTimer;
@@ -73,6 +74,7 @@ public class ControllerForest implements Initializable {
                         nbTourEcoule ++;
                     }
                     labelNbTour.setText(String.valueOf(nbTourEcoule));
+                    labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
                     lastUpdate = now;
                 }
             }
