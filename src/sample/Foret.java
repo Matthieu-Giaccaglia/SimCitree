@@ -71,13 +71,21 @@ public class Foret {
             addArbre(Math.random(),Math.random());
     }
 
+
     public void appliquerEvenement(int nbTour){
-        int r = randomEven.nextInt(2);
+        double totB = getTauxNaissance()* list.size(); //total Chances Naissance
+        double totM = getTauxMort()* list.size(); // total Chances Mort
+        //double totC
+        double tot = totB+totM;
+        double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
         int indexRandom = randomIndex.nextInt(list.size());
-        System.out.println(r);
-        if (r == 0 || nbTour == 1)
+
+        if(rdm <= totB || nbTour == 0){//jusqu'à totB,
             addFils(indexRandom);
-        else deleteArbre(indexRandom);
+        }else if(totB <= rdm && rdm <= totB+totM){//de totB au total
+            deleteArbre(indexRandom);
+        }
+
     }
 
 
@@ -92,20 +100,19 @@ public class Foret {
     }
 
     private double getTauxNaissance(){
-        return 1/(tauxNaissance*list.size());
+        return 1/(tauxNaissance);
     }
 
     private double getTauxMort(){
-        return (1 / (tauxMort * list.size()));
+        return (1 / (tauxMort));
     }
 
     private double getTauxGlobal() {
-        return 1/((tauxNaissance + tauxMort)*list.size());
+        return (getTauxNaissance()+getTauxMort())* list.size();
     }
 
     public double getDureeNextEven(){
         double n = (-Math.log(Math.random()))/getTauxGlobal();
-        System.out.println(n);
         return n;
     }
 }
