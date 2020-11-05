@@ -77,10 +77,8 @@ public class ControllerForest implements Initializable {
                     chrono.stop();
                 }
                 if ((now - lastSecond)/1_000_000_000.0 >= 1) {
-                    chrono.pause();
-                    labelTime.setText(chrono.getDureeTxt());
+                    labelTime.setText(chrono.getActuelDureeTxt());
                     System.out.println("testmailleur"+chrono.getDureeTxt());
-                    chrono.resume();
                     lastSecond = now;
                 }
             }

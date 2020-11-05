@@ -32,7 +32,7 @@ public class Chrono {
         tempsFin=0;
         pauseDepart=0;
         pauseFin=0;
-        duree=0;
+        //duree=0;
     }
 
     public void stop()
@@ -59,6 +59,15 @@ public class Chrono {
     public String getDureeTxt()
     {
         return timeToHMS(getDureeSec());
+    }
+
+    public String getActuelDureeTxt() {
+        tempsFin=System.currentTimeMillis();
+        duree=(tempsFin-tempsDepart) - (pauseFin-pauseDepart);
+        String temps = timeToHMS(getDureeSec());
+        duree = 0;
+        tempsFin = 0;
+        return temps;
     }
 
     public static String timeToHMS(long tempsS) {
