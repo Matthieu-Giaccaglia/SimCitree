@@ -63,20 +63,12 @@ public class ChartPanManager {
 		yAxis = (ValueAxis<?>) chart.getYAxis();
 		chartInfo = new XYChartInfo( chart, chart );
 
-		handlerManager.addEventHandler( false, MouseEvent.DRAG_DETECTED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle( MouseEvent mouseEvent ) {
-				if ( passesFilter( mouseEvent ) )
-					startDrag( mouseEvent );
-			}
-		} );
+		handlerManager.addEventHandler( false, MouseEvent.DRAG_DETECTED, mouseEvent -> {
+			if ( passesFilter( mouseEvent ) )
+				startDrag( mouseEvent );
+		});
 
-		handlerManager.addEventHandler( false, MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle( MouseEvent mouseEvent ) {
-				drag( mouseEvent );
-			}
-		} );
+		handlerManager.addEventHandler( false, MouseEvent.MOUSE_DRAGGED, this::drag);
 
 		handlerManager.addEventHandler( false, MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
 			@Override
@@ -136,8 +128,7 @@ public class ChartPanManager {
 		if ( mouseFilter != null ) {
 			MouseEvent cloned = (MouseEvent) event.clone();
 			mouseFilter.handle( cloned );
-			if ( cloned.isConsumed() )
-				return false;
+			return !cloned.isConsumed();
 		}
 
 		return true;
@@ -170,19 +161,29 @@ public class ChartPanManager {
 		if ( panMode == AxisConstraint.Both || panMode == AxisConstraint.Horizontal ) {
 			double dX = ( event.getX() - lastX ) / -xAxis.getScale();
 			lastX = event.getX();
-			System.out.println("drag");
 			xAxis.setAutoRanging( false );
-			xAxis.setLowerBound( xAxis.getLowerBound() + dX );
-			xAxis.setUpperBound( xAxis.getUpperBound() + dX );
+			double XMin = xAxis.getLowerBound() + dX;
+			double XMax = xAxis.getUpperBound() + dX;
+			if (XMin < 0)
+				XMin = 0;
+			if (XMax > 1)
+				XMax = 1;
+			xAxis.setLowerBound( XMin );
+			xAxis.setUpperBound( XMax );
 		}
 
 		if ( panMode == AxisConstraint.Both || panMode == AxisConstraint.Vertical ) {
 			double dY = ( event.getY() - lastY ) / -yAxis.getScale();
 			lastY = event.getY();
-			System.out.println("drag");
 			yAxis.setAutoRanging( false );
-			yAxis.setLowerBound( yAxis.getLowerBound() + dY );
-			yAxis.setUpperBound( yAxis.getUpperBound() + dY );
+			double YMin = yAxis.getLowerBound() + dY;
+			double YMax = yAxis.getUpperBound() + dY;
+			if (YMin < 0)
+				YMin = 0;
+			if (YMax > 1)
+				YMax = 1;
+			yAxis.setLowerBound( YMin );
+			yAxis.setUpperBound( YMax );
 		}
 	}
 
@@ -191,8 +192,6 @@ public class ChartPanManager {
 			return;
 
 		dragging = false;
-		System.out.println("release");
-
 		xAxis.setAnimated( wasXAnimated );
 		yAxis.setAnimated( wasYAnimated );
 	}

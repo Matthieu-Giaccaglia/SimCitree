@@ -7,13 +7,13 @@ import java.util.Random;
 
 public class Foret {
 
-    private ArrayList<Arbre> list = new ArrayList<>();
+    private final ArrayList<Arbre> list = new ArrayList<>();
     private final double rayonDispersion;
     private final double rayonCompetition;
     private final double tauxNaissance;
     private final double tauxMort;
     private Random randomEven = new Random();
-    private Random randomIndex = new Random();
+    private final Random randomIndex = new Random();
 
 
     public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, int nbArbre) {
@@ -30,7 +30,7 @@ public class Foret {
 
     private void addArbre(double coordonneeX, double coordonneeY) {
         list.add(new Arbre(coordonneeX,coordonneeY));
-        Main.serie.getData().add(new XYChart.Data(coordonneeX, coordonneeY));
+        Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
     }
 
     private void deleteArbre(int index) {

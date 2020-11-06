@@ -111,7 +111,6 @@ public class JFXChartUtil {
 	 * @return the {@link EventHandler} added to 'target' for {@link MouseEvent}.
 	 */
 	public static EventHandler<MouseEvent> addDoublePrimaryClickAutoRangeHandler(ScatterChart<?, ?> chart, Node target ) {
-		System.out.println("test");
 		XYChartInfo chartInfo = new XYChartInfo( chart, target );
 		EventHandler<MouseEvent> handler = getDoublePrimaryClickAutoRangeHandler( chartInfo );
 		target.addEventHandler( MouseEvent.MOUSE_CLICKED, handler );

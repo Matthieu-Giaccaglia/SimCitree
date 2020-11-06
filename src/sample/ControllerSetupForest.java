@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
@@ -16,7 +15,7 @@ public class ControllerSetupForest {
     public TextField textNbArbre;
 
 
-    public void addArbre(ActionEvent actionEvent) throws IOException {
+    public void addArbre() throws IOException {
 
         String rayonDisp = textRayonDisp.getText();
         String rayonComp = textRayonComp.getText();
@@ -42,7 +41,7 @@ public class ControllerSetupForest {
         } else {
             Main.foret = new Foret(Double.parseDouble(rayonDisp), Double.parseDouble(rayonDisp), Double.parseDouble(tauxReprod), Double.parseDouble(tauxMort), Integer.parseInt(nbArbre));
             Main.stage.close();
-            Main.changeScene("layout/forest.fxml", true, true);
+            Main.changeScene("layout/forest.fxml", true);
         }
     }
 

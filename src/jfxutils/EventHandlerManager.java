@@ -37,7 +37,7 @@ public class EventHandlerManager {
 
 	public EventHandlerManager( Node target ) {
 		this.target = target;
-		registrations = new ArrayList<Registration<? extends Event>>();
+		registrations = new ArrayList<>();
 	}
 
 	public Node getTarget() {
@@ -49,7 +49,7 @@ public class EventHandlerManager {
 	 */
 	public <T extends Event> void addEventHandler( boolean addImmediately, EventType<T> type,
 	                                               EventHandler<? super T> handler ) {
-		Registration<T> reg = new Registration<T>( type, handler );
+		Registration<T> reg = new Registration<>(type, handler);
 		registrations.add( reg );
 		if ( addImmediately ) {
 			target.addEventHandler( type, handler );

@@ -96,13 +96,10 @@ public class ChartZoomManager {
 	 * The default mouse filter for the {@link ChartZoomManager} filters events unless only primary
 	 * mouse button (usually left) is depressed.
 	 */
-	public static final EventHandler<MouseEvent> DEFAULT_FILTER = new EventHandler<MouseEvent>() {
-		@Override
-		public void handle( MouseEvent mouseEvent ) {
-			//The ChartPanManager uses this reference, so if behavior changes, copy to users first.
-			if ( mouseEvent.getButton() != MouseButton.PRIMARY )
-				mouseEvent.consume();
-		}
+	public static final EventHandler<MouseEvent> DEFAULT_FILTER = mouseEvent -> {
+		//The ChartPanManager uses this reference, so if behavior changes, copy to users first.
+		if ( mouseEvent.getButton() != MouseButton.PRIMARY )
+			mouseEvent.consume();
 	};
 
 	private final SimpleDoubleProperty rectX = new SimpleDoubleProperty();
@@ -159,37 +156,19 @@ public class ChartZoomManager {
 
 		handlerManager = new EventHandlerManager( chartPane );
 
-		handlerManager.addEventHandler( false, MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle( MouseEvent mouseEvent ) {
-				if ( passesFilter( mouseEvent ) )
-					onMousePressed( mouseEvent );
-			}
-		} );
+		handlerManager.addEventHandler( false, MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+			if ( passesFilter( mouseEvent ) )
+				onMousePressed( mouseEvent );
+		});
 
-		handlerManager.addEventHandler( false, MouseEvent.DRAG_DETECTED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle( MouseEvent mouseEvent ) {
-				if ( passesFilter( mouseEvent ) )
-					onDragStart();
-			}
-		} );
 
-		handlerManager.addEventHandler( false, MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle( MouseEvent mouseEvent ) {
-				//Don't check filter here, we're either already started, or not
-				onMouseDragged( mouseEvent );
-			}
-		} );
+		//Don't check filter here, we're either already started, or not
+		handlerManager.addEventHandler( false, MouseEvent.MOUSE_DRAGGED, this::onMouseDragged);
 
-		handlerManager.addEventHandler( false, MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle( MouseEvent mouseEvent ) {
-				//Don't check filter here, we're either already started, or not
-				onMouseReleased();
-			}
-		} );
+		handlerManager.addEventHandler( false, MouseEvent.MOUSE_RELEASED, mouseEvent -> {
+			//Don't check filter here, we're either already started, or not
+			onMouseReleased();
+		});
 
 		handlerManager.addEventHandler( false, ScrollEvent.ANY, new MouseWheelZoomHandler() );
 	}
@@ -340,15 +319,13 @@ public class ChartZoomManager {
 		if ( mouseFilter != null ) {
 			MouseEvent cloned = (MouseEvent) event.clone();
 			mouseFilter.handle( cloned );
-			if ( cloned.isConsumed() )
-				return false;
+			return !cloned.isConsumed();
 		}
 
 		return true;
 	}
 
 	private void onMousePressed( MouseEvent mouseEvent ) {
-		System.out.println("onMousePressed");
 		double x = mouseEvent.getX();
 		double y = mouseEvent.getY();
 
@@ -357,7 +334,6 @@ public class ChartZoomManager {
 		zoomMode = axisConstraintStrategy.getConstraint(context);
 
 		if ( zoomMode == AxisConstraint.Both ) {
-			System.out.println("AxisConstraint.Both");
 
 			selectRect.setTranslateX( x );
 			selectRect.setTranslateY( y );
@@ -365,7 +341,6 @@ public class ChartZoomManager {
 			rectY.set( y );
 
 		} else if ( zoomMode == AxisConstraint.Horizontal ) {
-			System.out.println("AxisConstraint.Horizontal");
 
 			selectRect.setTranslateX( x );
 			selectRect.setTranslateY( plotArea.getMinY() );
@@ -373,7 +348,6 @@ public class ChartZoomManager {
 			rectY.set( plotArea.getMaxY() );
 
 		} else if ( zoomMode == AxisConstraint.Vertical ) {
-			System.out.println("AxisConstraint.Vertical");
 
 			selectRect.setTranslateX( plotArea.getMinX() );
 			selectRect.setTranslateY( y );
@@ -390,7 +364,6 @@ public class ChartZoomManager {
 	}
 
 	private void onMouseDragged( MouseEvent mouseEvent ) {
-		System.out.println("onMouseDragged");
 
 		if ( !selecting.get() )
 			return;
@@ -478,7 +451,6 @@ public class ChartZoomManager {
 		@Override
 		public void handle( ScrollEvent event ) {
 			EventType<? extends Event> eventType = event.getEventType();
-			System.out.println("Zoom");
 			if ( eventType == ScrollEvent.SCROLL_STARTED ) {
 				//mouse wheel events never send SCROLL_STARTED
 				ignoring = true;
@@ -534,8 +506,16 @@ public class ChartZoomManager {
 				if ( zoomMode == AxisConstraint.Both || zoomMode == AxisConstraint.Horizontal ) {
 					double xZoomDelta = ( getXAxisUpperBound() - getXAxisLowerBound() ) * zoomAmount;
 					xAxis.setAutoRanging( false );
-					setXAxisLowerBound( getXAxisLowerBound() - xZoomDelta * xZoomBalance );
-					setXAxisUpperBound( getXAxisUpperBound() + xZoomDelta * ( 1 - xZoomBalance ) );
+
+					double XMin = getXAxisLowerBound() - xZoomDelta * xZoomBalance;
+					double XMax = getXAxisUpperBound() + xZoomDelta * ( 1 - xZoomBalance );
+
+					if (XMin < 0)
+						XMin = 0;
+					if (XMax > 1)
+						XMax = 1;
+					setXAxisLowerBound( XMin );
+					setXAxisUpperBound( XMax );
 				}
 
 				if ( zoomMode == AxisConstraint.Both || zoomMode == AxisConstraint.Vertical ) {
@@ -544,9 +524,22 @@ public class ChartZoomManager {
 
 					double YMin = getYAxisLowerBound() - yZoomDelta * yZoomBalance;
 					double YMax = getYAxisUpperBound() + yZoomDelta * ( 1 - yZoomBalance );
+					if (YMin < 0)
+						YMin = 0;
+					if (YMax > 1)
+						YMax = 1;
 					setYAxisLowerBound( YMin );
 					setYAxisUpperBound( YMax );
 				}
+
+				/*NumberAxis numberXAxis = (NumberAxis) chartInfo.getChart().getXAxis();
+				numberXAxis.setLowerBound(0);
+				numberXAxis.setUpperBound(1);
+
+				NumberAxis numberYAxis = (NumberAxis) chartInfo.getChart().getYAxis();
+				numberYAxis.setLowerBound(0);
+				numberYAxis.setUpperBound(1);*/
+
 			}
 		}
 	}
@@ -586,13 +579,13 @@ public class ChartZoomManager {
 	private static <T> DoubleProperty getLowerBoundProperty( Axis<T> axis ) {
 		return axis instanceof ValueAxis ?
 				((ValueAxis<?>) axis).lowerBoundProperty() :
-				toDoubleProperty(axis, ChartZoomManager.<T>getProperty(axis, "lowerBoundProperty") );
+				toDoubleProperty(axis, ChartZoomManager.getProperty(axis, "lowerBoundProperty") );
 	}
 
 	private static <T> DoubleProperty getUpperBoundProperty( Axis<T> axis ) {
 		return axis instanceof ValueAxis ?
 				((ValueAxis<?>) axis).upperBoundProperty() :
-				toDoubleProperty(axis, ChartZoomManager.<T>getProperty(axis, "upperBoundProperty") );
+				toDoubleProperty(axis, ChartZoomManager.getProperty(axis, "upperBoundProperty") );
 	}
 
 	private static <T> DoubleProperty toDoubleProperty( final Axis<T> axis, final Property<T> property ) {
@@ -606,25 +599,19 @@ public class ChartZoomManager {
 			};
 		};
 
-		doubleChangeListenerAry[0] = new ChangeListener<Number>() {
-			@Override
-			public void changed( ObservableValue<? extends Number> observable, Number oldValue, Number newValue ) {
-				property.removeListener( realValListenerAry[0] );
-				property.setValue( axis.toRealValue(
-						newValue == null ? null : newValue.doubleValue() )
-				);
-				property.addListener( realValListenerAry[0] );
-			}
+		doubleChangeListenerAry[0] = (observable, oldValue, newValue) -> {
+			property.removeListener( realValListenerAry[0] );
+			property.setValue( axis.toRealValue(
+					newValue == null ? null : newValue.doubleValue() )
+			);
+			property.addListener( realValListenerAry[0] );
 		};
 		result.addListener(doubleChangeListenerAry[0]);
 
-		realValListenerAry[0] = new ChangeListener<T>() {
-			@Override
-			public void changed( ObservableValue<? extends T> observable, T oldValue, T newValue ) {
-				result.removeListener( doubleChangeListenerAry[0] );
-				result.setValue( axis.toNumericValue( newValue ) );
-				result.addListener( doubleChangeListenerAry[0] );
-			}
+		realValListenerAry[0] = (observable, oldValue, newValue) -> {
+			result.removeListener( doubleChangeListenerAry[0] );
+			result.setValue( axis.toNumericValue( newValue ) );
+			result.addListener( doubleChangeListenerAry[0] );
 		};
 		property.addListener(realValListenerAry[0]);
 
