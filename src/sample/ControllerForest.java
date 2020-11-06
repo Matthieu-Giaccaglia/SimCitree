@@ -66,7 +66,11 @@ public class ControllerForest implements Initializable {
 
             @Override
             public void handle(long now) {
+                System.out.println((now - lastEvenement)/ 1_000_000_000.0);
                 if ((now - lastEvenement)/ 1_000_000_000.0 >= Main.foret.getDureeNextEven() && Main.foret.getList().size() != 0){
+                    System.out.println((now - lastEvenement)/ 1_000_000_000.0 >= Main.foret.getDureeNextEven());
+                    System.out.println((now - lastEvenement)/ 1_000_000_000.0);
+                    System.out.println("next event "+  Main.foret.getDureeNextEven());
                     nbTourEcoule++;
                     Main.foret.appliquerEvenement(nbTourEcoule);
                     labelNbTour.setText(String.valueOf(nbTourEcoule));
