@@ -1,4 +1,4 @@
-package sample;
+package simcitree;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

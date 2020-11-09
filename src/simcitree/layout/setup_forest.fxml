@@ -4,10 +4,10 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerSetupForest">
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simcitree.ControllerSetupForest">
     <ToolBar minHeight="-Infinity" prefHeight="40.0">
         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../sample/raw/logo_simcitree.png" />
+            <Image url="@../raw/logo_simcitree.png" />
         </ImageView>
     </ToolBar>
     <Pane prefHeight="425.0" prefWidth="600.0">

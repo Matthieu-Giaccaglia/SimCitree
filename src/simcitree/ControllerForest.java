@@ -1,4 +1,4 @@
-package sample;
+package simcitree;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.Initializable;

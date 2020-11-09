@@ -1,4 +1,4 @@
-package sample;
+package simcitree;
 
 public class Chrono {
 

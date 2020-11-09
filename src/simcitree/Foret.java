@@ -1,4 +1,4 @@
-package sample;
+package simcitree;
 
 import javafx.scene.chart.XYChart;
 
