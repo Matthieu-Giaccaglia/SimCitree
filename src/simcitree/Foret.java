@@ -12,8 +12,7 @@ public class Foret {
     private final double rayonCompetition;
     private final double tauxNaissance;
     private final double tauxMort;
-    private Random randomEven = new Random();
-    private final Random randomIndex = new Random();
+    private final Random random = new Random();
 
 
     public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, int nbArbre) {
@@ -44,7 +43,7 @@ public class Foret {
     private void addFils(int index) {
 
         Arbre arbrePere = list.get(index);
-        double angle = Math.toRadians(Math.random() * 360);
+        double angle = Math.toRadians(random.nextDouble() * 360);
         double amount = rayonDispersion;
         double coordonneX = (amount * Math.cos(angle));
         double coordonneY = (amount * Math.sin(angle));
@@ -82,7 +81,7 @@ public class Foret {
         double tot = totB+totM;
         double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
 
-        int indexArbreRandom = randomIndex.nextInt(list.size());
+        int indexArbreRandom = random.nextInt(list.size());
 
         if (rdm <= totB || nbEvent == 0) { //jusqu'à totB,
             addFils(indexArbreRandom);
@@ -141,6 +140,7 @@ public class Foret {
     }
 
     public double getDureeNextEven(){
-        return 1/((-Math.log(Math.random()))/getTauxGlobal());
+        return  -Math.log(random.nextFloat())
+                / getTauxGlobal();
     }
 }
