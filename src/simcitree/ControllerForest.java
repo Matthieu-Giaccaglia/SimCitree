@@ -99,6 +99,7 @@ public class ControllerForest implements Initializable {
     public void pauseSimulation() {
         this.chrono.pause();
         animationTimer.stop();
+        //ok
     }
 
 }
