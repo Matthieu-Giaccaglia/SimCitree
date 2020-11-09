@@ -21,7 +21,7 @@ public class Foret {
         this.rayonCompetition = rayonCompetition;
         this.tauxNaissance = tauxNaissance;
         this.tauxMort = tauxMort;
-        initialiseAllArbre(nbArbre);
+        initAllTree(nbArbre);
     }
 
     public ArrayList<Arbre> getList() {
@@ -66,13 +66,13 @@ public class Foret {
         addArbre(coordonneX, coordonneY);
     }
 
-    private void initialiseAllArbre(int nbArbre) {
+    private void initAllTree(int nbArbre) {
         for (int i = 0; i<nbArbre; i++)
             addArbre(Math.random(),Math.random());
     }
 
 
-    public void appliquerEvenement(int nbTour){
+    public void applyEvent(int nbEvent){
         double totB = getTauxNaissance()* list.size(); //total Chances Naissance
         double totM = getTauxMort()* list.size(); // total Chances Mort
         //double totC
@@ -80,7 +80,7 @@ public class Foret {
         double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
         int indexRandom = randomIndex.nextInt(list.size());
 
-        if(rdm <= totB || nbTour == 0){//jusqu'à totB,
+        if(rdm <= totB || nbEvent == 0){//jusqu'à totB,
             addFils(indexRandom);
         }else if(totB <= rdm && rdm <= totB+totM){//de totB au total
             deleteArbre(indexRandom);
@@ -100,18 +100,18 @@ public class Foret {
     }
 
     private double getTauxNaissance(){
-        return 1/(tauxNaissance);
+        return tauxNaissance;
     }
 
     private double getTauxMort(){
-        return (1 / (tauxMort));
+        return tauxMort;
     }
 
     private double getTauxGlobal() {
-        return (getTauxNaissance()+getTauxMort())* list.size();
+        return (getTauxNaissance()+getTauxMort()) * list.size();
     }
 
     public double getDureeNextEven(){
-        return (-Math.log(Math.random()))/(getTauxGlobal());
+        return 1/((-Math.log(Math.random()))/getTauxGlobal());
     }
 }
