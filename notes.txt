@@ -1,0 +1,79 @@
+Notes rendez notes
+
+Analyse :
+
+-normal pas volumineux diag : 
+	diag classe: esperanceVie plutôt un taux
+	-parag durée en 2 instant lambda b , lois expo ont esp 1/lambda
+	lambda =/= esperence de vie c taux mortalité
+	espérence 1/lambda
+	
+	Si arbre a espVie 50ans alors lambda = 1/50
+	vaut mieux l'appeler taux mortalité
+	
+	pareil pour chanceRepro c taux reproductino
+
+
+taux naissance et mort sont pareil pour tous les arbres
+lambda c (competition) individuel
+
+rayonComp, esperanceVie, rayonDisperion, chanceRepro sont les mêmes pour tous les arbres
+donc on peut mettre ces parametres dnas la forêt 
+
+un arbre c'est juste intensité (lambda c) et position 
+
+à modéliser en pseudo code pas en complexité structure 
+
+diag à refaire : ptet séquence.
+(diags UML simples mais bien faits, séquence ok)
+
+---------------------
+lambda et taux : 
+
+N * taux naiss indivi
+
+tous les arbres ont lambda b de naissance et lambda d de mort
+
+
+lambda c1 + lambda c2 + ... + lambda cn pour compétition
+
+---------------
+Tirage arbres: 
+
+tirage selon loi discrète seul dif si mort naturel alors c la même case sinon pas la même taille de case par mort de 
+compétition
+----------------
+
+lorsque le taux grandit alors le tirage va être petit alors -ln(rand())
+plus le taux est elevée plus le temps qui s'écoule va être faible 
+
+----------------
+Vaudrait mieux partir d'une config aléatoire uniforme
+on décrit pas population mais relation des individus
+
+on peut soit faire quelques arbres et voir soit commencez avec beaucoup d'arbres et voir 
+on espère une convergeance vers un état d'équilibre
+choix des paramètres qui va influer sur la
+position doit être random
+
+doit faire les paramètres de vie d'abord, puis mortalité seul pour essayer 
+
+
+
+truc intéressant : temps courrant, taille population
+en l'absence de mortalité normalement croissance exponnentielle
+
+en l'absence de naissance normalement décroissance exponnentielle
+
+avec compétition (de)croissance vers un état d'équilibre.
+
+un fois que structure de voisinage, arraylist compliqué (tableau de tableau avec les voisins dedans)
+
+si on garde arraylist : avec comp on doit parcourir toute la forêt pour les voisins
+complexcité n²
+
+quand naissance d'un arbre ajout dans liste des voisins et morts enlever liste des voisins. 
+
+orga : 
+sprint toutes les 2 semaines et qts par mail
+mercredi aprem ok (pour l'instant) 
