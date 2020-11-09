@@ -29,7 +29,9 @@ public class Foret {
     }
 
     private void addArbre(double coordonneeX, double coordonneeY) {
-        list.add(new Arbre(coordonneeX,coordonneeY));
+        Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY)
+        list.add(arbreAdd);
+        checkVoisins(arbreAdd);
         Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
     }
 
@@ -78,33 +80,32 @@ public class Foret {
         //double totC
         double tot = totB+totM;
         double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
-        int indexRandom = randomIndex.nextInt(list.size());
+        int indexArbreRandom = randomIndex.nextInt(list.size());
 
         if(rdm <= totB || nbEvent == 0){//jusqu'à totB,
-            addFils(indexRandom);
-            checkVoisins(indexRandom);
+            addFils(indexArbreRandom);
         }else if(totB <= rdm && rdm <= totB+totM){//de totB au total
-            removeVoisin(indexRandom);
-            deleteArbre(indexRandom);
+            removeVoisin(indexArbreRandom);
+            deleteArbre(indexArbreRandom);
         }
 
     }
 
-    public void checkVoisins(int index) {
+    public void checkVoisins(Arbre arbre) {
         double rayon = Math.sqrt(rayonCompetition);
         double intensite = 0;
         for (Arbre arbreCourant : list) {
-            if (arbreCourant != list.get(index)) {
+            if (arbreCourant != arbre) {
                 double coordArbreCourantX = arbreCourant.getX();
                 double coordArbreCourantY = arbreCourant.getY();
                 double distance = Math.hypot((coordArbreCourantX - list.get(index).getX()), (coordArbreCourantY - list.get(index).getY()));
                 if (distance <= rayon) {
-                    list.get(index).addVoisin(arbreCourant);
+                    arbre.addVoisin(arbreCourant);
                     intensite += distance;
                 }
             }
         }
-        list.get(index).setIntensiteCompetition(intensite);
+        arbre.setIntensiteCompetition(intensite);
     }
 
     public void removeVoisin(int index) {
