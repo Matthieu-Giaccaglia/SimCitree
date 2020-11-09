@@ -82,7 +82,9 @@ public class Foret {
 
         if(rdm <= totB || nbEvent == 0){//jusqu'à totB,
             addFils(indexRandom);
+            checkVoisins(indexRandom);
         }else if(totB <= rdm && rdm <= totB+totM){//de totB au total
+            removeVoisin(indexRandom);
             deleteArbre(indexRandom);
         }
 
