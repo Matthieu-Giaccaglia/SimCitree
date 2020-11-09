@@ -23,9 +23,6 @@ public class Foret {
         initAllTree(nbArbre);
     }
 
-    public ArrayList<Arbre> getList() {
-        return list;
-    }
 
     private void addArbre(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
@@ -91,7 +88,7 @@ public class Foret {
 
     }
 
-    public void checkVoisins(Arbre arbre) {
+    private void checkVoisins(Arbre arbre) {
         double rayon = Math.sqrt(rayonCompetition);
         double intensite = 0;
         for (Arbre arbreCourant : list) {
@@ -108,12 +105,12 @@ public class Foret {
         arbre.setIntensiteCompetition(intensite);
     }
 
-    public void removeVoisin(int index) {
-        for (Arbre arbreCourant : list) {
-            if (arbreCourant.getVoisins().contains(list.get(index))) {
-                arbreCourant.resuireIntensiteCompetition(1/(Math.hypot((arbreCourant.getX() - list.get(index).getX()), (arbreCourant.getY() - list.get(index).getY()))));
-                arbreCourant.getVoisins().remove(list.get(index));
-            }
+    private void removeVoisin(int index) {
+        /**
+         * Beaucoup plus rapide car on regarde dans la liste de l'arbre à détruire.
+         */
+        for (Arbre arbreVoisin : list.get(index).getVoisins()) {
+            arbreVoisin.getVoisins().remove(list.get(index));
         }
     }
 
@@ -142,5 +139,9 @@ public class Foret {
     public double getDureeNextEven(){
         return  -Math.log(random.nextFloat())
                 / getTauxGlobal();
+    }
+
+    public ArrayList<Arbre> getList() {
+        return list;
     }
 }
