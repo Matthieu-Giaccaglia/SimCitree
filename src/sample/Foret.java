@@ -88,6 +88,31 @@ public class Foret {
 
     }
 
+    public void checkVoisins(int index) {
+        double rayon = Math.sqrt(rayonCompetition);
+        double intensite = 0;
+        for (Arbre arbreCourant : list) {
+            if (arbreCourant != list.get(index)) {
+                double coordArbreCourantX = arbreCourant.getX();
+                double coordArbreCourantY = arbreCourant.getY();
+                double distance = Math.hypot((coordArbreCourantX - list.get(index).getX()), (coordArbreCourantY - list.get(index).getY()));
+                if (distance <= rayon) {
+                    list.get(index).addVoisin(arbreCourant);
+                    intensite += distance;
+                }
+            }
+        }
+        list.get(index).setIntensiteCompetition(intensite);
+    }
+
+    public void removeVoisin(int index) {
+        for (Arbre arbreCourant : list) {
+            if (arbreCourant.getVoisins().contains(list.get(index))) {
+                arbreCourant.resuireIntensiteCompetition(1/(Math.hypot((arbreCourant.getX() - list.get(index).getX()), (arbreCourant.getY() - list.get(index).getY()))));
+                arbreCourant.getVoisins().remove(list.get(index));
+            }
+        }
+    }
 
     public void listToString() {
         StringBuilder listString = new StringBuilder();
