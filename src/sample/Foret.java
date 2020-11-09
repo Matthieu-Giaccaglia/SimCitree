@@ -29,13 +29,14 @@ public class Foret {
     }
 
     private void addArbre(double coordonneeX, double coordonneeY) {
-        Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY)
+        Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
         checkVoisins(arbreAdd);
         Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
     }
 
     private void deleteArbre(int index) {
+        removeVoisin(index);
         list.remove(list.get(index));
         Main.serie.getData().remove(index);
     }
@@ -85,7 +86,6 @@ public class Foret {
         if(rdm <= totB || nbEvent == 0){//jusqu'à totB,
             addFils(indexArbreRandom);
         }else if(totB <= rdm && rdm <= totB+totM){//de totB au total
-            removeVoisin(indexArbreRandom);
             deleteArbre(indexArbreRandom);
         }
 
@@ -98,7 +98,7 @@ public class Foret {
             if (arbreCourant != arbre) {
                 double coordArbreCourantX = arbreCourant.getX();
                 double coordArbreCourantY = arbreCourant.getY();
-                double distance = Math.hypot((coordArbreCourantX - list.get(index).getX()), (coordArbreCourantY - list.get(index).getY()));
+                double distance = Math.hypot((coordArbreCourantX - arbre.getX()), (coordArbreCourantY - arbre.getY()));
                 if (distance <= rayon) {
                     arbre.addVoisin(arbreCourant);
                     intensite += distance;
