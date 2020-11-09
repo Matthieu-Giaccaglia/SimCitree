@@ -1,0 +1,72 @@
+Notes rendez-vous 2 9/11
+
+définir taux = c'est l'utilisateur qui s'en occupe.
+
+
+//calcul temps d'attente : taux 0.5 temps attends 2 fois par sec
+
+tirage aléatoire du temps :
+
+return -ln(Math.rand()) / lambda (Math.rand() pas ouf pour calcul scientifique)
+
+nextFloat() du coup(?) (entre 0 et 1)
+classe random aussi
+ptet class qui renvoie direct une loi exp quand on donne lambda(pas ouf)
+
+risque de pattern avec Math.rand()
+
+nb tjrs positif, pas besoin de faire 1/lambda par le chiffre.
+
+ex:
+tps courant 10,3827 ans
+-ln(rand()) / lambda = 0.4
+pop 253
+le temps d'attente avant le prochaine événement est de 0.4
+=>t= t + 0.4
+=>nv evenement -> naissance / mort
+
+birth rate 2 = graine tous les 6mois 1/2 donc 6mois.
+dure 4 ans car death rate 0.5, ça arrive tous les 1/0.5ans donc deux ans.
+competition integrity si  0.01 il faut 50 arbres pour diviser l'esp de vie / 2
+
+rayon de disp pas forcement égale à rayon de comp.
+
+prendre en compte la distance avec l'itensité de compétion du paramètre donnée (ici 0.01)
+
+si distance > rc 0 sinon ça
+voir Screen1rdv
+
+n * lambdaB + lambdaD = lambdaGlobal
+______   ______
+lambab + lambdad
+
+on mets tous les lamba (b et d) dans une grande liste
+pour saovir si c mort ou vie
+tire random 0 et 1
+si c rouge(vie) on tire uniformement l'arbre qui va se reproduire
+
+loi uniforme
+si ça tombe avant lambda1 / lamdaBarre
+alors c'est l'evenement 1
+
+après on ajoute (lambda1 + lambda2 + ... + lambdan) / lambdabarre
+alors c'est l'evenement n
+
+qts walter :
+
+la valeur absolue dans le cas d'un ensemble c'est un cardinal = c'est le nombre d'arbres à l'instant courant
+
+
+pour chaque arbre une liste de voisins (c'est ce qu'on a fait nan)
+
+rayon dispertionz entre 0 et 1
+rayon 0.05 on tire entre 0 et 1
+il faut multiplier les coords par rb(ici 0.05)
+gérer modulo(c fait)
+
+
+
+
+
+
+
