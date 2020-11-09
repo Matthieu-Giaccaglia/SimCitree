@@ -74,6 +74,7 @@ public class Foret {
         for (int i = 0; i < nbArbre; i++) {
             checkVoisins(i);
             System.out.println(list.get(i).getVoisins());
+            System.out.println(list.get(i).getIntensiteCompetition());
         }
     }
 
@@ -90,10 +91,9 @@ public class Foret {
             addFils(indexRandom);
             checkVoisins(indexRandom);
         }else if(totB <= rdm && rdm <= totB+totM){//de totB au total
-            deleteArbre(indexRandom);
             removeVoisin(indexRandom);
+            deleteArbre(indexRandom);
         }
-
     }
 
     public void checkVoisins(int index) {
@@ -104,7 +104,7 @@ public class Foret {
                 double distance = Math.hypot((arbreCourant.getX() - list.get(index).getX()), (arbreCourant.getY() - list.get(index).getY()));
                 if (distance <= rayon) {
                     list.get(index).addVoisin(arbreCourant);
-                    intensite += distance;
+                    intensite += (1/distance);
                 }
             }
         }
@@ -114,7 +114,7 @@ public class Foret {
     public void removeVoisin(int index) {
         for (Arbre arbreCourant : list) {
             if (arbreCourant.getVoisins().contains(list.get(index))) {
-                arbreCourant.resuireIntensiteCompetition(Math.hypot((arbreCourant.getX() - list.get(index).getX()), (arbreCourant.getY() - list.get(index).getY())));
+                arbreCourant.resuireIntensiteCompetition(1/(Math.hypot((arbreCourant.getX() - list.get(index).getX()), (arbreCourant.getY() - list.get(index).getY()))));
                 arbreCourant.getVoisins().remove(list.get(index));
             }
         }
