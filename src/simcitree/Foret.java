@@ -81,11 +81,12 @@ public class Foret {
         //double totC
         double tot = totB+totM;
         double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
+
         int indexArbreRandom = randomIndex.nextInt(list.size());
 
-        if(rdm <= totB || nbEvent == 0){//jusqu'à totB,
+        if (rdm <= totB || nbEvent == 0) { //jusqu'à totB,
             addFils(indexArbreRandom);
-        }else if(totB <= rdm && rdm <= totB+totM){//de totB au total
+        } else if(totB <= rdm && rdm <= totB+totM){ //de totB au total
             deleteArbre(indexArbreRandom);
         }
 

@@ -29,7 +29,6 @@ public class ControllerForest implements Initializable {
     public Label labelTime;
     private int nbTourEcoule = 0;
     private AnimationTimer animationTimer;
-    private MediaPlayer mediaPlayer;
     private Chrono chrono;
 
 
@@ -83,8 +82,7 @@ public class ControllerForest implements Initializable {
             }
         };
 
-        mediaPlayer = new MediaPlayer(new Media(Paths.get("src/sample/raw/test.mp3").toUri().toString()));
-        mediaPlayer.setVolume(0.1);
+
         labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
         labelNbTour.setText(String.valueOf(nbTourEcoule));
     }
@@ -96,13 +94,11 @@ public class ControllerForest implements Initializable {
             this.chrono.resume();
         }
         animationTimer.start();
-        mediaPlayer.play();
     }
 
     public void pauseSimulation() {
         this.chrono.pause();
         animationTimer.stop();
-        mediaPlayer.pause();
     }
 
 }
