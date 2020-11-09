@@ -27,7 +27,9 @@ public class ControllerSetupForest {
         if (rayonDisp.equals("") || rayonComp.equals("") || tauxReprod.equals("") || tauxMort.equals("") || nbArbre.equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Veillez remplir tous les champs !", ButtonType.OK);
             alert.showAndWait();
-        } else if (!rayonDisp.matches("[0]*[.][0-9]*") || !rayonComp.matches("[0]*[.][0-9]*") || !tauxReprod.matches("[0-9]*[.][0-9]*")) {
+        } else if ( ( !rayonDisp.matches("[0-9]*[.][0-9]*") && !rayonDisp.matches("[0-9]*") )
+                ||  ( !rayonComp.matches("[0]*[.][0-9]*")  && !rayonComp.matches("[0-9]*") )
+                ||  ( !tauxReprod.matches("[0-9]*[.][0-9]*") && !tauxReprod.matches("[0-9]*") )) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Veillez entrer uniquement des nombres à virgule (avec un point) pour :\n" +
                     " - Rayon de Dispersion.\n" +
                     " - Rayon de Compétition.\n" +
