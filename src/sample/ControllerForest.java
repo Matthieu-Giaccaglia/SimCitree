@@ -56,23 +56,18 @@ public class ControllerForest implements Initializable {
 
             @Override
             public void handle(long now) {
-                //System.out.println("-------------------------------------------");
-                double nowTest = (now - lastEvenement)/ 1_000_000_000.0;
-                double event = Main.foret.getDureeNextEven();
-                //System.out.println(nowTest);
-                if (nowTest >= event && Main.foret.getList().size() != 0){
+                System.out.println((now - lastEvenement)/ 1_000_000_000.0);
+                if ((now - lastEvenement)/ 1_000_000_000.0 >= Main.foret.getDureeNextEven() && Main.foret.getList().size() != 0){
+                    System.out.println((now - lastEvenement)/ 1_000_000_000.0 >= Main.foret.getDureeNextEven());
+                    System.out.println((now - lastEvenement)/ 1_000_000_000.0);
+                    System.out.println("next event "+  Main.foret.getDureeNextEven());
                     System.out.println("-------------------------------------------");
-                    System.out.println(nowTest >= event);
-                    System.out.println(nowTest);
-                    System.out.println("next event "+  event);
                     nbTourEcoule++;
-                    Main.foret.applyEvent(nbTourEcoule);
+                    Main.foret.appliquerEvenement(nbTourEcoule);
                     labelNbTour.setText(String.valueOf(nbTourEcoule));
                     labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
                     lastEvenement = now;
-                    System.out.println("-------------------------------------------");
-                }
-                if (Main.foret.getList().size() == 0) {
+                } else if (Main.foret.getList().size() == 0) {
                     stop();
                     chrono.stop();
                 }

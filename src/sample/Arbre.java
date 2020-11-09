@@ -28,24 +28,29 @@ public class Arbre {
         return intensiteCompetition;
     }
 
+    public ArrayList<Arbre> getVoisins() {
+        return voisins;
+    }
+
     public void setIntensiteCompetition(double intensiteCompetition) {
         this.intensiteCompetition = intensiteCompetition;
+    }
+
+    public void resuireIntensiteCompetition(double intensiteCompetition) {
+        this.intensiteCompetition -= intensiteCompetition;
     }
 
     public void addVoisin(Arbre arbreVoisin) {
         voisins.add(arbreVoisin);
     }
 
-    public ArrayList<Arbre> getVoisins() {
-        return voisins;
-    }
+
 
     @Override
     public String toString() {
         return "Arbre{" +
                 "x=" + x +
                 ", y="+ y  +
-                ", intensiteCompetition=" + intensiteCompetition +
                 '}';
     }
 

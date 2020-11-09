@@ -21,7 +21,7 @@ public class Foret {
         this.rayonCompetition = rayonCompetition;
         this.tauxNaissance = tauxNaissance;
         this.tauxMort = tauxMort;
-        initAllTree(nbArbre);
+        initialiseAllArbre(nbArbre);
     }
 
     public ArrayList<Arbre> getList() {
@@ -66,13 +66,19 @@ public class Foret {
         addArbre(coordonneX, coordonneY);
     }
 
-    private void initAllTree(int nbArbre) {
-        for (int i = 0; i<nbArbre; i++)
+    private void initialiseAllArbre(int nbArbre) {
+        for (int i = 0; i<nbArbre; i++) {
             addArbre(Math.random(),Math.random());
+
+        }
+        for (int i = 0; i < nbArbre; i++) {
+            checkVoisins(i);
+            System.out.println(list.get(i).getVoisins());
+        }
     }
 
 
-    public void applyEvent(int nbEvent){
+    public void appliquerEvenement(int nbTour){
         double totB = getTauxNaissance()* list.size(); //total Chances Naissance
         double totM = getTauxMort()* list.size(); // total Chances Mort
         //double totC
@@ -80,7 +86,7 @@ public class Foret {
         double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
         int indexRandom = randomIndex.nextInt(list.size());
 
-        if(rdm <= totB || nbEvent == 0){//jusqu'à totB,
+        if(rdm <= totB || nbTour == 0){//jusqu'à totB,
             addFils(indexRandom);
         }else if(totB <= rdm && rdm <= totB+totM){//de totB au total
             deleteArbre(indexRandom);
@@ -88,6 +94,34 @@ public class Foret {
 
     }
 
+    public void checkVoisins(int index) {
+        double rayon = Math.sqrt(rayonCompetition);
+        double intensite = 0;
+        for (Arbre arbreCourant : list) {
+            if (arbreCourant != list.get(index)) {
+                double distance = Math.hypot((arbreCourant.getX() - list.get(index).getX()), (arbreCourant.getY() - list.get(index).getY()));
+                if (distance <= rayon) {
+                    list.get(index).addVoisin(arbreCourant);
+                    intensite += distance;
+                }
+            }
+        }
+        list.get(index).setIntensiteCompetition(intensite);
+    }
+
+    public void removeVoisin(int index) {
+        for (Arbre arbreCourant : list) {
+            if (arbreCourant.getVoisins().contains(list.get(index))) {
+                arbreCourant.getVoisins().remove(list.get(index));
+                arbreCourant.resuireIntensiteCompetition(Math.hypot((arbreCourant.getX() - list.get(index).getX()), (arbreCourant.getY() - list.get(index).getY())));
+            }
+        }
+    }
+
+
+    //public void deleteVoisins(int index) {
+      //  list.get(index).deleteVoisins(int index);
+    //}
 
     public void listToString() {
         StringBuilder listString = new StringBuilder();
@@ -100,18 +134,18 @@ public class Foret {
     }
 
     private double getTauxNaissance(){
-        return tauxNaissance;
+        return 1/(tauxNaissance);
     }
 
     private double getTauxMort(){
-        return tauxMort;
+        return (1 / (tauxMort));
     }
 
     private double getTauxGlobal() {
-        return (getTauxNaissance()+getTauxMort()) * list.size();
+        return (getTauxNaissance()+getTauxMort())* list.size();
     }
 
     public double getDureeNextEven(){
-        return 1/((-Math.log(Math.random()))/getTauxGlobal());
+        return (-Math.log(Math.random()))/(getTauxGlobal());
     }
 }
