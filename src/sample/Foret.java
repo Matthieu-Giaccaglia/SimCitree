@@ -88,8 +88,10 @@ public class Foret {
 
         if(rdm <= totB || nbTour == 0){//jusqu'à totB,
             addFils(indexRandom);
+            checkVoisins(indexRandom);
         }else if(totB <= rdm && rdm <= totB+totM){//de totB au total
             deleteArbre(indexRandom);
+            removeVoisin(indexRandom);
         }
 
     }
@@ -112,8 +114,8 @@ public class Foret {
     public void removeVoisin(int index) {
         for (Arbre arbreCourant : list) {
             if (arbreCourant.getVoisins().contains(list.get(index))) {
-                arbreCourant.getVoisins().remove(list.get(index));
                 arbreCourant.resuireIntensiteCompetition(Math.hypot((arbreCourant.getX() - list.get(index).getX()), (arbreCourant.getY() - list.get(index).getY())));
+                arbreCourant.getVoisins().remove(list.get(index));
             }
         }
     }
