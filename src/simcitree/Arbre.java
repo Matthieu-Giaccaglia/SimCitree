@@ -36,7 +36,7 @@ public class Arbre {
         this.intensiteCompetition = intensiteCompetition;
     }
 
-    public void resuireIntensiteCompetition(double intensiteCompetition) {
+    public void reduireIntensiteCompetition(double intensiteCompetition) {
         this.intensiteCompetition -= intensiteCompetition;
     }
 

@@ -12,7 +12,8 @@ public class Foret {
     private final double rayonCompetition;
     private final double tauxNaissance;
     private final double tauxMort;
-    private final Random random = new Random();
+    private Random randomEven = new Random();
+    private final Random randomIndex = new Random();
 
 
     public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, int nbArbre) {
@@ -23,6 +24,9 @@ public class Foret {
         initAllTree(nbArbre);
     }
 
+    public ArrayList<Arbre> getList() {
+        return list;
+    }
 
     private void addArbre(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
@@ -40,7 +44,7 @@ public class Foret {
     private void addFils(int index) {
 
         Arbre arbrePere = list.get(index);
-        double angle = Math.toRadians(random.nextDouble() * 360);
+        double angle = Math.toRadians(Math.random() * 360);
         double amount = rayonDispersion;
         double coordonneX = (amount * Math.cos(angle));
         double coordonneY = (amount * Math.sin(angle));
@@ -78,7 +82,7 @@ public class Foret {
         double tot = totB+totM;
         double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
 
-        int indexArbreRandom = random.nextInt(list.size());
+        int indexArbreRandom = randomIndex.nextInt(list.size());
 
         if (rdm <= totB || nbEvent == 0) { //jusqu'à totB,
             addFils(indexArbreRandom);
@@ -88,14 +92,51 @@ public class Foret {
 
     }
 
-    private void checkVoisins(Arbre arbre) {
+    public void checkVoisins(Arbre arbre) {
         double rayon = Math.sqrt(rayonCompetition);
         double intensite = 0;
         for (Arbre arbreCourant : list) {
             if (arbreCourant != arbre) {
-                double coordArbreCourantX = arbreCourant.getX();
-                double coordArbreCourantY = arbreCourant.getY();
-                double distance = Math.hypot((coordArbreCourantX - arbre.getX()), (coordArbreCourantY - arbre.getY()));
+                double coordArbreCX = arbreCourant.getX();
+                double coordArbreCY = arbreCourant.getY();
+                double distance = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()));
+                if (coordArbreCX + rayonCompetition > 1 ) {
+                    if (coordArbreCY + rayonCompetition > 1) {
+                        //do truc
+                    }else if (coordArbreCY - rayonCompetition < 0) {
+                        //do truc
+                    }else {
+                        //do truc
+                    }
+                }
+                else if (coordArbreCX - rayonCompetition < 0) {
+                    if (coordArbreCY + rayonCompetition > 1) {
+                        //do truc
+                    }else if (coordArbreCY - rayonCompetition < 0) {
+                        //do truc
+                    }else {
+                        //do truc
+                    }
+                }
+                else if (coordArbreCY + rayonCompetition > 1 ) {
+                    if (coordArbreCX + rayonCompetition > 1) {
+                        //do truc
+                    }else if (coordArbreCX - rayonCompetition < 0) {
+                        //do truc
+                    }else {
+                        //do truc
+                    }
+                }
+                else if (coordArbreCY - rayonCompetition < 0 ) {
+                    if (coordArbreCX + rayonCompetition > 1) {
+                        //do truc
+                    }else if (coordArbreCX - rayonCompetition < 0) {
+                        //do truc
+                    }else {
+                        //do truc
+                    }
+                }
+
                 if (distance <= rayon) {
                     arbre.addVoisin(arbreCourant);
                     intensite += distance;
@@ -105,12 +146,12 @@ public class Foret {
         arbre.setIntensiteCompetition(intensite);
     }
 
-    private void removeVoisin(int index) {
-        /**
-         * Beaucoup plus rapide car on regarde dans la liste de voisin de l'arbre à détruire.
-         */
-        for (Arbre arbreVoisin : list.get(index).getVoisins()) {
-            arbreVoisin.getVoisins().remove(list.get(index));
+    public void removeVoisin(int index) {
+        for (Arbre arbreCourant : list) {
+            if (arbreCourant.getVoisins().contains(list.get(index))) {
+                arbreCourant.reduireIntensiteCompetition(1/(Math.hypot((arbreCourant.getX() - list.get(index).getX()), (arbreCourant.getY() - list.get(index).getY()))));
+                arbreCourant.getVoisins().remove(list.get(index));
+            }
         }
     }
 
@@ -137,11 +178,6 @@ public class Foret {
     }
 
     public double getDureeNextEven(){
-        return  -Math.log(random.nextFloat())
-                / getTauxGlobal();
-    }
-
-    public ArrayList<Arbre> getList() {
-        return list;
+        return 1/((-Math.log(Math.random()))/getTauxGlobal());
     }
 }
