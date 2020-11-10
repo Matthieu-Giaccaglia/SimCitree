@@ -66,8 +66,16 @@ public class Foret {
     }
 
     private void initAllTree(int nbArbre) {
-        for (int i = 0; i<nbArbre; i++)
+        for (int i = 0; i<nbArbre; i++) {
             addArbre(Math.random(),Math.random());
+        }
+        for (int i = 0; i < nbArbre; i++) {
+            checkVoisins(list.get(i));
+        }
+        for (int i = 0; i < nbArbre; i++) {
+            System.out.println(list.get(i).getVoisins());
+        }
+
     }
 
 
@@ -96,46 +104,67 @@ public class Foret {
                 double coordArbreCX = arbreCourant.getX();
                 double coordArbreCY = arbreCourant.getY();
                 double distance = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()));
-                if (coordArbreCX + rayonCompetition > 1 ) {
-                    if (coordArbreCY + rayonCompetition > 1) {
-                        //do truc
-                    }else if (coordArbreCY - rayonCompetition < 0) {
-                        //do truc
-                    }else {
-                        //do truc
+                if (!arbre.getVoisins().contains(arbreCourant)) {
+                    if (distance <= rayon ) {
+                        arbre.addVoisin(arbreCourant);
+                        intensite += distance;
                     }
-                }
-                else if (coordArbreCX - rayonCompetition < 0) {
-                    if (coordArbreCY + rayonCompetition > 1) {
-                        //do truc
-                    }else if (coordArbreCY - rayonCompetition < 0) {
-                        //do truc
-                    }else {
-                        //do truc
+                    if (coordArbreCX + rayonCompetition > 1 ) {
+                        if (coordArbreCY + rayonCompetition > 1) {
+                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()-1), (coordArbreCY - arbre.getY())-1);
+                            if (distance1 <= rayon) {
+                                arbre.addVoisin(arbreCourant);
+                                intensite += distance1;
+                            }
+                        }else if (coordArbreCY - rayonCompetition < 0) {
+                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()+1), (coordArbreCY - arbre.getY())+1);
+                            if (distance1 <= rayon) {
+                                arbre.addVoisin(arbreCourant);
+                                intensite += distance1;
+                            }
+                        }else {
+                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()-1), (coordArbreCY - arbre.getY()));
+                            if (distance1 <= rayon) {
+                                arbre.addVoisin(arbreCourant);
+                                intensite += distance1;
+                            }
+                        }
                     }
-                }
-                else if (coordArbreCY + rayonCompetition > 1 ) {
-                    if (coordArbreCX + rayonCompetition > 1) {
-                        //do truc
-                    }else if (coordArbreCX - rayonCompetition < 0) {
-                        //do truc
-                    }else {
-                        //do truc
+                    else if (coordArbreCX - rayonCompetition < 0) {
+                        if (coordArbreCY + rayonCompetition > 1) {
+                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()+1), (coordArbreCY - arbre.getY()-1));
+                            if (distance1 <= rayon) {
+                                arbre.addVoisin(arbreCourant);
+                                intensite += distance1;
+                            }
+                        }else if (coordArbreCY - rayonCompetition < 0) {
+                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()+1), (coordArbreCY - arbre.getY()+1));
+                            if (distance1 <= rayon) {
+                                arbre.addVoisin(arbreCourant);
+                                intensite += distance1;
+                            }
+                        }else {
+                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()+1));
+                            if (distance1 <= rayon) {
+                                arbre.addVoisin(arbreCourant);
+                                intensite += distance1;
+                            }
+                        }
                     }
-                }
-                else if (coordArbreCY - rayonCompetition < 0 ) {
-                    if (coordArbreCX + rayonCompetition > 1) {
-                        //do truc
-                    }else if (coordArbreCX - rayonCompetition < 0) {
-                        //do truc
-                    }else {
-                        //do truc
+                    else if (coordArbreCY + rayonCompetition > 1 ) {
+                        double distance1 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()-1));
+                        if (distance1 <= rayon) {
+                            arbre.addVoisin(arbreCourant);
+                            intensite += distance1;
+                        }
                     }
-                }
-
-                if (distance <= rayon) {
-                    arbre.addVoisin(arbreCourant);
-                    intensite += distance;
+                    else if (coordArbreCY - rayonCompetition < 0 ) {
+                        double distance1 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()+1));
+                        if (distance1 <= rayon) {
+                            arbre.addVoisin(arbreCourant);
+                            intensite += distance1;
+                        }
+                    }
                 }
             }
         }
