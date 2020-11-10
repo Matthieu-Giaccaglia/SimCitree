@@ -107,7 +107,7 @@ public class Foret {
 
     private void removeVoisin(int index) {
         /**
-         * Beaucoup plus rapide car on regarde dans la liste de l'arbre à détruire.
+         * Beaucoup plus rapide car on regarde dans la liste de voisin de l'arbre à détruire.
          */
         for (Arbre arbreVoisin : list.get(index).getVoisins()) {
             arbreVoisin.getVoisins().remove(list.get(index));

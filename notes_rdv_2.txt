@@ -3,7 +3,7 @@ Notes rendez-vous 2 9/11
 définir taux = c'est l'utilisateur qui s'en occupe.
 
 
-//calcul temps d'attente : taux 0.5 temps attends 2 fois par sec
+//calcul temps d'attente : taux 0.5 temps attends 2 secondes
 
 tirage aléatoire du temps :
 
@@ -36,7 +36,7 @@ prendre en compte la distance avec l'itensité de compétion du paramètre donn�
 si distance > rc 0 sinon ça
 voir Screen1rdv
 
-n * lambdaB + lambdaD = lambdaGlobal
+n * (lambdaB + lambdaD) = lambdaGlobal
 ______   ______
 lambab + lambdad
 

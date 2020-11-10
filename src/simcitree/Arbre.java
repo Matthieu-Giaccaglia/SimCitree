@@ -8,7 +8,7 @@ public class Arbre {
     private final double x;
     private final double y;
     private double intensiteCompetition;
-    private ArrayList<Arbre> voisins = new ArrayList<>();
+    private final ArrayList<Arbre> voisins = new ArrayList<>();
 
     public Arbre(double x, double y) {
         this.x = x;
