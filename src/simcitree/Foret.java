@@ -178,6 +178,6 @@ public class Foret {
     }
 
     public double getDureeNextEven(){
-        return 1/((-Math.log(Math.random()))/getTauxGlobal());
+        return ((-Math.log(Math.random()))/getTauxGlobal());
     }
 }
