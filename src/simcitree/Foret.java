@@ -202,7 +202,7 @@ public class Foret {
         return (getTauxNaissance()+getTauxMort()) * list.size();
     }
 
-    public double getDureeNextEven(){
+    public double getDureeNextEvent(){
         return  -Math.log(random.nextFloat())
                 / getTauxGlobal();
     }
