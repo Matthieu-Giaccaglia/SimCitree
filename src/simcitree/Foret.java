@@ -103,17 +103,17 @@ public class Foret {
             if (arbreCourant != arbre) {
                 double coordArbreCX = arbreCourant.getX();
                 double coordArbreCY = arbreCourant.getY();
-                double distance = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()));
+                double distance = Math.hypot(( arbre.getX()- coordArbreCX), (arbre.getY() - coordArbreCY));
                 if (!arbre.getVoisins().contains(arbreCourant)) {
                     if (distance <= rayon ) {
                         arbre.addVoisin(arbreCourant);
-                        intensite += distance;
+                        intensite += 1;
                     }
                     if (arbre.getX() + rayonCompetition > 1 ) {
                         if (arbre.getY() + rayonCompetition > 1) {
-                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()-1), (coordArbreCY - arbre.getY())-1);
-                            double distance2 = Math.hypot((coordArbreCX - arbre.getX()-1), (coordArbreCY - arbre.getY()));
-                            double distance3 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY())-1);
+                            double distance1 = Math.hypot((arbre.getX()-1) - coordArbreCX , (arbre.getY())-1 - coordArbreCY);
+                            double distance2 = Math.hypot((arbre.getX()-1) - coordArbreCX , (arbre.getY() - coordArbreCY));
+                            double distance3 = Math.hypot((arbre.getX() - coordArbreCX ), (arbre.getY()-1) - coordArbreCY);
                             if (distance1 <= rayon) {
                                 arbre.addVoisin(arbreCourant);
                                 intensite += 1;
@@ -127,9 +127,9 @@ public class Foret {
                                 intensite += 1;
                             }
                         }else if (arbre.getY() - rayonCompetition < 0) {
-                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY())+1);
-                            double distance2 = Math.hypot((coordArbreCX - arbre.getX()-1), (coordArbreCY - arbre.getY()+1));
-                            double distance3 = Math.hypot((coordArbreCX - arbre.getX()-1), (coordArbreCY - arbre.getY()));
+                            double distance1 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY())+1) - coordArbreCY);
+                            double distance2 = Math.hypot(((arbre.getX()-1) - coordArbreCX) , (arbre.getY()+1) - coordArbreCY );
+                            double distance3 = Math.hypot(((arbre.getX()-1) - coordArbreCX), (arbre.getY() - coordArbreCY));
                             if (distance1 <= rayon) {
                                 arbre.addVoisin(arbreCourant);
                                 intensite += 1;
@@ -143,7 +143,7 @@ public class Foret {
                                 intensite += 1;
                             }
                         }else {
-                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()-1), (coordArbreCY - arbre.getY()));
+                            double distance1 = Math.hypot(((arbre.getX()-1) -coordArbreCX), ((arbre.getY()) - coordArbreCY ));
                             if (distance1 <= rayon) {
                                 arbre.addVoisin(arbreCourant);
                                 intensite += 1;
@@ -152,9 +152,9 @@ public class Foret {
                     }
                     else if (arbre.getX() - rayonCompetition < 0) {
                         if (arbre.getY() + rayonCompetition > 1) {
-                            double distance3 = Math.hypot((coordArbreCX - arbre.getX()+1), (coordArbreCY - arbre.getY()-1));
-                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()+1), (coordArbreCY - arbre.getY()));
-                            double distance2 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()-1));
+                            double distance3 = Math.hypot(((arbre.getX()+1) -coordArbreCX), (arbre.getY()-1) - coordArbreCY);
+                            double distance1 = Math.hypot(((arbre.getX()+1) - coordArbreCX), (arbre.getY()- coordArbreCY));
+                            double distance2 = Math.hypot((arbre.getX()- coordArbreCX), (arbre.getY()-1)-coordArbreCY );
                             if (distance1 <= rayon) {
                                 arbre.addVoisin(arbreCourant);
                                 intensite += 1;
@@ -168,9 +168,9 @@ public class Foret {
                                 intensite += 1;
                             }
                         }else if (arbre.getY() - rayonCompetition < 0) {
-                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()+1), (coordArbreCY - arbre.getY()+1));
-                            double distance2 = Math.hypot((coordArbreCX - arbre.getX()+1), (coordArbreCY - arbre.getY()));
-                            double distance3 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()+1));
+                            double distance1 = Math.hypot(((arbre.getX()+1) - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
+                            double distance2 = Math.hypot(( arbre.getX()+1 - coordArbreCX), (arbre.getY() - coordArbreCY));
+                            double distance3 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
                             if (distance1 <= rayon) {
                                 arbre.addVoisin(arbreCourant);
                                 intensite += 1;
@@ -184,7 +184,7 @@ public class Foret {
                                 intensite += 1;
                             }
                         }else {
-                            double distance1 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()+1));
+                            double distance1 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
                             if (distance1 <= rayon) {
                                 arbre.addVoisin(arbreCourant);
                                 intensite += 1;
@@ -192,14 +192,14 @@ public class Foret {
                         }
                     }
                     else if (arbre.getY() + rayonCompetition > 1 ) {
-                        double distance1 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()-1));
+                        double distance1 = Math.hypot((arbre.getX() - coordArbreCX), (arbre.getY()-1) - coordArbreCY);
                         if (distance1 <= rayon) {
                             arbre.addVoisin(arbreCourant);
                             intensite += 1;
                         }
                     }
                     else if (arbre.getY() - rayonCompetition < 0 ) {
-                        double distance1 = Math.hypot((coordArbreCX - arbre.getX()), (coordArbreCY - arbre.getY()+1));
+                        double distance1 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
                         if (distance1 <= rayon) {
                             arbre.addVoisin(arbreCourant);
                             intensite += 1;
