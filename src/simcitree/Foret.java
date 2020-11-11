@@ -13,6 +13,7 @@ public class Foret {
     private final double rayonCompetition;
     private final double tauxNaissance;
     private final double tauxMort;
+    private final double tauxIntensiteC;
     private final Random random = new Random();
 
 
@@ -21,6 +22,7 @@ public class Foret {
         this.rayonCompetition = rayonCompetition;
         this.tauxNaissance = tauxNaissance;
         this.tauxMort = tauxMort;
+        this.tauxIntensiteC = 0;
         initAllTree(nbArbre);
     }
 
@@ -29,13 +31,13 @@ public class Foret {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
         checkVoisins(arbreAdd);
-        //Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
+        Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
     }
     public void addArbreV2(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
         checkVoisinsV2(arbreAdd);
-        //Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
+        Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
     }
 
     private void deleteArbre(int index) {
@@ -87,19 +89,26 @@ public class Foret {
 
 
     public void applyEvent(int nbEvent){
-        double totB = getTauxNaissance()* list.size(); //total Chances Naissance
-        double totM = getTauxMort()* list.size(); // total Chances Mort
-        //double totC
-        double tot = totB+totM;
+        double totB = this.tauxNaissance; //total Chances Naissance
+        double totM = this.tauxMort; // total Chances Mort
+        double totC = getSommeIntensiteC();
+
+        double tot = totB+totM+totC;
         double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
 
         int indexArbreRandom = random.nextInt(list.size());
 
         if (rdm <= totB || nbEvent == 0) { //jusqu'à totB,
             addFils(indexArbreRandom);
-        } else if(totB <= rdm && rdm <= totB+totM){ //de totB au total
+        } else if(totB <= rdm && rdm <= totB+totM){ //de totB au totB+totM
             deleteArbre(indexArbreRandom);
+        }else{//de totB+totM au total
+            deathByCompetitiveness();
         }
+
+    }
+
+    private void deathByCompetitiveness() {
 
     }
 
@@ -243,7 +252,7 @@ public class Foret {
                 }
             }
         }
-        arbre.setIntensiteCompetition(intensite);
+        //arbre.setIntensiteCompetition(intensite);
     }
 
     private void removeVoisin(int index) {
@@ -262,16 +271,17 @@ public class Foret {
         System.out.println(listString);
     }
 
-    private double getTauxNaissance(){
-        return tauxNaissance;
-    }
-
-    private double getTauxMort(){
-        return tauxMort;
+    private double getSommeIntensiteC(){
+        double tauxIntens = 0;
+        for (Arbre a: getList()) {
+            tauxIntens += a.getIntensiteCompetition();
+        }
+        System.out.println(tauxIntens);
+        return tauxIntens;
     }
 
     private double getTauxGlobal() {
-        return (getTauxNaissance()+getTauxMort()) * list.size();
+        return (this.tauxNaissance+this.tauxMort) * list.size();
     }
 
     public double getDureeNextEvent(){
