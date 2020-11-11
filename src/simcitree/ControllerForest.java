@@ -69,7 +69,7 @@ public class ControllerForest implements Initializable {
                     labelNbTour.setText(String.valueOf(nbTourEcoule));
                     labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
                     lastEvenement = now;
-                    this.event = Main.foret.getDureeNextEvent();
+                    event = Main.foret.getDureeNextEvent();
                     System.out.println("-------------------------------------------");
                 }
                 if (Main.foret.getList().size() == 0) {

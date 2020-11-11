@@ -96,6 +96,24 @@ public class Foret {
 
     }
 
+    private void checkVoisinsV2(Arbre arbreNouveau) {
+        for (Arbre arbreList : list) {
+            if (arbreList != arbreNouveau) {
+
+                if (Math.sqrt(Math.pow(arbreList.getX() - arbreNouveau.getX(),2)) <= rayonCompetition) {
+                    arbreNouveau.addVoisin(arbreList);
+                    arbreList.addVoisin(arbreNouveau);
+                }
+
+
+                if (arbreNouveau.getX() + rayonCompetition > 1) {
+
+                }
+            }
+        }
+    }
+
+
     private void checkVoisins(Arbre arbre) {
         double rayon = Math.sqrt(rayonCompetition);
         double intensite = 0;
