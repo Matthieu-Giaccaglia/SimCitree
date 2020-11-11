@@ -1,5 +1,6 @@
 package simcitree;
 
+
 import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
@@ -24,11 +25,17 @@ public class Foret {
     }
 
 
-    private void addArbre(double coordonneeX, double coordonneeY) {
+    public void addArbre(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
         checkVoisins(arbreAdd);
-        Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
+        //Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
+    }
+    public void addArbreV2(double coordonneeX, double coordonneeY) {
+        Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
+        list.add(arbreAdd);
+        checkVoisinsV2(arbreAdd);
+        //Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
     }
 
     private void deleteArbre(int index) {
@@ -100,17 +107,27 @@ public class Foret {
         for (Arbre arbreList : list) {
             if (arbreList != arbreNouveau) {
 
-                if (Math.sqrt(Math.pow(arbreList.getX() - arbreNouveau.getX(),2)) <= rayonCompetition) {
+                if (getDistance(arbreNouveau.getX(), arbreList.getX()-1, arbreNouveau.getY(), arbreList.getY()) <= rayonCompetition
+                   || getDistance(arbreNouveau.getX(), arbreList.getX()-1, arbreNouveau.getY(), arbreList.getY()-1) <= rayonCompetition
+                   || getDistance(arbreNouveau.getX(), arbreList.getX()-1, arbreNouveau.getY(), arbreList.getY()+1) <= rayonCompetition
+                   || getDistance(arbreNouveau.getX(), arbreList.getX()+1, arbreNouveau.getY(), arbreList.getY()) <= rayonCompetition
+                   || getDistance(arbreNouveau.getX(), arbreList.getX()+1, arbreNouveau.getY(), arbreList.getY()-1) <= rayonCompetition
+                   || getDistance(arbreNouveau.getX(), arbreList.getX()+1, arbreNouveau.getY(), arbreList.getY()+1) <= rayonCompetition
+                   || getDistance(arbreNouveau.getX(), arbreList.getX(), arbreNouveau.getY(), arbreList.getY()) <= rayonCompetition
+                   || getDistance(arbreNouveau.getX(), arbreList.getX(), arbreNouveau.getY(), arbreList.getY()-1) <= rayonCompetition
+                   || getDistance(arbreNouveau.getX(), arbreList.getX(), arbreNouveau.getY(), arbreList.getY()+1) <= rayonCompetition
+                ) {
                     arbreNouveau.addVoisin(arbreList);
                     arbreList.addVoisin(arbreNouveau);
                 }
-
-
-                if (arbreNouveau.getX() + rayonCompetition > 1) {
-
-                }
             }
         }
+    }
+
+    private double getDistance(double X1, double X2, double Y1, double Y2) {
+        double puissX = Math.pow(X2-X1, 2);
+        double puissY = Math.pow(Y2-Y1, 2);
+        return Math.sqrt(puissX + puissY);
     }
 
 
@@ -230,9 +247,6 @@ public class Foret {
     }
 
     private void removeVoisin(int index) {
-        /**
-         * Beaucoup plus rapide car on regarde dans la liste de voisin de l'arbre à détruire.
-         */
         for (Arbre arbreVoisin : list.get(index).getVoisins()) {
             arbreVoisin.getVoisins().remove(list.get(index));
         }
