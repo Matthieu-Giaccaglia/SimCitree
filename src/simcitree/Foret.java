@@ -164,7 +164,6 @@ public class Foret {
                 double coordArbreCX = arbreCourant.getX();
                 double coordArbreCY = arbreCourant.getY();
                 double distance =  Math.hypot((arbre.getX() - coordArbreCX ), (arbre.getY() - coordArbreCY));
-
                 checkInsideRayon(arbre, arbreCourant, distance);
 
                     if (arbre.getX() + rayonCompetition > 1 ) {
