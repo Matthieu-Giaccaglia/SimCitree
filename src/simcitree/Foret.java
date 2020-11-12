@@ -14,7 +14,7 @@ public class Foret {
     private final double tauxIntensiteC;
     private double sommeIntensiteC;
     private final Random random = new Random();
-    private ArrayList<ArrayList<ArrayList<Arbre>>> tableauDivision = new ArrayList<ArrayList<ArrayList<Arbre>>>();
+    private final ArrayList<ArrayList<ArrayList<Arbre>>> tableauDivision = new ArrayList<>();
     private int division = 10;
 
 
@@ -159,12 +159,12 @@ public class Foret {
 
     private ArrayList<ArrayList<Arbre>> diviserTableau(double X, double Y){
 
-        int division2 = division/10;
+        //int division2 = division/10;
 
-        int xmin = (int) (X - rayonCompetition) * division2;
-        int xmax = (int) (X + rayonCompetition) * division2;
-        int ymin = (int) (Y - rayonCompetition) * division2;
-        int ymax = (int) (Y + rayonCompetition) * division2;
+        int xmin = (int) (X - rayonCompetition) * division;
+        int xmax = (int) (X + rayonCompetition) * division;
+        int ymin = (int) (Y - rayonCompetition) * division;
+        int ymax = (int) (Y + rayonCompetition) * division;
 
         ArrayList<ArrayList<Arbre>> returnThis = new ArrayList<>();
 
