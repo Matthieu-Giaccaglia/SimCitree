@@ -1,8 +1,6 @@
 package simcitree;
 
 
-import javafx.scene.chart.XYChart;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,6 +14,8 @@ public class Foret {
     private final double tauxIntensiteC;
     private double sommeIntensiteC;
     private final Random random = new Random();
+    private ArrayList<ArrayList<ArrayList<Arbre>>> tableauDivision = new ArrayList<ArrayList<ArrayList<Arbre>>>();
+    private int division = 10;
 
 
     public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, int nbArbre) {
@@ -25,6 +25,7 @@ public class Foret {
         this.tauxMort = tauxMort;
         this.tauxIntensiteC = 0;
         this.sommeIntensiteC = 0;
+
         initAllTree(nbArbre);
     }
 
@@ -39,6 +40,7 @@ public class Foret {
     public void addArbreV2(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
+        tableauDivision.get((int) coordonneeX).get((int) coordonneeY).add(arbreAdd);
         checkVoisinsV2(arbreAdd);
         sommeIntensiteC += arbreAdd.getIntensiteCompetition();
         //Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
@@ -153,6 +155,41 @@ public class Foret {
         double puissX = Math.pow(X2-X1, 2);
         double puissY = Math.pow(Y2-Y1, 2);
         return Math.sqrt(puissX + puissY);
+    }
+
+    private ArrayList<ArrayList<Arbre>> diviserTableau(double X, double Y){
+
+        int division2 = division/10;
+
+        int xmin = (int) (X - rayonCompetition) * division2;
+        int xmax = (int) (X + rayonCompetition) * division2;
+        int ymin = (int) (Y - rayonCompetition) * division2;
+        int ymax = (int) (Y + rayonCompetition) * division2;
+
+        ArrayList<ArrayList<Arbre>> returnThis = new ArrayList<>();
+
+        for (int i = xmin; i <= xmax; i= i + 1) {
+
+            int j = i;
+            while (j < 0)
+                j++;
+            while (j>1)
+                j--;
+
+            for (int k = ymin; k< ymax; k= k + 1) {
+
+                int l = k;
+                while (l<0)
+                    l++;
+                while (l>1)
+                    l--;
+
+                returnThis.add(tableauDivision.get(j).get(l));
+            }
+        }
+
+
+        return returnThis;
     }
 
 
