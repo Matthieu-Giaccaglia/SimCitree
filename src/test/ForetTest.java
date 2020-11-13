@@ -23,8 +23,8 @@ public class ForetTest {
     @Test
     public void checkVoisins_DebordementXandY() {
         foret = new Foret(0.5, 0.2, 0.1, 0.1, 0);
-        foret.addArbreV2(0,0);
-        foret.addArbreV2(0.9,0.9);
+        foret.addArbre(0,0);
+        foret.addArbre(0.9,0.9);
 
         Arbre arbre1 = foret.getList().get(0);
         Arbre arbre2 = foret.getList().get(1);
@@ -74,9 +74,16 @@ public class ForetTest {
         Arbre arbre2 = foret.getList().get(1);
         assertTrue(arbre1.getVoisins().contains(arbre2) && arbre2.getVoisins().contains(arbre1));
     }
+
     @Test
-    public void checkVoisinsV2_DebordementXandYAZEA3EAZe() {
-        System.out.println("bite");
+    public void checkBonCase(){
+        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0);
+        foret.addArbreV2(0.5,0.7);
+        foret.addArbreV2(0.002, 0.415);
+
+
+        assertTrue(foret.getTableauDivision().get(5).get(7).contains(foret.getList().get(0))
+                    && foret.getTableauDivision().get(0).get(4).contains(foret.getList().get(1)));
     }
 
 }

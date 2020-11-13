@@ -14,8 +14,8 @@ public class Foret {
     private final double tauxIntensiteC;
     private double sommeIntensiteC;
     private final Random random = new Random();
-    private final ArrayList<ArrayList<ArrayList<Arbre>>> tableauDivision = new ArrayList<>();
-    private int division = 10;
+    private final ArrayList<ArrayList<ArrayList<Arbre>>> tableauDivision = new ArrayList<ArrayList<ArrayList<Arbre>>>();
+    private int division = 1;
 
 
     public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, int nbArbre) {
@@ -25,6 +25,18 @@ public class Foret {
         this.tauxMort = tauxMort;
         this.tauxIntensiteC = 0;
         this.sommeIntensiteC = 0;
+
+        double divisionTest = this.rayonCompetition;
+        while (divisionTest < 0) {
+            division *= 10;
+            divisionTest *= 10;
+        }
+
+        for (int i = 0; i<division;i++) {
+            tableauDivision.add(new ArrayList<ArrayList<Arbre>>());
+            for (int j = 0; j < division; j++)
+                tableauDivision.get(i).add(new ArrayList<Arbre>());
+        }
 
         initAllTree(nbArbre);
     }
@@ -40,7 +52,9 @@ public class Foret {
     public void addArbreV2(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
-        tableauDivision.get((int) coordonneeX).get((int) coordonneeY).add(arbreAdd);
+        System.out.println(coordonneeX + ";" + coordonneeY);
+        System.out.println((int) (coordonneeX *10) + " ; " + (int) (coordonneeY *10));
+        tableauDivision.get((int) (coordonneeX *10)).get((int) (coordonneeY *10)).add(arbreAdd);
         checkVoisinsV2(arbreAdd);
         sommeIntensiteC += arbreAdd.getIntensiteCompetition();
         //Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
@@ -157,28 +171,35 @@ public class Foret {
         return Math.sqrt(puissX + puissY);
     }
 
-    private ArrayList<ArrayList<Arbre>> diviserTableau(double X, double Y){
+    private ArrayList<ArrayList<Arbre>> getCaseVoisins(double X, double Y){
 
         //int division2 = division/10;
 
-        int xmin = (int) (X - rayonCompetition) * division;
-        int xmax = (int) (X + rayonCompetition) * division;
-        int ymin = (int) (Y - rayonCompetition) * division;
-        int ymax = (int) (Y + rayonCompetition) * division;
+        int divisionTableau = 10; //Divise le tableau par 10.
+
+
+        //On trouve les coordonnées min et max en fonction de l'arbre et du rayon
+        int xmin = (int) (X - rayonCompetition) * 10; //Pour "Diviser" par 10, il faut multiplier par 10
+        int xmax = (int) (X + rayonCompetition) * 10;
+        int ymin = (int) (Y - rayonCompetition) * 10;
+        int ymax = (int) (Y + rayonCompetition) * 10;
 
         ArrayList<ArrayList<Arbre>> returnThis = new ArrayList<>();
 
+
+        //On met mtn dans une liste tous les zones suceptibles de contenir les voisins
         for (int i = xmin; i <= xmax; i= i + 1) {
 
             int j = i;
+            //On fait gaffe que ça dépasse pas 1 ou inversement
             while (j < 0)
                 j++;
             while (j>1)
                 j--;
-
-            for (int k = ymin; k< ymax; k= k + 1) {
+            for (int k = ymin; k < ymax; k= k + 1) {
 
                 int l = k;
+                //On fait gaffe que ça dépasse pas 1 ou inversement
                 while (l<0)
                     l++;
                 while (l>1)
@@ -187,10 +208,10 @@ public class Foret {
                 returnThis.add(tableauDivision.get(j).get(l));
             }
         }
-
-
+        //return la liste
         return returnThis;
     }
+
 
 
     private void checkVoisins(Arbre arbre) {
@@ -301,6 +322,10 @@ public class Foret {
     public double getDureeNextEvent(){
         return  -Math.log(random.nextFloat())
                 / getTauxGlobal();
+    }
+
+    public ArrayList<ArrayList<ArrayList<Arbre>>> getTableauDivision() {
+        return tableauDivision;
     }
 
     public ArrayList<Arbre> getList() {
