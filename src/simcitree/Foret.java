@@ -14,7 +14,7 @@ public class Foret {
     private final double tauxIntensiteC;
     private double sommeIntensiteC;
     private final Random random = new Random();
-    private final ArrayList<ArrayList<ArrayList<Arbre>>> tableauDivision = new ArrayList<ArrayList<ArrayList<Arbre>>>();
+    private final ArrayList<ArrayList<ArrayList<Arbre>>> tableauDivision = new ArrayList<>();
     private int division = 1;
 
 
@@ -34,9 +34,9 @@ public class Foret {
 
         System.out.println(division);
         for (int i = 0; i<division;i++) {
-            tableauDivision.add(new ArrayList<ArrayList<Arbre>>());
+            tableauDivision.add(new ArrayList<>());
             for (int j = 0; j < division; j++)
-                tableauDivision.get(i).add(new ArrayList<Arbre>());
+                tableauDivision.get(i).add(new ArrayList<>());
         }
 
         initAllTree(nbArbre);
@@ -217,7 +217,9 @@ public class Foret {
 
     private void checkVoisins(Arbre arbre) {
         double rayon = rayonCompetition;
-        for (Arbre arbreCourant : list) {
+        ArrayList<ArrayList<Arbre>> listedeliste = getCaseVoisins(arbre.getX(), arbre.getY());
+        for (ArrayList<Arbre> listeArbreDeListeDeListe : listedeliste) {
+            for ( Arbre arbreCourant : listeArbreDeListeDeListe) {
             if (arbreCourant != arbre) {
                 double coordArbreCX = arbreCourant.getX();
                 double coordArbreCY = arbreCourant.getY();
@@ -279,6 +281,7 @@ public class Foret {
                 }
             }
         }
+    }
 
 
 
