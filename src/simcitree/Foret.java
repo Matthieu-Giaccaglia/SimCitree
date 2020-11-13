@@ -32,7 +32,6 @@ public class Foret {
             divisionTest *= 10;
         }
 
-        System.out.println(division);
         for (int i = 0; i<division;i++) {
             tableauDivision.add(new ArrayList<>());
             for (int j = 0; j < division; j++)
@@ -54,8 +53,6 @@ public class Foret {
     public void addArbreV2(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
-        System.out.println(coordonneeX + ";" + coordonneeY);
-        System.out.println((int) (coordonneeX *10) + " ; " + (int) (coordonneeY *10));
         tableauDivision.get((int) (coordonneeX *10)).get((int) (coordonneeY *10)).add(arbreAdd);
         checkVoisinsV2(arbreAdd);
         sommeIntensiteC += arbreAdd.getIntensiteCompetition();
@@ -100,9 +97,6 @@ public class Foret {
     private void initAllTree(int nbArbre) {
         for (int i = 0; i<nbArbre; i++) {
             addArbre(Math.random(),Math.random());
-        }
-        for (int i = 0; i < nbArbre; i++) {
-            System.out.println(list.get(i).getVoisins());
         }
 
     }
