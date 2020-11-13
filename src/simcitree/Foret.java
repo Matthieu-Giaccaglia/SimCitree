@@ -46,6 +46,7 @@ public class Foret {
     public void addArbre(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
+        tableauDivision.get((int) (coordonneeX *10)).get((int) (coordonneeY *10)).add(arbreAdd);
         checkVoisins(arbreAdd);
         sommeIntensiteC += arbreAdd.getIntensiteCompetition();
         //Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
