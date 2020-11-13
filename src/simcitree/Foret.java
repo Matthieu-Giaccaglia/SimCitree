@@ -97,9 +97,10 @@ public class Foret {
 
     private void initAllTree(int nbArbre) {
         for (int i = 0; i<nbArbre; i++) {
-            addArbre(Math.random(),Math.random());
+            addArbreV2(Math.random(),Math.random());
+            System.out.println(i);
         }
-
+        System.out.println("END initAllTree()");
     }
 
 
@@ -140,86 +141,6 @@ public class Foret {
 
     }
 
-    private void checkVoisinsV2(Arbre arbreNouveau) {
-        for (Arbre arbreList : list) {
-            if (arbreList != arbreNouveau) {
-
-                if (getDistance(arbreNouveau.getX(), arbreList.getX()-1, arbreNouveau.getY(), arbreList.getY()) <= rayonCompetition
-
-                   || getDistance(arbreNouveau.getX(), arbreList.getX()-1, arbreNouveau.getY(), arbreList.getY()-1) <= rayonCompetition
-                   || getDistance(arbreNouveau.getX(), arbreList.getX()-1, arbreNouveau.getY(), arbreList.getY()+1) <= rayonCompetition
-                   || getDistance(arbreNouveau.getX(), arbreList.getX()+1, arbreNouveau.getY(), arbreList.getY()) <= rayonCompetition
-                   || getDistance(arbreNouveau.getX(), arbreList.getX()+1, arbreNouveau.getY(), arbreList.getY()-1) <= rayonCompetition
-                   || getDistance(arbreNouveau.getX(), arbreList.getX()+1, arbreNouveau.getY(), arbreList.getY()+1) <= rayonCompetition
-                   || Math.hypot((arbreNouveau.getX() - arbreList.getX() ), (arbreNouveau.getY() - arbreList.getY())) <= rayonCompetition
-                   || getDistance(arbreNouveau.getX(), arbreList.getX(), arbreNouveau.getY(), arbreList.getY()-1) <= rayonCompetition
-                   || getDistance(arbreNouveau.getX(), arbreList.getX(), arbreNouveau.getY(), arbreList.getY()+1) <= rayonCompetition
-                ) {
-                    arbreNouveau.addVoisin(arbreList);
-                    arbreList.addVoisin(arbreNouveau);
-                }
-            }
-        }
-    }
-
-    private double getDistance(double X1, double X2, double Y1, double Y2) {
-        double puissX = Math.pow(X2-X1, 2);
-        double puissY = Math.pow(Y2-Y1, 2);
-        return Math.sqrt(puissX + puissY);
-    }
-
-    private ArrayList<ArrayList<Arbre>> getCaseVoisins(double X, double Y){
-
-        //int division2 = division/10;
-
-        int divisionTableau = 10; //Divise le tableau par 10.
-
-
-        //On trouve les coordonnées min et max en fonction de l'arbre et du rayon
-        int xmin = (int) ((X - rayonCompetition) * 10) ; //Pour "Diviser" par 10, il faut multiplier par 10
-        int xmax = (int) ((X + rayonCompetition) * 10);
-        int ymin = (int) ((Y - rayonCompetition) * 10);
-        int ymax = (int) ((Y + rayonCompetition) * 10);
-
-        System.out.println("X MIN et MAX :" + xmin + " ; " + xmax);
-        System.out.println("X MIN et MAX :" + ymin + " ; " + ymax);
-
-        ArrayList<ArrayList<Arbre>> returnThis = new ArrayList<>();
-
-
-        //On met mtn dans une liste tous les zones suceptibles de contenir les voisins
-        for (int i = xmin; i <= xmax; i= i + 1) {
-
-            int j = i;
-            //On fait gaffe que ça dépasse pas 1 ou inversement
-            while (j < 0)
-                j += division;
-            while (j >= division)
-                j -= division;
-            for (int k = ymin; k < ymax; k = k + 1) {
-
-                int l = k;
-                //On fait gaffe que ça dépasse pas le nombre de case max ou inversement
-                System.out.println("l :" + l);
-
-                while (l < 0) {
-                    l += division;
-                    System.out.println("l :" + l);
-                }
-                while (l >= division) {
-                    l -= division;
-                    System.out.println("l :" + l);
-                }
-
-                System.out.println("CASE :" + j + " ; " + l);
-                returnThis.add(tableauDivision.get(j).get(l));
-            }
-        }
-        //return la liste
-        return returnThis;
-    }
-
-
 
     private void checkVoisins(Arbre arbre) {
         double rayon = rayonCompetition;
@@ -241,7 +162,7 @@ public class Foret {
 
                             checkInsideRayon(arbre, arbreCourant, distance1, distance2, distance3);
 
-                        }else if (arbre.getY() - rayonCompetition < 0) {
+                        } else if (arbre.getY() - rayonCompetition < 0) {
 
                             double distance1 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY())+1) - coordArbreCY);
                             double distance2 = Math.hypot(((arbre.getX()-1) - coordArbreCX) , (arbre.getY()+1) - coordArbreCY );
@@ -249,12 +170,12 @@ public class Foret {
 
                             checkInsideRayon(arbre, arbreCourant, distance1, distance2, distance3);
 
-                        }else {
+                        } else {
                             double distance1 = Math.hypot(((arbre.getX()-1) -coordArbreCX), ((arbre.getY()) - coordArbreCY ));
                             checkInsideRayon(arbre, arbreCourant, distance1);
                         }
-                    }
-                    else if (arbre.getX() - rayonCompetition < 0) {
+
+                    } else if (arbre.getX() - rayonCompetition < 0) {
                         if (arbre.getY() + rayonCompetition > 1) {
 
                             double distance3 = Math.hypot(((arbre.getX()+1) -coordArbreCX), (arbre.getY()-1) - coordArbreCY);
@@ -265,9 +186,9 @@ public class Foret {
 
                         }else if (arbre.getY() - rayonCompetition < 0) {
 
-                            double distance1 = Math.hypot(((arbre.getX()+1) - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
-                            double distance2 = Math.hypot(( arbre.getX()+1 - coordArbreCX), (arbre.getY() - coordArbreCY));
-                            double distance3 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
+                            double distance1 = Math.hypot(( arbre.getX()+1 - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
+                            double distance2 = Math.hypot(( arbre.getX()+1 - coordArbreCX), (arbre.getY()     - coordArbreCY));
+                            double distance3 = Math.hypot(( arbre.getX()   - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
 
                             checkInsideRayon(arbre, arbreCourant, distance1, distance2, distance3);
 
@@ -275,12 +196,10 @@ public class Foret {
                             double distance1 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
                             checkInsideRayon(arbre, arbreCourant, distance1);
                         }
-                    }
-                    else if (arbre.getY() + rayonCompetition > 1 ) {
+                    } else if (arbre.getY() + rayonCompetition > 1 ) {
                         double distance1 = Math.hypot((arbre.getX() - coordArbreCX), (arbre.getY()-1) - coordArbreCY);
                         checkInsideRayon(arbre, arbreCourant, distance1);
-                    }
-                    else if (arbre.getY() - rayonCompetition < 0 ) {
+                    } else if (arbre.getY() - rayonCompetition < 0 ) {
                         double distance1 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
                         checkInsideRayon(arbre, arbreCourant, distance1);
                     }
@@ -289,22 +208,75 @@ public class Foret {
         }
     }
 
-
-
     private void checkInsideRayon (Arbre arbre , Arbre arbreCourant , double distance) {
         if (distance <= rayonCompetition) {
             arbre.addVoisin(arbreCourant);
+            arbre.augmenterIntensiteCompetition( (1-distance) / rayonCompetition);
             arbreCourant.addVoisin(arbre);
-            arbre.setIntensiteCompetition(1);
+            arbreCourant.augmenterIntensiteCompetition( (1-distance) / rayonCompetition);
         }
     }
 
     private void checkInsideRayon (Arbre arbre , Arbre arbreCourant , double distance, double distance2, double distance3) {
-        if (distance <= rayonCompetition || distance2 <= rayonCompetition ||distance3 <= rayonCompetition ) {
+        if (distance <= rayonCompetition) {
             arbre.addVoisin(arbreCourant);
+            arbre.augmenterIntensiteCompetition( (1-distance) / rayonCompetition);
             arbreCourant.addVoisin(arbre);
-            arbre.setIntensiteCompetition(1);
+            arbreCourant.augmenterIntensiteCompetition( (1-distance) / rayonCompetition);
+        } else if (distance2 <= rayonCompetition) {
+            arbre.addVoisin(arbreCourant);
+            arbre.augmenterIntensiteCompetition( (1-distance2) / rayonCompetition);
+            arbreCourant.addVoisin(arbre);
+            arbreCourant.augmenterIntensiteCompetition( (1-distance2) / rayonCompetition);
+        } else if (distance3 <= rayonCompetition) {
+            arbre.addVoisin(arbreCourant);
+            arbre.augmenterIntensiteCompetition( (1-distance3) / rayonCompetition);
+            arbreCourant.addVoisin(arbre);
+            arbreCourant.augmenterIntensiteCompetition( (1-distance3) / rayonCompetition);
         }
+    }
+
+    private ArrayList<ArrayList<Arbre>> getCaseVoisins(double X, double Y){
+
+        //int division2 = division/10;
+
+        int divisionTableau = 10; //Divise le tableau par 10.
+
+        //On trouve les coordonnées min et max en fonction de l'arbre et du rayon
+        int xmin = (int) ((X - rayonCompetition) * 10) ; //Pour "Diviser" par 10, il faut multiplier par 10
+        int xmax = (int) ((X + rayonCompetition) * 10);
+        int ymin = (int) ((Y - rayonCompetition) * 10);
+        int ymax = (int) ((Y + rayonCompetition) * 10);
+
+        ArrayList<ArrayList<Arbre>> returnThis = new ArrayList<>();
+
+
+        //On met mtn dans une liste tous les zones suceptibles de contenir les voisins
+        for (int i = xmin; i <= xmax; i= i + 1) {
+
+            int j = i;
+            //On fait gaffe que ça dépasse pas 1 ou inversement
+            while (j < 0)
+                j += division;
+            while (j >= division)
+                j -= division;
+            for (int k = ymin; k < ymax; k = k + 1) {
+
+                int l = k;
+                //On fait gaffe que ça dépasse pas le nombre de case max ou inversement
+
+                while (l < 0) {
+                    l += division;
+                }
+                while (l >= division) {
+                    l -= division;
+                }
+
+                returnThis.add(tableauDivision.get(j).get(l));
+            }
+        }
+        //return la liste
+        return returnThis;
     }
 
 

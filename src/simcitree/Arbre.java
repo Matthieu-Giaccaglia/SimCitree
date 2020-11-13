@@ -32,8 +32,8 @@ public class Arbre {
         return voisins;
     }
 
-    public void setIntensiteCompetition(double intensiteCompetition) {
-        this.intensiteCompetition = intensiteCompetition;
+    public void augmenterIntensiteCompetition(double intensiteCompetition) {
+        this.intensiteCompetition += intensiteCompetition;
     }
 
     public void reduireIntensiteCompetition(double intensiteCompetition) {
