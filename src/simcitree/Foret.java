@@ -216,7 +216,6 @@ public class Foret {
 
     private void checkVoisins(Arbre arbre) {
         double rayon = rayonCompetition;
-        double intensite = 0;
         for (Arbre arbreCourant : list) {
             if (arbreCourant != arbre) {
                 double coordArbreCX = arbreCourant.getX();
