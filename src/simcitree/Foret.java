@@ -27,11 +27,12 @@ public class Foret {
         this.sommeIntensiteC = 0;
 
         double divisionTest = this.rayonCompetition;
-        while (divisionTest < 0) {
-            division *= 10;
+        while (divisionTest < 1) {
+            this.division *= 10;
             divisionTest *= 10;
         }
 
+        System.out.println(division);
         for (int i = 0; i<division;i++) {
             tableauDivision.add(new ArrayList<ArrayList<Arbre>>());
             for (int j = 0; j < division; j++)
