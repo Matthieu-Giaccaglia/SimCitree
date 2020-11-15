@@ -40,8 +40,9 @@ public class Arbre {
         this.intensiteCompetition -= intensiteCompetition;
     }
 
-    public void addVoisin(Arbre arbreVoisin) {
+    public void addVoisin(Arbre arbreVoisin, double tauxCompetition) {
         voisins.add(arbreVoisin);
+        augmenterIntensiteCompetition(tauxCompetition);
     }
 
 
