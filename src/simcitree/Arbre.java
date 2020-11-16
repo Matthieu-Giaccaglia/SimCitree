@@ -48,7 +48,9 @@ public class Arbre {
     }
 
     public void deleteVoisin(Arbre arbreVoisin) {
-        intensiteVoisins.remove(voisins.indexOf(arbreVoisin));
+        Double intensiteComp = intensiteVoisins.get(voisins.indexOf(arbreVoisin));
+        reduireIntensiteCompetition(intensiteCompetition);
+        intensiteVoisins.remove(intensiteComp);
         voisins.remove(arbreVoisin);
     }
 
