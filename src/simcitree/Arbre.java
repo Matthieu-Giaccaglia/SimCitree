@@ -9,6 +9,7 @@ public class Arbre {
     private final double y;
     private double intensiteCompetition;
     private final ArrayList<Arbre> voisins = new ArrayList<>();
+    private final ArrayList<Double> intensiteVoisins = new ArrayList<>();
 
     public Arbre(double x, double y) {
         this.x = x;
@@ -42,9 +43,18 @@ public class Arbre {
 
     public void addVoisin(Arbre arbreVoisin, double tauxCompetition) {
         voisins.add(arbreVoisin);
+        intensiteVoisins.add(tauxCompetition);
         augmenterIntensiteCompetition(tauxCompetition);
     }
 
+    public void deleteVoisin(Arbre arbreVoisin) {
+        intensiteVoisins.remove(voisins.indexOf(arbreVoisin));
+        voisins.remove(arbreVoisin);
+    }
+
+    public double getDistance(int index) {
+        return intensiteVoisins.get(index);
+    }
 
 
     @Override

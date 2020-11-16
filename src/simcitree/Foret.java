@@ -61,7 +61,7 @@ public class Foret {
     private void deleteArbre(int index) {
         this.tauxIntensiteCTotal -= list.get(index).getIntensiteCompetition();
         removeVoisin(index);
-        list.remove(list.get(index));
+        list.remove(index);
         //Main.serie.getData().remove(index);
     }
 
@@ -271,8 +271,12 @@ public class Foret {
 
 
     private void removeVoisin(int index) {
-        for (Arbre arbreVoisin : list.get(index).getVoisins()) {
-            arbreVoisin.getVoisins().remove(list.get(index));
+        Arbre arbreSupp = list.get(index);
+
+        for (int i = 0; i < arbreSupp.getVoisins().size(); i++) {
+            Arbre arbreVoisin = arbreSupp.getVoisins().get(i);
+            tauxIntensiteCTotal -= arbreSupp.getDistance(i);
+            arbreVoisin.deleteVoisin(arbreSupp);
         }
     }
 
