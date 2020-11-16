@@ -11,7 +11,7 @@ public class ForetTest {
 
     @Test
     public void checkVoisinsWithoutCase() {
-        foret = new Foret(0.5, 0.2, 0.1, 0.1, 50000);
+        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0,50000);
         foret.addArbre(0.5,0.5);
         foret.addArbre(0.55,0.5);
 
@@ -23,7 +23,7 @@ public class ForetTest {
 
     @Test
     public void checkVoisins() {
-        foret = new Foret(0.5, 0.2, 0.1, 0.1, 50000);
+        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0,50000);
         foret.addArbreV2(0.5,0.5);
         foret.addArbreV2(0.55,0.5);
 
@@ -35,7 +35,7 @@ public class ForetTest {
 
     @Test
     public void checkVoisins_DebordementXandY() {
-        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0);
+        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0,0);
         foret.addArbre(0,0);
         foret.addArbre(0.9,0.9);
 
@@ -47,7 +47,7 @@ public class ForetTest {
 
     @Test
     public void checkVoisins_DebordementX() {
-        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0);
+        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0,0);
         foret.addArbre(0,0);
         foret.addArbre(0.9,0);
 
@@ -58,7 +58,7 @@ public class ForetTest {
 
     @Test
     public void checkVoisins_DebordementY() {
-        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0);
+        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0,0);
         foret.addArbre(0,0);
         foret.addArbre(0,0.9);
 
@@ -70,7 +70,7 @@ public class ForetTest {
 
     @Test
     public void checkBonCase(){
-        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0);
+        foret = new Foret(0.5, 0.2, 0.1, 0.1, 0,0);
         foret.addArbre(0.5,0.7);
         foret.addArbre(0.002, 0.415);
 

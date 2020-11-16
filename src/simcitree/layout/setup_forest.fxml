@@ -19,22 +19,27 @@
                 <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
                     <Label text="Rayon de Dispersion :" />
                     <Pane HBox.hgrow="ALWAYS" />
-                    <TextField fx:id="textRayonDisp" prefHeight="20.0" prefWidth="50.0" promptText="12" />
+                    <TextField fx:id="textRayonDisp" prefHeight="20.0" prefWidth="50.0" promptText="0.5" />
                 </HBox>
                 <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
                     <Label text="Rayon de Compétition :" />
                     <Pane HBox.hgrow="ALWAYS" />
-                    <TextField fx:id="textRayonComp" editable="false" prefHeight="20.0" prefWidth="50.0" promptText="12" text="0.0" />
+                    <TextField fx:id="textRayonComp" prefHeight="20.0" prefWidth="50.0" promptText="0.07" />
                 </HBox>
                 <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
                     <Label text="Taux de Reproduction :" />
                     <Pane HBox.hgrow="ALWAYS" />
-                    <TextField fx:id="textTauxReprod" prefHeight="20.0" prefWidth="50.0" promptText="12.0" />
+                    <TextField fx:id="textTauxReprod" prefHeight="20.0" prefWidth="50.0" promptText="2" />
                 </HBox>
                 <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
                     <Label text="Taux de Mortalité :" />
                     <Pane HBox.hgrow="ALWAYS" />
-                    <TextField fx:id="textTauxMort" prefHeight="20.0" prefWidth="50.0" promptText="12.0" />
+                    <TextField fx:id="textTauxMort" prefHeight="20.0" prefWidth="50.0" promptText="0.5" />
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Taux de Compétition :" />
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="textTauxComp" prefHeight="20.0" prefWidth="50.0" promptText="0.05" />
                 </HBox>
                 <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
                     <Label text="Nombre d'arbre :" />

@@ -18,12 +18,12 @@ public class Foret {
     private int division = 1;
 
 
-    public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, int nbArbre) {
+    public Foret(double rayonDispersion, double rayonCompetition, double tauxNaissance, double tauxMort, double tauxIntensiteC, int nbArbre) {
         this.rayonDispersion = rayonDispersion;
         this.rayonCompetition = rayonCompetition;
         this.tauxNaissance = tauxNaissance;
         this.tauxMort = tauxMort;
-        this.tauxIntensiteC = 0;
+        this.tauxIntensiteC = tauxIntensiteC;
         this.tauxIntensiteCTotal = 0;
 
         double divisionTest = this.rayonCompetition;
