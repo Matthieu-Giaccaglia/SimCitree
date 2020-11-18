@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simcitree.ControllerSetupForest">
+    <ToolBar minHeight="-Infinity" prefHeight="40.0">
+        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../raw/logo_simcitree.png" />
+        </ImageView>
+    </ToolBar>
+    <Pane prefHeight="425.0" prefWidth="600.0">
+        <Pane layoutX="138.0" layoutY="25.0" prefWidth="325.0" style="-fx-border-color: black;">
+            <ToolBar prefHeight="40.0" prefWidth="325.0" style="-fx-border-color: black;">
+                <Label prefHeight="16.0" prefWidth="165.0" text="Paramètre de la foret" />
+            </ToolBar>
+            <VBox layoutX="9.0" layoutY="40.0" prefHeight="275.0" prefWidth="300.0">
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Rayon de Dispersion :" />
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="textRayonDisp" prefHeight="20.0" prefWidth="50.0" promptText="0.5" />
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Rayon de Compétition :" />
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="textRayonComp" prefHeight="20.0" prefWidth="50.0" promptText="0.07" />
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Taux de Reproduction :" />
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="textTauxReprod" prefHeight="20.0" prefWidth="50.0" promptText="2" />
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Taux de Mortalité :" />
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="textTauxMort" prefHeight="20.0" prefWidth="50.0" promptText="0.5" />
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Taux de Compétition :" />
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="textTauxComp" prefHeight="20.0" prefWidth="50.0" promptText="0.05" />
+                </HBox>
+                <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="40.0" VBox.vgrow="SOMETIMES">
+                    <Label text="Nombre d'arbre :" />
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="textNbArbre" prefHeight="20.0" prefWidth="50.0" promptText="10" />
+                </HBox>
+            </VBox>
+        </Pane>
+        <Button layoutX="387.0" layoutY="370.0" mnemonicParsing="false" onAction="#addArbre" prefHeight="39.0" prefWidth="199.0" text="Commencer la simulation" />
+    </Pane>
+</VBox>
