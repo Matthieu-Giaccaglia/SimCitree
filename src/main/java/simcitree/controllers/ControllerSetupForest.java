@@ -1,8 +1,10 @@
-package simcitree;
+package simcitree.controllers;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import simcitree.Main;
+import simcitree.forest.Foret;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package simcitree;
+package simcitree.forest;
 
 public class Voisins {
 

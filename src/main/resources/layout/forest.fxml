@@ -2,20 +2,13 @@
 
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="vbox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simcitree.ControllerForest">
+<VBox fx:id="vbox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simcitree.controllers.ControllerForest">
    <ToolBar fx:id="toolbar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0">
-      <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../raw/logo_simcitree.png" />
-         </image>
-      </ImageView>
       <Separator orientation="VERTICAL" prefHeight="40.0" />
-      <Button fx:id="buttonStart" mnemonicParsing="false" onAction="#startSimulation" text="Start" />
-      <Separator orientation="VERTICAL" prefHeight="200.0" />
-      <Button fx:id="buttonPause" mnemonicParsing="false" onAction="#pauseSimulation" text="Pause" />
+      <Button fx:id="buttonStart" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#startSimulation" prefWidth="50.0" text="Start" />
+      <Button fx:id="buttonPause" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pauseSimulation" prefWidth="50.0" text="Pause" />
       <Separator orientation="VERTICAL" prefHeight="200.0" />
       <Label text="Nb Event :" />
       <Label fx:id="labelNbTour" />
@@ -25,8 +18,9 @@
       <Separator orientation="VERTICAL" prefHeight="200.0" />
       <Label text="Temps :" />
       <Label fx:id="labelTime" />
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
    </ToolBar>
-   <ScatterChart fx:id="chart" alternativeColumnFillVisible="false" alternativeRowFillVisible="false" animated="true" legendVisible="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+   <ScatterChart fx:id="chart" alternativeRowFillVisible="false" legendVisible="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
       <xAxis>
          <NumberAxis animated="false" autoRanging="false" side="BOTTOM" tickMarkVisible="false" upperBound="1.0" />
       </xAxis>

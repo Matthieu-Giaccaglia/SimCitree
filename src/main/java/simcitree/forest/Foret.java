@@ -1,6 +1,7 @@
-package simcitree;
+package simcitree.forest;
 
 import javafx.scene.chart.XYChart;
+import simcitree.Main;
 
 import java.util.ArrayList;
 import java.util.Random;

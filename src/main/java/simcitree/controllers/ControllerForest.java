@@ -1,4 +1,4 @@
-package simcitree;
+package simcitree.controllers;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.Initializable;
@@ -8,8 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
+import simcitree.Main;
 import simcitree.jfxutils.chart.ChartPanManager;
 import simcitree.jfxutils.chart.JFXChartUtil;
+import simcitree.utils.Chrono;
 
 
 import java.net.URL;

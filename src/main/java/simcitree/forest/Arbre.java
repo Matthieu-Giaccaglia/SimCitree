@@ -1,4 +1,4 @@
-package simcitree;
+package simcitree.forest;
 
 import java.util.ArrayList;
 

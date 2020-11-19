@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.XYChart;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import simcitree.forest.Foret;
 
 import java.io.IOException;
 
@@ -21,7 +23,7 @@ public class Main extends Application {
         serie = new XYChart.Series<>();
         stage = primaryStage;
         stage.setTitle("SimCitree");
-        //stage.getIcons().add(new Image(Main.class.getResource("/raw/logo_simcitree2.png").toExternalForm()));
+        stage.getIcons().add(new Image(Main.class.getResource("/raw/logo_simcitree2.png").toExternalForm()));
 
         changeScene("/layout/setup_forest.fxml",false);
 

@@ -2,7 +2,7 @@ package simcitree;
 
 
 
-import org.junit.Test;
+import simcitree.forest.Foret;
 
 import static org.junit.Assert.assertTrue;
 

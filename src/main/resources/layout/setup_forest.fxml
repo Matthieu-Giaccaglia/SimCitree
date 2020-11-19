@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simcitree.ControllerSetupForest">
-    <ToolBar minHeight="-Infinity" prefHeight="40.0">
-        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../raw/logo_simcitree.png" />
-        </ImageView>
-    </ToolBar>
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simcitree.controllers.ControllerSetupForest">
     <Pane prefHeight="425.0" prefWidth="600.0">
-        <Pane layoutX="138.0" layoutY="25.0" prefWidth="325.0" style="-fx-border-color: black;">
+        <Pane layoutX="138.0" layoutY="37.0" prefWidth="325.0" style="-fx-border-color: black;">
             <ToolBar prefHeight="40.0" prefWidth="325.0" style="-fx-border-color: black;">
                 <Label prefHeight="16.0" prefWidth="165.0" text="Paramètre de la foret" />
             </ToolBar>
