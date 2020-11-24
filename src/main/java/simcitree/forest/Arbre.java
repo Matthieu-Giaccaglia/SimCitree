@@ -8,7 +8,7 @@ public class Arbre {
     private final double x;
     private final double y;
     private double intensiteCompetition;
-    private final ArrayList<Voisins> listVoisins = new ArrayList<>();
+    private final ArrayList<Voisin> listVoisins = new ArrayList<>();
 
     public Arbre(double x, double y) {
         this.x = x;
@@ -28,40 +28,23 @@ public class Arbre {
         return intensiteCompetition;
     }
 
-    public void augmenterIntensiteCompetition(double intensiteCompetition) {
+    private void augmenterIntensiteCompetition(double intensiteCompetition) {
         this.intensiteCompetition += intensiteCompetition;
     }
 
-    public void reduireIntensiteCompetition(double intensiteCompetition) {
+    private void reduireIntensiteCompetition(double intensiteCompetition) {
         this.intensiteCompetition -= intensiteCompetition;
     }
 
-    public void addVoisin(Arbre arbreVoisin, double tauxCompetition) {
-        listVoisins.add(new Voisins(arbreVoisin, tauxCompetition));
-        augmenterIntensiteCompetition(tauxCompetition);
+    public void addVoisin(Voisin voisin) {
+        listVoisins.add(voisin);
+        augmenterIntensiteCompetition(voisin.getTauxComp());
     }
 
-    public Arbre getArbreVoisins(int i) {
-        return listVoisins.get(i).getArbre();
-    }
 
-    public void deleteVoisin(Arbre arbreVoisin, double tauxComp) {
-        Voisins voisinTrouve = null;
-        int index = 0;
-        for (int i = 0; i< listVoisins.size(); i++) {
-            Voisins voisinsCourant1 = listVoisins.get(i);
-            if (voisinsCourant1.getArbre() == arbreVoisin && voisinsCourant1.getTauxComp() == tauxComp) {
-                voisinTrouve = voisinsCourant1;
-                index = i;
-                break;
-            }
-        }
-
-        System.out.println("index : " + index);
-        assert voisinTrouve != null;
-        double intensiteComp = voisinTrouve.getTauxComp();
-        reduireIntensiteCompetition(intensiteCompetition);
-        listVoisins.remove(index);
+    public void deleteVoisin(Voisin voisinDelete) {
+        reduireIntensiteCompetition(voisinDelete.getTauxComp());
+        listVoisins.remove(voisinDelete);
     }
 
     public double getTauxComp(int index) {
@@ -77,7 +60,7 @@ public class Arbre {
                 '}';
     }
 
-    public ArrayList<Voisins> getListVoisins() {
+    public ArrayList<Voisin> getListVoisins() {
         return listVoisins;
     }
 

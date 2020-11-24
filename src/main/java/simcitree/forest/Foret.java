@@ -1,8 +1,5 @@
 package simcitree.forest;
 
-import javafx.scene.chart.XYChart;
-import simcitree.Main;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -53,16 +50,16 @@ public class Foret {
         tableauDivision.get((int) (coordonneeX *division)).get((int) (coordonneeY *division)).add(arbreAdd);
         if (rayonCompetition>0)
             checkVoisins(arbreAdd);
-        Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
+        //Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
     }
 
     private void deleteArbre(int index) {
         System.out.println("Death");
         this.tauxIntensiteCTotal -= list.get(index).getIntensiteCompetition();
-        removeVoisin(index);
+        removeVoisin(list.get(index));
         if (rayonCompetition>0)
             list.remove(index);
-        Main.serie.getData().remove(index);
+        //Main.serie.getData().remove(index);
     }
 
     private void addFils(int index) {
@@ -123,6 +120,7 @@ public class Foret {
         ArrayList<Integer> listCompetitions = new ArrayList<>(list.size());
         double rdm = Math.random()* tauxIntensiteCTotal; // entre 0 et 1, il faut alors le rammener sur le total
 
+
         for(Arbre a: list){
             tot += a.getIntensiteCompetition();
             listCompetitions.add(tot);
@@ -143,76 +141,49 @@ public class Foret {
         for (ArrayList<Arbre> listeArbreDeListeDeListe : listedeliste) {
             for ( Arbre arbreCourant : listeArbreDeListeDeListe) {
             if (arbreCourant != arbre) {
-                double coordArbreCX = arbreCourant.getX();
-                double coordArbreCY = arbreCourant.getY();
-                double distance =  Math.hypot((arbre.getX() - coordArbreCX ), (arbre.getY() - coordArbreCY));
-                checkInsideRayon(arbre, arbreCourant, distance);
 
-                    if (arbre.getX() + rayonCompetition > 1 ) {
-                        if (arbre.getY() + rayonCompetition > 1) {
+                if (arbre.getX() + rayonCompetition > 1 && arbre.getY() + rayonCompetition > 1)
+                    checkInsideRayonTrois(arbre, arbreCourant, -1, -1);
+                else if (arbre.getX() + rayonCompetition > 1 && arbre.getY() - rayonCompetition < 0)
+                    checkInsideRayonTrois(arbre, arbreCourant, -1, 1);
+                else if (arbre.getX() + rayonCompetition > 1 && arbre.getY() + rayonCompetition < 1 && arbre.getY() - rayonCompetition > 0)
+                    checkInsideRayon(arbre, arbreCourant, -1,0);
 
-                            double distance1 = Math.hypot((arbre.getX()-1) - coordArbreCX , (arbre.getY())-1 - coordArbreCY);
-                            double distance2 = Math.hypot((arbre.getX()-1) - coordArbreCX , (arbre.getY() - coordArbreCY));
-                            double distance3 = Math.hypot((arbre.getX() - coordArbreCX ), (arbre.getY()-1) - coordArbreCY);
+                else if (arbre.getX() - rayonCompetition < 0 && arbre.getY() + rayonCompetition > 1)
+                    checkInsideRayonTrois(arbre, arbreCourant, 1, -1);
+                else if (arbre.getX() - rayonCompetition < 0 && arbre.getY() - rayonCompetition < 0)
+                    checkInsideRayonTrois(arbre, arbreCourant, 1,1);
+                else if (arbre.getX() - rayonCompetition < 0 && arbre.getY() + rayonCompetition < 1 && arbre.getY() - rayonCompetition > 0)
+                    checkInsideRayon(arbre, arbreCourant, 1, 0);
 
-                            checkInsideRayon(arbre, arbreCourant, distance1, distance2, distance3);
+                else if (arbre.getY() + rayonCompetition > 1)
+                    checkInsideRayon(arbre, arbreCourant, 0, -1);
+                else if (arbre.getY() - rayonCompetition < 0)
+                    checkInsideRayon(arbre, arbreCourant, 0, 1);
 
-                        } else if (arbre.getY() - rayonCompetition < 0) {
+                else
+                    checkInsideRayon(arbre, arbreCourant, 0, 0);
 
-                            double distance1 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY())+1) - coordArbreCY);
-                            double distance2 = Math.hypot(((arbre.getX()-1) - coordArbreCX) , (arbre.getY()+1) - coordArbreCY );
-                            double distance3 = Math.hypot(((arbre.getX()-1) - coordArbreCX), (arbre.getY() - coordArbreCY));
-
-                            checkInsideRayon(arbre, arbreCourant, distance1, distance2, distance3);
-
-                        } else {
-                            double distance1 = Math.hypot(((arbre.getX()-1) -coordArbreCX), ((arbre.getY()) - coordArbreCY ));
-                            checkInsideRayon(arbre, arbreCourant, distance1);
-                        }
-
-                    } else if (arbre.getX() - rayonCompetition < 0) {
-                        if (arbre.getY() + rayonCompetition > 1) {
-
-                            double distance3 = Math.hypot(((arbre.getX()+1) -coordArbreCX), (arbre.getY()-1) - coordArbreCY);
-                            double distance1 = Math.hypot(((arbre.getX()+1) - coordArbreCX), (arbre.getY()- coordArbreCY));
-                            double distance2 = Math.hypot((arbre.getX()- coordArbreCX), (arbre.getY()-1)-coordArbreCY );
-
-                            checkInsideRayon(arbre, arbreCourant, distance1, distance2, distance3);
-
-                        }else if (arbre.getY() - rayonCompetition < 0) {
-
-                            double distance1 = Math.hypot(( arbre.getX()+1 - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
-                            double distance2 = Math.hypot(( arbre.getX()+1 - coordArbreCX), (arbre.getY()     - coordArbreCY));
-                            double distance3 = Math.hypot(( arbre.getX()   - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
-
-                            checkInsideRayon(arbre, arbreCourant, distance1, distance2, distance3);
-
-                        }else {
-                            double distance1 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
-                            checkInsideRayon(arbre, arbreCourant, distance1);
-                        }
-                    } else if (arbre.getY() + rayonCompetition > 1 ) {
-                        double distance1 = Math.hypot((arbre.getX() - coordArbreCX), (arbre.getY()-1) - coordArbreCY);
-                        checkInsideRayon(arbre, arbreCourant, distance1);
-                    } else if (arbre.getY() - rayonCompetition < 0 ) {
-                        double distance1 = Math.hypot((arbre.getX() - coordArbreCX), ((arbre.getY()+1) - coordArbreCY));
-                        checkInsideRayon(arbre, arbreCourant, distance1);
-                    }
                 }
             }
         }
     }
 
-    private void checkInsideRayon (Arbre arbre , Arbre arbreCourant , double distance) {
+    private void checkInsideRayon (Arbre arbre , Arbre arbreCourant , int debordementX, int debordementY) {
 
-        if (distance <= rayonCompetition) {
-            addEachOther(arbre,arbreCourant,distance);
-        }
-    }
-
-    private void checkInsideRayon (Arbre arbre , Arbre arbreCourant , double distance, double distance2, double distance3) {
+        double distance = Math.hypot(( (arbre.getX() + debordementX) - arbreCourant.getX()), ( (arbre.getY()+debordementY) - arbreCourant.getY() ));
         if (distance <= rayonCompetition)
             addEachOther(arbre,arbreCourant,distance);
+    }
+
+    private void checkInsideRayonTrois(Arbre arbre , Arbre arbreCourant , int debordementX, int debordementY) {
+
+        double distance1 = Math.hypot(( (arbre.getX() + debordementX) - arbreCourant.getX()), ((arbre.getY() + debordementY) - arbreCourant.getY() ));
+        double distance2 = Math.hypot(( (arbre.getX() + debordementX) - arbreCourant.getX()), (arbre.getY()                  - arbreCourant.getY() ));
+        double distance3 = Math.hypot(( arbre.getX()               - arbreCourant.getX()), ((arbre.getY() + debordementY) - arbreCourant.getY() ));
+
+        if (distance1 <= rayonCompetition)
+            addEachOther(arbre,arbreCourant,distance1);
 
         else if (distance2 <= rayonCompetition)
             addEachOther(arbre,arbreCourant,distance2);
@@ -223,8 +194,9 @@ public class Foret {
 
     private void addEachOther(Arbre arbre, Arbre arbreCourant, double distance) {
         double tauxCompetition = ((1-distance) / rayonCompetition) * tauxIntensiteC;
-        arbre.addVoisin(arbreCourant, tauxCompetition);
-        arbreCourant.addVoisin(arbre, tauxCompetition);
+        Voisin voisin = new Voisin(arbre, arbreCourant, tauxCompetition);
+        arbre.addVoisin(voisin);
+        arbreCourant.addVoisin(voisin);
         this.tauxIntensiteCTotal += (tauxCompetition * 2);
     }
 
@@ -272,14 +244,12 @@ public class Foret {
     }
 
 
-    private void removeVoisin(int index) {
-        Arbre arbreSupp = list.get(index);
+    private void removeVoisin(Arbre arbreDelete) {
 
-        for (int i = 0; i < arbreSupp.getListVoisins().size(); i++) {
-            tauxIntensiteCTotal -= arbreSupp.getTauxComp(i);
-            Arbre arbreVoisin = arbreSupp.getArbreVoisins(i);
+        tauxIntensiteCTotal -= arbreDelete.getIntensiteCompetition();
 
-            arbreVoisin.deleteVoisin(arbreSupp, arbreSupp.getTauxComp(i));
+        for (Voisin voisinCourant : arbreDelete.getListVoisins()) {
+            voisinCourant.delete(arbreDelete);
         }
     }
 
