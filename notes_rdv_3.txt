@@ -1,4 +1,4 @@
-notes comptes rendu numéro 3 24/11
+notes comptes rendu numéro 3 24/11 z
 
 côté architecture projet :
 - Redondance d'information entre intensite competition et intensite competition par voisin
