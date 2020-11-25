@@ -104,11 +104,11 @@ public class Foret {
         double totC = this.tauxIntensiteCTotal;
 
         double tot = totB+totM+totC;
-        double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
+        double rdm = random.nextDouble()*tot; // entre 0 et 1, il faut alors le rammener sur le total
 
         int indexArbreRandom = random.nextInt(list.size());
 
-        if (rdm <= totB || list.size() == 1) //jusqu'à totB,
+        if (rdm <= totB ) //jusqu'à totB,
             addFils(indexArbreRandom);
 
         else if(totB <= rdm && rdm <= totB+totM) //de totB au totB+totM
@@ -120,14 +120,15 @@ public class Foret {
 
     private void deathByCompetition() {
         System.out.println("Death By Competition");
-        int tot = 0;int i = 0;
-        ArrayList<Integer> listCompetitions = new ArrayList<>(list.size());
+        double tot = 0;int i = 0;
+        ArrayList<Double> listCompetitions = new ArrayList<>(list.size());
         double rdm = Math.random()* tauxIntensiteCTotal; // entre 0 et 1, il faut alors le rammener sur le total
-
+        System.out.println(tauxIntensiteCTotal);
 
         for(Arbre a: list){
             tot += a.getIntensiteCompetition();
             listCompetitions.add(tot);
+            System.out.println(tot+" ¨ "+rdm);
             if ( rdm < listCompetitions.get(i)) { //jusqu'à totB,
                 deleteArbre(i);
                 return;
