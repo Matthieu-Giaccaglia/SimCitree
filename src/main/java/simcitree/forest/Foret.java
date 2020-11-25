@@ -58,7 +58,6 @@ public class Foret {
 
     private void deleteArbre(int index) {
         System.out.println("Death");
-        this.tauxIntensiteCTotal -= list.get(index).getIntensiteCompetition();
         removeVoisin(list.get(index));
         if (rayonCompetition>0)
             list.remove(index);
@@ -123,18 +122,20 @@ public class Foret {
         double tot = 0;int i = 0;
         ArrayList<Double> listCompetitions = new ArrayList<>(list.size());
         double rdm = Math.random()* tauxIntensiteCTotal; // entre 0 et 1, il faut alors le rammener sur le total
-        System.out.println(tauxIntensiteCTotal);
+        System.out.println("Taux Intensité C Total : " + tauxIntensiteCTotal);
+        System.out.println("RDM : " + rdm);
 
         for(Arbre a: list){
             tot += a.getIntensiteCompetition();
             listCompetitions.add(tot);
-            System.out.println(tot+" ¨ "+rdm);
+            System.out.println("tot : " + tot);
             if ( rdm < listCompetitions.get(i)) { //jusqu'à totB,
-                deleteArbre(i);
-                return;
+                //deleteArbre(i);
+                //return;
             }
             i++;
         }
+        System.out.println("TOT : " + tot);
 
     }
 
