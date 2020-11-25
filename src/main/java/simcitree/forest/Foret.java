@@ -14,7 +14,7 @@ public class Foret {
     private final double tauxNaissance;
     private final double tauxMort;
     private final double tauxIntensiteC;
-    private double tauxIntensiteCTotal;
+    private double tauxIntensiteCTotal = 0;
     private final Random random = new Random();
     private final ArrayList<ArrayList<ArrayList<Arbre>>> tableauDivision = new ArrayList<>();
     private int division = 1;
@@ -26,7 +26,6 @@ public class Foret {
         this.tauxNaissance = tauxNaissance;
         this.tauxMort = tauxMort;
         this.tauxIntensiteC = tauxIntensiteC;
-        this.tauxIntensiteCTotal = 0;
 
         if (rayonCompetition>0) {
             double divisionTest = this.rayonCompetition;
@@ -130,12 +129,11 @@ public class Foret {
             listCompetitions.add(tot);
             System.out.println("tot : " + tot);
             if ( rdm < listCompetitions.get(i)) { //jusqu'à totB,
-                //deleteArbre(i);
-                //return;
+                deleteArbre(i);
+                return;
             }
             i++;
         }
-        System.out.println("TOT : " + tot);
 
     }
 
@@ -203,7 +201,9 @@ public class Foret {
         Voisin voisin = new Voisin(arbre, arbreCourant, tauxCompetition);
         arbre.addVoisin(voisin);
         arbreCourant.addVoisin(voisin);
-        this.tauxIntensiteCTotal += (tauxCompetition * 2);
+        //this.tauxIntensiteCTotal += (tauxCompetition * 2);
+        tauxIntensiteCTotal += tauxCompetition;
+        tauxIntensiteCTotal += tauxCompetition;
     }
 
     private ArrayList<ArrayList<Arbre>> getCaseVoisins(double X, double Y){
@@ -253,9 +253,12 @@ public class Foret {
     private void removeVoisin(Arbre arbreDelete) {
 
         tauxIntensiteCTotal -= arbreDelete.getIntensiteCompetition();
+        System.out.println("Taux Comp total : " + tauxIntensiteCTotal);
 
         for (Voisin voisinCourant : arbreDelete.getListVoisins()) {
             voisinCourant.delete(arbreDelete);
+            tauxIntensiteCTotal -= voisinCourant.getTauxComp();
+            System.out.println("Taux Comp total : " + tauxIntensiteCTotal);
         }
     }
 
