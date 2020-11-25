@@ -1,5 +1,8 @@
 package simcitree.forest;
 
+import javafx.scene.chart.XYChart;
+import simcitree.Main;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -50,7 +53,7 @@ public class Foret {
         tableauDivision.get((int) (coordonneeX *division)).get((int) (coordonneeY *division)).add(arbreAdd);
         if (rayonCompetition>0)
             checkVoisins(arbreAdd);
-        //Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
+        Main.serie.getData().add(new XYChart.Data<>(coordonneeX, coordonneeY));
     }
 
     private void deleteArbre(int index) {
@@ -59,7 +62,7 @@ public class Foret {
         removeVoisin(list.get(index));
         if (rayonCompetition>0)
             list.remove(index);
-        //Main.serie.getData().remove(index);
+        Main.serie.getData().remove(index);
     }
 
     private void addFils(int index) {
@@ -104,6 +107,7 @@ public class Foret {
         double rdm = Math.random()*tot; // entre 0 et 1, il faut alors le rammener sur le total
 
         int indexArbreRandom = random.nextInt(list.size());
+
         if (rdm <= totB || list.size() == 1) //jusqu'à totB,
             addFils(indexArbreRandom);
 
@@ -124,7 +128,7 @@ public class Foret {
         for(Arbre a: list){
             tot += a.getIntensiteCompetition();
             listCompetitions.add(tot);
-            if (rdm<listCompetitions.get(i)) { //jusqu'à totB,
+            if ( rdm < listCompetitions.get(i)) { //jusqu'à totB,
                 deleteArbre(i);
                 return;
             }
@@ -202,7 +206,6 @@ public class Foret {
 
     private ArrayList<ArrayList<Arbre>> getCaseVoisins(double X, double Y){
 
-        //int division2 = division/10;
 
         int divisionTableau = 10; //Divise le tableau par 10.
 
@@ -222,19 +225,20 @@ public class Foret {
             //On fait gaffe que ça dépasse pas 1 ou inversement
             while (j < 0)
                 j += division;
+
             while (j >= division)
                 j -= division;
+
             for (int k = ymin; k < ymax; k = k + 1) {
 
                 int l = k;
                 //On fait gaffe que ça dépasse pas le nombre de case max ou inversement
 
-                while (l < 0) {
+                while (l < 0)
                     l += division;
-                }
-                while (l >= division) {
+
+                while (l >= division)
                     l -= division;
-                }
 
                 returnThis.add(tableauDivision.get(j).get(l));
             }
@@ -253,14 +257,6 @@ public class Foret {
         }
     }
 
-    public void listToString() {
-        StringBuilder listString = new StringBuilder();
-
-        for (Arbre a : list) {
-            listString.append(a.toString()).append("\t");
-        }
-        System.out.println(listString);
-    }
 
     private double getTauxGlobal() {
         return ( (this.tauxNaissance+this.tauxMort) * list.size()) + tauxIntensiteCTotal;
