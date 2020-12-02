@@ -11,6 +11,9 @@ public class Voisin {
         this.arbre1 = arbre1;
         this.arbre2 = arbre2;
         this.tauxComp = tauxComp;
+
+        arbre1.addVoisin(this);
+        arbre2.addVoisin(this);
     }
 
 
@@ -25,5 +28,12 @@ public class Voisin {
             arbre2.deleteVoisin(this);
         else
             arbre1.deleteVoisin(this);
+    }
+
+    public Arbre getOtherArbre(Arbre arbre) {
+        if (arbre1 == arbre) {
+            return arbre2;
+        } else
+            return arbre1;
     }
 }

@@ -7,13 +7,12 @@ public class Arbre {
 
     private final double x;
     private final double y;
-    private double intensiteCompetition;
+    private double intensiteCompetition = 0;
     private final ArrayList<Voisin> listVoisins = new ArrayList<>();
 
     public Arbre(double x, double y) {
         this.x = x;
         this.y = y;
-        this.intensiteCompetition = 0;
     }
 
     public double getX() {
@@ -29,11 +28,12 @@ public class Arbre {
     }
 
     private void augmenterIntensiteCompetition(double intensiteCompetition) {
-        this.intensiteCompetition += intensiteCompetition;
+        //this.intensiteCompetition += intensiteCompetition;
+        this.intensiteCompetition = Math.round( (this.intensiteCompetition + intensiteCompetition) * 1000000000) / 1000000000d;
     }
 
     private void reduireIntensiteCompetition(double intensiteCompetition) {
-        this.intensiteCompetition -= intensiteCompetition;
+        this.intensiteCompetition = Math.round( (this.intensiteCompetition - intensiteCompetition) * 1000000000) / 1000000000d;
     }
 
     public void addVoisin(Voisin voisin) {
