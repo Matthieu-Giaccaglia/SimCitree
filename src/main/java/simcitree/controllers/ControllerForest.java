@@ -14,6 +14,7 @@ import simcitree.jfxutils.chart.JFXChartUtil;
 import simcitree.utils.Chrono;
 
 
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -65,6 +66,7 @@ public class ControllerForest implements Initializable {
                     Main.foret.applyEvent();
                     labelNbTour.setText(String.valueOf(nbTourEcoule));
                     labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
+                    ecrireFichier();
 
                     lastEvenement = now;
                     event = Main.foret.getDureeNextEvent();
@@ -99,4 +101,20 @@ public class ControllerForest implements Initializable {
         animationTimer.stop();
     }
 
+    public void ecrireFichier(){
+        try {
+            String data = labelNbArbres.getText();
+            String data2 = labelNbTour.getText();
+
+            FileWriter fWriter = new FileWriter("donnees.txt");
+            fWriter.write("Nombres d'arbres :");
+            fWriter.write(data);
+            fWriter.write(" Nombres d'événements :");
+            fWriter.write(data2);
+            fWriter.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
