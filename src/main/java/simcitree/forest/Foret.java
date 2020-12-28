@@ -101,14 +101,16 @@ public class Foret {
         coordonneX = coordonneX + arbrePere.getX();
         coordonneY = coordonneY + arbrePere.getY();
 
-        while (coordonneX >= 1)
-            coordonneX = coordonneX - 1;
-        while (coordonneX <= 0)
-            coordonneX = coordonneX + 1;
-        while (coordonneY >= 1)
-            coordonneY = coordonneY - 1;
-        while (coordonneY <= 0)
-            coordonneY = coordonneY + 1;
+
+        if (coordonneX > 1)
+            coordonneX = Math.round( (coordonneX - (int) coordonneX) * 10000000 ) / 10000000d;
+        else if (coordonneX < 0)
+            coordonneX = Math.round( ( Math.abs(coordonneX) - (int) Math.abs(coordonneX) ) * 10000000 ) / 10000000d;
+
+        if (coordonneY > 1)
+            coordonneY = Math.round( (coordonneY - (int) coordonneY) * 10000000 ) / 10000000d;
+        else if (coordonneY < 0)
+            coordonneX = Math.round( ( Math.abs(coordonneY) - (int) Math.abs(coordonneY) ) * 10000000 ) / 10000000d;
 
         addArbre(coordonneX, coordonneY);
     }
@@ -123,7 +125,7 @@ public class Foret {
         double Y = arbreNouveau.getY();
 
         //On trouve les coordonnées min et max en fonction de l'arbre et du rayon
-        int xmin = (int) ((X - rayonCompetition) * division) ; //Pour "Diviser" par 10, il faut multiplier par 10
+        int xmin = (int) ((X - rayonCompetition) * division); //Pour "Diviser" par 10, il faut multiplier par 10
         int xmax = (int) ((X + rayonCompetition) * division);
         int ymin = (int) ((Y - rayonCompetition) * division);
         int ymax = (int) ((Y + rayonCompetition) * division);
@@ -145,7 +147,6 @@ public class Foret {
                 indexX -= division;
                 debordX = -1;
             }
-
 
 
             for (int j = ymin; j < ymax; j ++) {

@@ -28,7 +28,6 @@ public class Arbre {
     }
 
     private void augmenterIntensiteCompetition(double intensiteCompetition) {
-        //this.intensiteCompetition += intensiteCompetition;
         this.intensiteCompetition = Math.round( (this.intensiteCompetition + intensiteCompetition) * 1000000000) / 1000000000d;
     }
 
