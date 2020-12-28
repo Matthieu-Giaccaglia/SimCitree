@@ -76,7 +76,7 @@ public class Foret {
     public void addArbre(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
-        tableauDivision.get((int) (coordonneeX *division)).get((int) (coordonneeY *division)).add(arbreAdd);
+        tableauDivision.get((int) (coordonneeX * division)).get((int) (coordonneeY * division)).add(arbreAdd);
         if (rayonCompetition>0 && rayonCompetition <= 0.4) {
             checkVoisinFast(arbreAdd);
         }
@@ -110,8 +110,9 @@ public class Foret {
         if (coordonneY > 1)
             coordonneY = Math.round( (coordonneY - (int) coordonneY) * 10000000 ) / 10000000d;
         else if (coordonneY < 0)
-            coordonneX = Math.round( ( Math.abs(coordonneY) - (int) Math.abs(coordonneY) ) * 10000000 ) / 10000000d;
+            coordonneY = Math.round( ( Math.abs(coordonneY) - (int) Math.abs(coordonneY) ) * 10000000 ) / 10000000d;
 
+        System.out.println("X : " + coordonneX + "; Y : " + coordonneY);
         addArbre(coordonneX, coordonneY);
     }
 
