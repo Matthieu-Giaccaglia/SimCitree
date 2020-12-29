@@ -94,9 +94,8 @@ public class Foret {
     private void addFils(Arbre arbrePere) {
         System.out.println("Born");
         double angle = Math.toRadians(random.nextDouble() * 360);
-        double amount = rayonDispersion;
-        double coordonneX = (amount * Math.cos(angle));
-        double coordonneY = (amount * Math.sin(angle));
+        double coordonneX = (rayonDispersion * Math.cos(angle));
+        double coordonneY = (rayonDispersion * Math.sin(angle));
 
         coordonneX = coordonneX + arbrePere.getX();
         coordonneY = coordonneY + arbrePere.getY();

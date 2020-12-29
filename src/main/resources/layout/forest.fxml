@@ -11,7 +11,7 @@
       <Button fx:id="buttonPause" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pauseSimulation" prefWidth="50.0" text="Pause" />
       <Separator orientation="VERTICAL" prefHeight="200.0" />
       <Label text="Nb Event :" />
-      <Label fx:id="labelNbTour" />
+      <Label fx:id="labelNbEvent" />
       <Separator orientation="VERTICAL" prefHeight="200.0" />
       <Label prefHeight="17.0" text="Nombres Arbres : " />
       <Label fx:id="labelNbArbres" />

@@ -24,11 +24,11 @@ public class ControllerForest implements Initializable {
     public VBox vbox;
     public Button buttonStart;
     public Button buttonPause;
-    public Label labelNbTour;
+    public Label labelNbEvent;
     public Label labelNbArbres;
     public ScatterChart<Number, Number> chart;
     public Label labelTime;
-    private int nbTourEcoule = 0;
+    private int nbEvent = 0;
     private AnimationTimer animationTimer;
     private Chrono chrono;
 
@@ -61,10 +61,10 @@ public class ControllerForest implements Initializable {
 
                 if ((now - lastEvenement)/ 1_000_000_000.0 >= event && Main.foret.getList().size() != 0){
                     System.out.println("-------------------------------------------");
-                    nbTourEcoule++;
+                    nbEvent++;
 
                     Main.foret.applyEvent();
-                    labelNbTour.setText(String.valueOf(nbTourEcoule));
+                    labelNbEvent.setText(String.valueOf(nbEvent));
                     labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
                     ecrireFichier();
 
@@ -84,11 +84,11 @@ public class ControllerForest implements Initializable {
         };
 
         labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
-        labelNbTour.setText(String.valueOf(nbTourEcoule));
+        labelNbEvent.setText(String.valueOf(nbEvent));
     }
 
     public void startSimulation() {
-        if(nbTourEcoule==0) {
+        if(nbEvent ==0) {
             this.chrono.start();
         }else {
             this.chrono.resume();
@@ -103,14 +103,11 @@ public class ControllerForest implements Initializable {
 
     public void ecrireFichier(){
         try {
-            String data = labelNbArbres.getText();
-            String data2 = labelNbTour.getText();
-
             FileWriter fWriter = new FileWriter("donnees.txt");
-            fWriter.write("Nombres d'arbres :");
-            fWriter.write(data);
-            fWriter.write(" Nombres d'événements :");
-            fWriter.write(data2);
+            String message = "Temps de simulation : " + labelTime.getText()
+                                + " ; Nombres d'arbres : " + labelNbArbres.getText()
+                                + " ; Nombre d'évènements : " + labelNbEvent.getText();
+            fWriter.write(message);
             fWriter.close();
         }
         catch (IOException e) {
