@@ -51,15 +51,14 @@ public class ControllerForest implements Initializable {
 
 
         animationTimer = new AnimationTimer() {
-            private long lastEvenement = 0;
+            private long lastTimeEvenement = 0;
             private long lastSecond = 0;
-            private double event = Main.foret.getDureeNextEvent();
-            private boolean finish = true;
+            private double nextTimeEvent = Main.foret.getDureeNextEvent();
 
             @Override
             public void handle(long now) {
 
-                if ((now - lastEvenement)/ 1_000_000_000.0 >= event && Main.foret.getList().size() != 0){
+                if ((now - lastTimeEvenement)/ 1_000_000_000.0 >= nextTimeEvent && Main.foret.getList().size() != 0){
                     System.out.println("-------------------------------------------");
                     nbEvent++;
 
@@ -68,8 +67,8 @@ public class ControllerForest implements Initializable {
                     labelNbArbres.setText(String.valueOf(Main.foret.getList().size()));
                     ecrireFichier();
 
-                    lastEvenement = now;
-                    event = Main.foret.getDureeNextEvent();
+                    lastTimeEvenement = now;
+                    nextTimeEvent = Main.foret.getDureeNextEvent();
                     System.out.println("-------------------------------------------");
                 }
                 if (Main.foret.getList().size() == 0) {
