@@ -278,6 +278,8 @@ public class Foret {
      */
     private void checkInsideRayonTrois(Arbre arbre , Arbre arbreCourant , int debordementX, int debordementY) {
 
+        double distance0 = Math.hypot(( arbre.getX()                  - arbreCourant.getX()), ((arbre.getY()               ) - arbreCourant.getY() ));
+
         double distance1 = Math.hypot(( (arbre.getX() + debordementX) - arbreCourant.getX()), ((arbre.getY() + debordementY) - arbreCourant.getY() ));
         //checkInsideRayon(arbre, arbreCourant, debordementX, debordementY)
         double distance2 = Math.hypot(( (arbre.getX() + debordementX) - arbreCourant.getX()), (arbre.getY()                  - arbreCourant.getY() ));
@@ -285,14 +287,19 @@ public class Foret {
         double distance3 = Math.hypot(( arbre.getX()                  - arbreCourant.getX()), ((arbre.getY() + debordementY) - arbreCourant.getY() ));
         //checkInsideRayon(arbre, arbreCourant, 0, debordementY)
 
-        if (distance1 <= rayonCompetition)
-            addEachOther(arbre,arbreCourant,distance1);
+        double distancePlusPetite = distance0;
 
-        else if (distance2 <= rayonCompetition)
-            addEachOther(arbre,arbreCourant,distance2);
+        if (distance1 <= distancePlusPetite)
+            distancePlusPetite = distance1;
 
-        else if (distance3 <= rayonCompetition)
-            addEachOther(arbre,arbreCourant,distance3);
+        if (distance2 <= distancePlusPetite)
+            distancePlusPetite = distance2;
+
+        if (distance3 <= distancePlusPetite)
+            distancePlusPetite = distance3;
+
+        if(distancePlusPetite < rayonCompetition)
+            addEachOther(arbre,arbreCourant,distancePlusPetite);
     }
 
     /**
