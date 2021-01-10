@@ -281,11 +281,11 @@ public class Foret {
         double distance0 = Math.hypot(( arbre.getX()                  - arbreCourant.getX()), ((arbre.getY()               ) - arbreCourant.getY() ));
 
         double distance1 = Math.hypot(( (arbre.getX() + debordementX) - arbreCourant.getX()), ((arbre.getY() + debordementY) - arbreCourant.getY() ));
-        //checkInsideRayon(arbre, arbreCourant, debordementX, debordementY)
+
         double distance2 = Math.hypot(( (arbre.getX() + debordementX) - arbreCourant.getX()), (arbre.getY()                  - arbreCourant.getY() ));
-        //checkInsideRayon(arbre, arbreCourant, debordementX, 0)
+
         double distance3 = Math.hypot(( arbre.getX()                  - arbreCourant.getX()), ((arbre.getY() + debordementY) - arbreCourant.getY() ));
-        //checkInsideRayon(arbre, arbreCourant, 0, debordementY)
+
 
         double distancePlusPetite = distance0;
 
