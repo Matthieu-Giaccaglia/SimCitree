@@ -36,7 +36,7 @@ public class Foret {
         this.tauxMort = tauxMort;
         this.tauxIntensiteC = tauxIntensiteC;
 
-        if (rayonCompetition>0) {
+        if (rayonCompetition > 0 && rayonCompetition <= 0.4) {
             double divisionTest = this.rayonCompetition;
             while (divisionTest < 1) {
                 this.division *= 10;
@@ -76,11 +76,12 @@ public class Foret {
     public void addArbre(double coordonneeX, double coordonneeY) {
         Arbre arbreAdd = new Arbre(coordonneeX,coordonneeY);
         list.add(arbreAdd);
-        tableauDivision.get((int) (coordonneeX * division)).get((int) (coordonneeY * division)).add(arbreAdd);
-        if (rayonCompetition>0 && rayonCompetition <= 0.4) {
+        if (division != 1) {
             checkVoisinFast(arbreAdd);
+            tableauDivision.get((int) (coordonneeX * division)).get((int) (coordonneeY * division)).add(arbreAdd);
+            System.out.println("ok");
         }
-        else if(rayonCompetition>0 && rayonCompetition>0.4) {
+        else {
             checkVoisinsSlow(arbreAdd);
         }
 
@@ -323,7 +324,8 @@ public class Foret {
             removeVoisin(arbreSupp);
 
         list.remove(arbreSupp);
-        tableauDivision.get((int) (arbreSupp.getX() *division)).get((int) (arbreSupp.getY() *division)).remove(arbreSupp);
+        if (division != 1)
+            tableauDivision.get((int) (arbreSupp.getX() *division)).get((int) (arbreSupp.getY() *division)).remove(arbreSupp);
         Main.serie.getData().remove(index);
         System.out.println("Fin Death");
     }
