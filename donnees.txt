@@ -1,1 +1,1 @@
-Temps de simulation : 8 s ; Nombres d'arbres : 115 ; Nombre d'évènements : 467
+Temps de simulation : 24 s ; Nombres d'arbres : 8 ; Nombre d'évènements : 746

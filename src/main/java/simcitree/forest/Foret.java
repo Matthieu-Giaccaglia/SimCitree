@@ -343,13 +343,11 @@ public class Foret {
     private void deathByCompetition() {
         System.out.println("Death By Competition");
         double tot = 0;int i = 0;
-        ArrayList<Double> listCompetitions = new ArrayList<>(list.size());
         double rdm = Math.random()* tauxIntensiteCTotal; // entre 0 et 1, il faut alors le rammener sur le total
 
         for(Arbre a: list){
             tot += a.getIntensiteCompetition();
-            listCompetitions.add(tot);
-            if ( rdm < listCompetitions.get(i)) { //jusqu'à totB,
+            if ( rdm < tot) { //jusqu'à totB,
                 deleteArbre(list.get(i), i);
                 return;
             }
