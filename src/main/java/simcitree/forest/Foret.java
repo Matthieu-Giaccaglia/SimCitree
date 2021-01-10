@@ -183,23 +183,23 @@ public class Foret {
             if (arbreCourant != arbre) {
 
                 if (arbre.getX() + rayonCompetition > 1 && arbre.getY() + rayonCompetition > 1)
-                    checkInsideRayonTrois(arbre, arbreCourant, -1, -1);
+                    checkInsideRayonQuatre(arbre, arbreCourant, -1, -1);
                 else if (arbre.getX() + rayonCompetition > 1 && arbre.getY() - rayonCompetition < 0)
-                    checkInsideRayonTrois(arbre, arbreCourant, -1, 1);
+                    checkInsideRayonQuatre(arbre, arbreCourant, -1, 1);
                 else if (arbre.getX() + rayonCompetition > 1 && arbre.getY() + rayonCompetition < 1 && arbre.getY() - rayonCompetition > 0)
-                    checkInsideRayon(arbre, arbreCourant, -1,0);
+                    checkInsideRayonDeux(arbre, arbreCourant, -1,0);
 
                 else if (arbre.getX() - rayonCompetition < 0 && arbre.getY() + rayonCompetition > 1)
-                    checkInsideRayonTrois(arbre, arbreCourant, 1, -1);
+                    checkInsideRayonQuatre(arbre, arbreCourant, 1, -1);
                 else if (arbre.getX() - rayonCompetition < 0 && arbre.getY() - rayonCompetition < 0)
-                    checkInsideRayonTrois(arbre, arbreCourant, 1,1);
+                    checkInsideRayonQuatre(arbre, arbreCourant, 1,1);
                 else if (arbre.getX() - rayonCompetition < 0 && arbre.getY() + rayonCompetition < 1 && arbre.getY() - rayonCompetition > 0)
-                    checkInsideRayon(arbre, arbreCourant, 1, 0);
+                    checkInsideRayonDeux(arbre, arbreCourant, 1, 0);
 
                 else if (arbre.getY() + rayonCompetition > 1)
-                    checkInsideRayon(arbre, arbreCourant, 0, -1);
+                    checkInsideRayonDeux(arbre, arbreCourant, 0, -1);
                 else if (arbre.getY() - rayonCompetition < 0)
-                    checkInsideRayon(arbre, arbreCourant, 0, 1);
+                    checkInsideRayonDeux(arbre, arbreCourant, 0, 1);
 
                 else
                     checkInsideRayon(arbre, arbreCourant, 0, 0);
@@ -246,6 +246,21 @@ public class Foret {
             addEachOther(arbre,arbreCourant,distance);
     }
 
+    private void checkInsideRayonDeux (Arbre arbre , Arbre arbreCourant , int debordementX, int debordementY) {
+
+        double distance0 = Math.hypot(( arbre.getX()                  - arbreCourant.getX()), ((arbre.getY()               ) - arbreCourant.getY() ));
+
+        double distance = Math.hypot(( (arbre.getX() + debordementX) - arbreCourant.getX()), ( (arbre.getY()+debordementY) - arbreCourant.getY() ));
+
+        double distancePlusPetite = distance0;
+
+        if (distance <= distancePlusPetite)
+            distancePlusPetite = distance;
+
+        if (distancePlusPetite <= rayonCompetition)
+            addEachOther(arbre,arbreCourant,distancePlusPetite);
+    }
+
     /**
      * Permet de savoir si les arbres sont dans le rayon de compétitions de l'autre mais en testant de trois manières différentes pour que cela soit plus rapide.
      * @param arbre Arbre dont on doit trouver son voisin.
@@ -276,7 +291,7 @@ public class Foret {
      *      </li>
      *</ul>
      */
-    private void checkInsideRayonTrois(Arbre arbre , Arbre arbreCourant , int debordementX, int debordementY) {
+    private void checkInsideRayonQuatre(Arbre arbre , Arbre arbreCourant , int debordementX, int debordementY) {
 
         double distance0 = Math.hypot(( arbre.getX()                  - arbreCourant.getX()), ((arbre.getY()               ) - arbreCourant.getY() ));
 
