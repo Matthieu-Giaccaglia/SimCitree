@@ -18,6 +18,12 @@ import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller graphic de la forêt.
+ * Ce controller permettra de faire fonctionner la forêt.
+ * Même s'il ne calcul pas le temps d'attente entre deux évènements,
+ * c'est lui qui va faire le timer.
+ */
 public class ControllerForest implements Initializable {
 
     public ToolBar toolbar;
@@ -33,7 +39,11 @@ public class ControllerForest implements Initializable {
     private Chrono chrono;
 
 
-
+    /**
+     * Fonctionne appelée directement après la création de l'interface graphic.
+     * @param url useless?
+     * @param resourceBundle useless?
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.chrono = new Chrono();

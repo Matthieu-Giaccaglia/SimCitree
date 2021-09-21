@@ -8,6 +8,9 @@ import simcitree.forest.Foret;
 
 import java.io.IOException;
 
+/**
+ * Controller Graphic permettant d'initialiser les paramètres de la forêt.
+ */
 public class ControllerSetupForest {
 
     public TextField textRayonDisp;
@@ -17,8 +20,13 @@ public class ControllerSetupForest {
     public TextField textNbArbre;
     public TextField textTauxComp;
 
-
-    public void addArbre() throws IOException {
+    /**
+     * Crée une forêt avec les paramètres mis par l'utilisateur.
+     * Les données sont vérifiées avant d'être utilisées.
+     * Fait un retour à l'utilisateur s'il a mis une mauvaise donnée.
+     * @throws IOException
+     */
+    public void createForest() throws IOException {
 
         String rayonDisp = textRayonDisp.getText();
         String rayonComp = textRayonComp.getText();

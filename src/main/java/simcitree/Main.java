@@ -11,6 +11,9 @@ import simcitree.forest.Foret;
 
 import java.io.IOException;
 
+/**
+ * Classe Main de SimCitree.
+ */
 public class Main extends Application {
 
     public static Foret foret;
@@ -29,13 +32,17 @@ public class Main extends Application {
 
     }
 
-
-
-
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Permet de changer de scène graphique.
+     *
+     * @param FXLM Chemin vers le fxml a utilisé.
+     * @param resizible Permet de dire si la fenêtre est redimensionable.
+     * @throws IOException
+     */
     public static void changeScene(String FXLM, boolean resizible) throws IOException {
         stage.setResizable(resizible);
         Parent root = FXMLLoader.load(Main.class.getResource(FXLM));

@@ -6,17 +6,64 @@ import simcitree.Main;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Classe Forêt simulant une forêt.
+ */
 public class Foret {
 
+    /**
+     * Liste d'arbre dans la forêt.
+     */
     private final ArrayList<Arbre> list = new ArrayList<>();
+
+    /**
+     * Le rayon de dispersion de tous les arbres.
+     */
     private final double rayonDispersion;
+
+    /**
+     * Le rayon de compétition de tous les arbres.
+     */
     private final double rayonCompetition;
+
+    /**
+     * Le taux de naissance de tous les arbres.
+     */
     private final double tauxNaissance;
+
+    /**
+     * Le taux de mortalité de tous les arbres.
+     */
     private final double tauxMort;
+
+    /**
+     * Le taux d'intensité de compétition de tous les arbres.
+     */
     private final double tauxIntensiteC;
+
+    /**
+     * Le total des intensités de compétition de tous les arbres.
+     */
     private double tauxIntensiteCTotal = 0;
+
+    /**
+     * Pour siimuler de l'aléatoire plus facilement.
+     */
     private final Random random = new Random();
+
+    /**
+     * Quadrialage de la forêt en n*n. Cela augmente les performances du simulateur.
+     * Et dans chaque "case", il y a les arbres correspondant.
+     * Ex :
+     * - Quadrilage en 10*10
+     * - Arbre en 0.5; 0.42
+     * - L'arbre se trouve dans le quadrilage 5;4
+     */
     private final ArrayList<ArrayList<ArrayList<Arbre>>> tableauDivision = new ArrayList<>();
+
+    /**
+     * Le N du quadrilage.
+     */
     private int division = 1;
 
 

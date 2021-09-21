@@ -42,6 +42,6 @@
                 </HBox>
             </VBox>
         </Pane>
-        <Button layoutX="387.0" layoutY="370.0" mnemonicParsing="false" onAction="#addArbre" prefHeight="39.0" prefWidth="199.0" text="Commencer la simulation" />
+        <Button layoutX="387.0" layoutY="370.0" mnemonicParsing="false" onAction="#createForest" prefHeight="39.0" prefWidth="199.0" text="Commencer la simulation" />
     </Pane>
 </VBox>
