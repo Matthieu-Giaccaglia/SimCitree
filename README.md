@@ -5,7 +5,7 @@
 
 SimCitree est un simulateur de forêt très basique. 
 
-### Projects Status
+## Projects Status
 
 Le projet est terminé.
 
