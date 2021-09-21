@@ -6,6 +6,7 @@
 SimCitree est un simulateur de forêt très basique. 
 
 ### Projects Status
+
 Le projet est terminé.
 
 ## Contexte
@@ -38,7 +39,6 @@ La documentation et les diapos ont été rédigées/crées lors au même moment 
 - Dans la configuration du **RUN**, dans la section **VM options**, mettre **--module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml,javafx.media**
 
 ## Licence
-
 
 Copyright [2020] [Birembaut Mateusz, Collé Florian, Deneuville Walter, Giaccaglia Matthieu]
 
