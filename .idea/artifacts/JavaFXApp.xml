@@ -9,7 +9,6 @@
     <root id="root">
       <element id="archive" name="JavaFXApp.jar">
         <element id="module-output" name="SimCitree" />
-        <element id="library" level="project" name="lib" />
         <element id="library" level="module" name="JUnit4" module-name="SimCitree" />
         <element id="file-copy" path="$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar" />
         <element id="file-copy" path="$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar" />

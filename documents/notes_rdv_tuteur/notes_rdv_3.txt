@@ -1,0 +1,91 @@
+notes comptes rendu numéro 3 24/11 z
+
+côté architecture projet :
+- Redondance d'information entre intensite competition et intensite competition par voisin
+- ok avec la structure en général
+
+choix de structures cruciales 
+doit être claires de pourquoi (arguments de pourquoi on a fait comme ça) 
+choix conception fait pas performance et pertinance 
+
+- ça à pas l'air idiot (sympa ça)
+
+creuser + pourquoi on décide de le faire dans cette forme 
+
+avant de tuer arbre 100 on regarde dans liste de ses voisins si y a 10 on enlève a liste de 10 arbre 100 et par
+extension on enleve arbre 100 à tous ses voisins
+
+arbre 1000 qui nait a comme voisins a 100 (pas réussi à suivre son exemple)
+
+
+pas vraiment des voisins mais plutot des noeuds / arrêtes 
+
+pas idiot mais merite d'être expliqué
+
+on fait structure de graphe, à la fois intéressant et à la fois ???????
+
+si jamais on en avait parler avant on aurait pu faire ça en structure de graphe car ya des librairies javais qui
+aide pour les graphes
+
+Interessant d'un point de vue utilisation du composant, ce qu'on fait plus bas niveau
+Mais utilisation de librairies aide de faire des trucs plus poussées mais on comprends pas forcement ce que les autres ont fait
+
+FAIRE POINT CENTRAL DU RAPPORT SUR LE CHOIX D'AVOIR FAIRE CA EN MODE DE GRAPHE 
+
+bien détaillé la vision de ce schéma
+
+--------------------------
+2struct de graphges qui coexistent
+struc de graphes localisée (voisinage)
+struct de cadrillage qui est posé sur le carée 0,1 
+
+
+on devrait pouvoir relier les cases à un arbre 
+dans un case pour connaitre les arbres de cette case (on parcours tout les arbres dans cette case en maintenant une
+liste d'arbre)
+Il faut justifier les choix à expliquer (encore une fois c important)
+
+un truc en rapport avec les cases à schematiser sur le diagrammes 
+
+on a un tableau, et pour chaque element c une liste
+
+nos choix sont globalements pertinants, la structure tient le coup
+
+métaphores verrous / clé (????)(rapprot important)
+
+choix d'une double structure qui parrait une redondance d'informations mais qui aboutit à un benef de perf
+
+pas l'ajout le prob de perf mais plus la recherche avec la solution de base de parcourir tout
+
+--------------
+tirage pour abre aléatoire pour mort compétition:
+
+horloge globale, d'abord type d'evenement (naissance,mortNat, lambdatauxcompet)
+
+prob : choisir l'arbre
+tirer nombre uniforme entre 0 et somme lambdaBarre puis on regarde 
+si ce nombre U < lambda1 alors lambda1
+si lambda1 < u < lambda2 alors lambda2 ...
+Si lambda1+lambda2 < u < lambda1+2+3 alors lambda3
+
+competition est le plus couteux, ça marche c'est sur mais moyen de l'optimiser 
+ptet moyen de l'optimiser avec la structure en graphe qu'on utilise dans le voisinage
+
+peut faire ça dichtomie log(n) (?)
+moyen que ça se fasse avec complexcité
+
+faire avec la somme et il expliquera après le MAX
+
+
+c normal que croissance rapide ou décroissance rapide
+
+à chaque evenement rajouter une ligne dans un ficher avec date et la taille de population.
+tout ça sur fichier texte 
+date taille /n
+
+
+
+
+
+
+ 
