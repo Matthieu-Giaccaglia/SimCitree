@@ -3,7 +3,8 @@
 ![SimCitree Logo](/documents/logo_simcitree.png)
 
 
-SimCitree est un simulateur de forêt très basique. 
+SimCitree est un simulateur de forêt très basique.
+Date : Octobre 2020 à début Janvier 2021.
 
 ## Projects Status
 
@@ -34,8 +35,8 @@ La documentation et les diapos ont été rédigées/crées lors au même moment 
 
 *Nous avions utilisé que cet IDE pour le développement*
 
-- Dans **File>Project Structure>Librairies**, ajouter le path du répertoire "lib" de javaFX 11 
-- Dans **File>Settings>Appearance & Behavior>Path Variables**, créer la variable PATH_TO_FX et y mettre le path du répertoire "lib" de javaFX.
+- Dans **File>Project Structure>Librairies**, ajouter le chemin du répertoire "lib" de javaFX 11 
+- Dans **File>Settings>Appearance & Behavior>Path Variables**, créer la variable PATH_TO_FX et y mettre le chemin du répertoire "lib" de javaFX.
 - Dans la configuration du **RUN**, dans la section **VM options**, mettre **--module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml,javafx.media**
 
 ## Licence
